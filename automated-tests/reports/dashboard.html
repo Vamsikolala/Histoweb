@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HistoQuanta Automated Test Dashboard</title>
+  <style>
+    :root {
+      --primary: #0f4c81;
+      --primary-light: #eef5fc;
+      --success: #10b981;
+      --success-light: #ecfdf5;
+      --danger: #ef4444;
+      --danger-light: #fef2f2;
+      --bg: #f4f7f9;
+      --surface: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background: var(--bg); color: var(--text); padding: 2.5rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    h1 { font-size: 1.75rem; font-weight: 800; color: var(--primary); }
+    .timestamp { font-size: 0.875rem; color: var(--text-muted); }
+    .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 2rem; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .card-label { font-size: 0.875rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.5rem; }
+    .card-value { font-size: 2rem; font-weight: 800; color: var(--text); }
+    .card.pass { border-left: 4px solid var(--success); }
+    .card.fail { border-left: 4px solid var(--danger); }
+    .card.total { border-left: 4px solid var(--primary); }
+    .suite-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 1.5rem; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .suite-header { padding: 1.25rem 1.5rem; background: #fafbfc; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+    .suite-title { font-weight: 700; font-size: 1.125rem; display: flex; align-items: center; gap: 0.75rem; }
+    .badge { font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.625rem; border-radius: 50px; text-transform: uppercase; }
+    .badge-passed { background: var(--success-light); color: var(--success); border: 1px solid rgba(16,185,129,0.2); }
+    .badge-failed { background: var(--danger-light); color: var(--danger); border: 1px solid rgba(239,68,68,0.2); }
+    .suite-body { padding: 1.5rem; }
+    .log-title { font-size: 0.875rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .log-container { background: #0f172a; color: #cbd5e1; padding: 1rem 1.25rem; border-radius: 8px; font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 0.85rem; line-height: 1.6; margin-bottom: 1.5rem; max-height: 280px; overflow-y: auto; }
+    .log-pass { color: #86efac; }
+    .log-fail { color: #fca5a5; }
+    .log-info { color: #94a3b8; }
+    .error-container { background: #fef2f2; border: 1px solid #fee2e2; color: #991b1b; padding: 1rem 1.25rem; border-radius: 8px; font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 0.85rem; margin-bottom: 1.5rem; white-space: pre-wrap; }
+    .screenshot-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
+    .screenshot-card { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; cursor: pointer; background: var(--bg); transition: transform 0.2s, box-shadow 0.2s; }
+    .screenshot-card:hover { transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .screenshot-card img { width: 100%; height: 110px; object-fit: cover; display: block; border-bottom: 1px solid var(--border); }
+    .screenshot-label { padding: 0.5rem; font-size: 0.75rem; font-weight: 600; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text); }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,23,42,0.8); z-index: 1000; justify-content: center; align-items: center; padding: 2rem; }
+    .modal-content { position: relative; max-width: 90%; max-height: 90%; background: var(--surface); padding: 0.5rem; border-radius: 8px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2); }
+    .modal-content img { max-width: 100%; max-height: 80vh; display: block; }
+    .modal-close { position: absolute; top: -35px; right: 0; color: #fff; font-size: 1.5rem; font-weight: bold; cursor: pointer; background: none; border: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>HistoQuanta Automation Report</h1>
+        <div class="timestamp">Executed on 6/9/2026, 4:05:24 PM</div>
+      </div>
+      <div class="badge badge-passed" style="font-size: 1rem; padding: 0.5rem 1rem;">
+        Pass Rate: 100%
+      </div>
+    </header>
+
+    <div class="summary-grid">
+      <div class="card total"><div class="card-label">Total Suites</div><div class="card-value">5</div></div>
+      <div class="card pass"><div class="card-label">Passed</div><div class="card-value" style="color:var(--success)">5</div></div>
+      <div class="card fail"><div class="card-label">Failed</div><div class="card-value" style="color:var(--danger)">0</div></div>
+      <div class="card"><div class="card-label">Duration</div><div class="card-value">103.92s</div></div>
+    </div>
+
+    <h2 style="font-size:1.25rem;font-weight:700;margin-bottom:1rem;color:var(--text-muted);text-transform:uppercase;">Detailed Test Results</h2>
+
+    
+      <div class="suite-section">
+        <div class="suite-header" onclick="toggleSuite(0)">
+          <div class="suite-title">
+            <span class="badge badge-passed">PASSED</span>
+            <span>Authentication Flow</span>
+          </div>
+          <div style="font-size:0.875rem;color:var(--text-muted)">10.21s &nbsp;▾</div>
+        </div>
+        <div class="suite-body" id="suite-body-0" style="display:none">
+          
+
+          <div class="log-title">Execution Log</div>
+          <div class="log-container">
+            <div class="log-info">[4:05:24 PM] === Authentication Flow Suite ===</div><div class="log-info">[4:05:24 PM] [1] Checking unauthenticated redirect from "/" to "/login"...</div><div class="log-pass">[4:05:25 PM] ✔ Redirect to /login verified.</div><div class="log-info">[4:05:25 PM] Screenshot saved: authentication-flow-01-redirect-to-login-1781001325354.png</div><div class="log-info">[4:05:25 PM] [2] Verifying Login page UI elements...</div><div class="log-pass">[4:05:25 PM] ✔ Login page elements (license, password, submit, signup link, forgot-password) found.</div><div class="log-info">[4:05:25 PM] Screenshot saved: authentication-flow-02-login-page-ui-1781001325503.png</div><div class="log-info">[4:05:25 PM] [2a] Testing login with empty credentials...</div><div class="log-pass">[4:05:26 PM] ✔ Empty credentials error shown correctly.</div><div class="log-info">[4:05:26 PM] Screenshot saved: authentication-flow-02a-login-empty-credentials-1781001326181.png</div><div class="log-info">[4:05:26 PM] [2b] Testing SQL Injection handling in login...</div><div class="log-pass">[4:05:26 PM] ✔ SQL Injection attempt rejected safely.</div><div class="log-info">[4:05:26 PM] [3] Testing login with wrong credentials...</div><div class="log-pass">[4:05:27 PM] ✔ Invalid credentials error text verified.</div><div class="log-pass">[4:05:27 PM] ✔ Stayed on /login after bad credentials.</div><div class="log-info">[4:05:27 PM] Screenshot saved: authentication-flow-03-login-wrong-credentials-1781001327392.png</div><div class="log-info">[4:05:27 PM] [3a] Navigating to Forgot Password page...</div><div class="log-pass">[4:05:27 PM] ✔ Forgot Password page loaded.</div><div class="log-info">[4:05:27 PM] Screenshot saved: authentication-flow-03a-forgot-password-1781001327519.png</div><div class="log-pass">[4:05:27 PM] ✔ Navigated back to Login page.</div><div class="log-info">[4:05:27 PM] [4] Navigating to Signup page...</div><div class="log-pass">[4:05:27 PM] ✔ Signup page loaded.</div><div class="log-info">[4:05:27 PM] Screenshot saved: authentication-flow-04-signup-page-1781001327862.png</div><div class="log-info">[4:05:27 PM] [5] Verifying Signup form UI elements...</div><div class="log-pass">[4:05:27 PM] ✔ Signup form elements (name, license, email, password, submit) all present.</div><div class="log-info">[4:05:27 PM] [5a] Testing signup with empty fields...</div><div class="log-pass">[4:05:28 PM] ✔ Signup empty fields validation correct.</div><div class="log-info">[4:05:28 PM] [5b] Testing signup with invalid email format...</div><div class="log-pass">[4:05:29 PM] ✔ Invalid email format rejected correctly.</div><div class="log-info">[4:05:29 PM] Before clear - name: Test Name, license: TEST1234, email: invalidemailformat, password: ValidPass1!</div><div class="log-info">[4:05:29 PM] After clear - name: , license: , email: , password: </div><div class="log-info">[4:05:29 PM] [6] Signing up new doctor: Dr. Selenium Test</div><div class="log-info">[4:05:29 PM]     License: SEL172178</div><div class="log-info">[4:05:29 PM]     Email: selenium.test.895816@histoquanta.com</div><div class="log-info">[4:05:30 PM] Screenshot saved: authentication-flow-06-signup-form-filled-1781001329998.png</div><div class="log-info">[4:05:30 PM] Signup form submitted. Waiting for redirect to /login...</div><div class="log-pass">[4:05:32 PM] ✔ Signup successful, redirected to /login.</div><div class="log-info">[4:05:32 PM] Screenshot saved: authentication-flow-06-post-signup-login-1781001332410.png</div><div class="log-info">[4:05:32 PM] [6a] Testing duplicate signup rejection...</div><div class="log-pass">[4:05:34 PM] ✔ Duplicate email signup rejected correctly.</div><div class="log-info">[4:05:34 PM] [7] Logging in with new doctor credentials...</div><div class="log-info">[4:05:34 PM] Screenshot saved: authentication-flow-07-login-form-filled-1781001334346.png</div><div class="log-info">[4:05:34 PM] Login submitted. Waiting for /dashboard...</div><div class="log-pass">[4:05:34 PM] ✔ Logged in successfully, dashboard loaded.</div><div class="log-info">[4:05:35 PM] Screenshot saved: authentication-flow-07-dashboard-loaded-1781001334918.png</div><div class="log-info">[4:05:35 PM] [8] Verifying sidebar tabs on dashboard...</div><div class="log-pass">[4:05:35 PM] ✔ Sidebar tabs 0 (Home), 1 (Search), 2 (Add), 3 (Profile) all found.</div><div class="log-info">[4:05:35 PM] Screenshot saved: authentication-flow-08-sidebar-tabs-visible-1781001335070.png</div><div class="log-info">[4:05:35 PM] === Authentication Flow Suite COMPLETE ===</div>
+          </div>
+
+          
+            <div class="log-title">Captured Screenshots (11)</div>
+            <div class="screenshot-gallery">
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/authentication-flow-01-redirect-to-login-1781001325354.png')">
+                  <img src="./screenshots/authentication-flow-01-redirect-to-login-1781001325354.png" alt="01-redirect-to-login" onerror="this.style.display='none'">
+                  <div class="screenshot-label">01-redirect-to-login</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/authentication-flow-02-login-page-ui-1781001325503.png')">
+                  <img src="./screenshots/authentication-flow-02-login-page-ui-1781001325503.png" alt="02-login-page-ui" onerror="this.style.display='none'">
+                  <div class="screenshot-label">02-login-page-ui</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/authentication-flow-02a-login-empty-credentials-1781001326181.png')">
+                  <img src="./screenshots/authentication-flow-02a-login-empty-credentials-1781001326181.png" alt="02a-login-empty-credentials" onerror="this.style.display='none'">
+                  <div class="screenshot-label">02a-login-empty-credentials</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/authentication-flow-03-login-wrong-credentials-1781001327392.png')">
+                  <img src="./screenshots/authentication-flow-03-login-wrong-credentials-1781001327392.png" alt="03-login-wrong-credentials" onerror="this.style.display='none'">
+                  <div class="screenshot-label">03-login-wrong-credentials</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/authentication-flow-03a-forgot-password-1781001327519.png')">
+                  <img src="./screenshots/authentication-flow-03a-forgot-password-1781001327519.png" alt="03a-forgot-password" onerror="this.style.display='none'">
+                  <div class="screenshot-label">03a-forgot-password</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/authentication-flow-04-signup-page-1781001327862.png')">
+                  <img src="./screenshots/authentication-flow-04-signup-page-1781001327862.png" alt="04-signup-page" onerror="this.style.display='none'">
+                  <div class="screenshot-label">04-signup-page</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/authentication-flow-06-signup-form-filled-1781001329998.png')">
+                  <img src="./screenshots/authentication-flow-06-signup-form-filled-1781001329998.png" alt="06-signup-form-filled" onerror="this.style.display='none'">
+                  <div class="screenshot-label">06-signup-form-filled</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/authentication-flow-06-post-signup-login-1781001332410.png')">
+                  <img src="./screenshots/authentication-flow-06-post-signup-login-1781001332410.png" alt="06-post-signup-login" onerror="this.style.display='none'">
+                  <div class="screenshot-label">06-post-signup-login</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/authentication-flow-07-login-form-filled-1781001334346.png')">
+                  <img src="./screenshots/authentication-flow-07-login-form-filled-1781001334346.png" alt="07-login-form-filled" onerror="this.style.display='none'">
+                  <div class="screenshot-label">07-login-form-filled</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/authentication-flow-07-dashboard-loaded-1781001334918.png')">
+                  <img src="./screenshots/authentication-flow-07-dashboard-loaded-1781001334918.png" alt="07-dashboard-loaded" onerror="this.style.display='none'">
+                  <div class="screenshot-label">07-dashboard-loaded</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/authentication-flow-08-sidebar-tabs-visible-1781001335070.png')">
+                  <img src="./screenshots/authentication-flow-08-sidebar-tabs-visible-1781001335070.png" alt="08-sidebar-tabs-visible" onerror="this.style.display='none'">
+                  <div class="screenshot-label">08-sidebar-tabs-visible</div>
+                </div>
+              
+            </div>
+          
+        </div>
+      </div>
+    
+      <div class="suite-section">
+        <div class="suite-header" onclick="toggleSuite(1)">
+          <div class="suite-title">
+            <span class="badge badge-passed">PASSED</span>
+            <span>Patient & Report Management</span>
+          </div>
+          <div style="font-size:0.875rem;color:var(--text-muted)">23.96s &nbsp;▾</div>
+        </div>
+        <div class="suite-body" id="suite-body-1" style="display:none">
+          
+
+          <div class="log-title">Execution Log</div>
+          <div class="log-container">
+            <div class="log-info">[4:05:35 PM] === Patient & Report Management Suite ===</div><div class="log-info">[4:05:36 PM] Already logged in, on dashboard.</div><div class="log-info">[4:05:36 PM] [1] Verifying Home tab – module tiles and no-patient banner...</div><div class="log-pass">[4:05:37 PM] ✔ "No Patient Selected" banner visible.</div><div class="log-pass">[4:05:37 PM] ✔ All 6 clinical module tiles found.</div><div class="log-info">[4:05:37 PM] Screenshot saved: patient-report-management-01-home-tab-no-patient-1781001337206.png</div><div class="log-info">[4:05:37 PM] [2] Navigating to Add Patient tab...</div><div class="log-pass">[4:05:38 PM] ✔ Add Patient tab loaded.</div><div class="log-info">[4:05:38 PM] Screenshot saved: patient-report-management-02-add-patient-tab-1781001338184.png</div><div class="log-info">[4:05:38 PM] [3] Testing Name input filter ("John123" → "John")...</div><div class="log-pass">[4:05:39 PM] ✔ Name filter correct: "John123" → "John".</div><div class="log-info">[4:05:39 PM] [4] Testing Phone input filter ("abc9876543210" → "9876543210")...</div><div class="log-pass">[4:05:39 PM] ✔ Phone filter correct: "abc9876543210" → "9876543210".</div><div class="log-info">[4:05:39 PM] [4a] Testing short phone number validation...</div><div class="log-pass">[4:05:41 PM] ✔ Short phone number rejected correctly.</div><div class="log-info">[4:05:41 PM] [4b] Testing age boundary validation...</div><div class="log-pass">[4:05:41 PM] ✔ Negative age blocked by HTML5 validation.</div><div class="log-pass">[4:05:41 PM] ✔ Extreme age (200) blocked by HTML5 validation.</div><div class="log-info">[4:05:41 PM] [5] Testing empty form validation...</div><div class="log-pass">[4:05:43 PM] ✔ Error shown: "Please fill in all required fields (Name, Age, Gender)."</div><div class="log-info">[4:05:43 PM] Screenshot saved: patient-report-management-05-validation-error-empty-form-1781001343522.png</div><div class="log-info">[4:05:43 PM] [6] Filling valid patient form: "John Doe Test SWT"...</div><div class="log-pass">[4:05:47 PM] ✔ Patient saved successfully.</div><div class="log-info">[4:05:47 PM] Screenshot saved: patient-report-management-06-patient-saved-success-1781001347906.png</div><div class="log-info">[4:05:48 PM] [7] Testing bogus search on Search tab...</div><div class="log-pass">[4:05:49 PM] ✔ Bogus search yielded no results (0 cards).</div><div class="log-info">[4:05:49 PM] Screenshot saved: patient-report-management-07-bogus-search-1781001349865.png</div><div class="log-info">[4:05:50 PM] [8] Searching for "John Doe Test SWT"...</div><div class="log-pass">[4:05:51 PM] ✔ Patient card found in search.</div><div class="log-info">[4:05:51 PM] Screenshot saved: patient-report-management-08-search-results-1781001351514.png</div><div class="log-info">[4:05:51 PM] [9] Selecting patient session...</div><div class="log-pass">[4:05:51 PM] ✔ Patient ID format verified (PTXXX): PT013</div><div class="log-pass">[4:05:53 PM] ✔ Patient session active on Home tab.</div><div class="log-info">[4:05:53 PM] Screenshot saved: patient-report-management-09-patient-session-active-1781001353521.png</div><div class="log-info">[4:05:53 PM] [10] Verifying tiles unlocked...</div><div class="log-pass">[4:05:53 PM] ✔ Tiles unlocked — no "Locked" badge.</div><div class="log-info">[4:05:53 PM] Screenshot saved: patient-report-management-10-modules-unlocked-1781001353666.png</div><div class="log-info">[4:05:53 PM] [11] Opening patient profile...</div><div class="log-pass">[4:05:56 PM] ✔ Patient Profile page loaded.</div><div class="log-info">[4:05:56 PM] Screenshot saved: patient-report-management-11-patient-profile-1781001356074.png</div><div class="log-info">[4:05:56 PM] [12] Verifying Patient Profile page...</div><div class="log-pass">[4:05:56 PM] ✔ Profile name: "John Doe Test SWT"</div><div class="log-info">[4:05:56 PM] Screenshot saved: patient-report-management-12-patient-profile-details-1781001356177.png</div><div class="log-info">[4:05:56 PM] [13] Navigating to Edit Patient...</div><div class="log-pass">[4:05:56 PM] ✔ Edit Patient form loaded.</div><div class="log-info">[4:05:56 PM] Screenshot saved: patient-report-management-13-edit-patient-form-1781001356641.png</div><div class="log-info">[4:05:57 PM] Screenshot saved: patient-report-management-13-edit-patient-filled-1781001357635.png</div><div class="log-pass">[4:05:58 PM] ✔ Edit saved, back on profile.</div><div class="log-info">[4:05:58 PM] Screenshot saved: patient-report-management-13-post-edit-profile-1781001358132.png</div><div class="log-info">[4:05:58 PM] [13a] Edit Patient without making changes...</div><div class="log-pass">[4:05:59 PM] ✔ Saved profile without changes successfully.</div><div class="log-info">[4:05:59 PM] [14] Verifying updated patient details...</div><div class="log-info">[4:05:59 PM] ℹ Updated details may not be in current view (backend-sync).</div><div class="log-info">[4:05:59 PM] Screenshot saved: patient-report-management-14-verify-updated-details-1781001359069.png</div><div class="log-info">[4:05:59 PM] === Patient & Report Management Suite COMPLETE ===</div>
+          </div>
+
+          
+            <div class="log-title">Captured Screenshots (14)</div>
+            <div class="screenshot-gallery">
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/patient-report-management-01-home-tab-no-patient-1781001337206.png')">
+                  <img src="./screenshots/patient-report-management-01-home-tab-no-patient-1781001337206.png" alt="01-home-tab-no-patient" onerror="this.style.display='none'">
+                  <div class="screenshot-label">01-home-tab-no-patient</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/patient-report-management-02-add-patient-tab-1781001338184.png')">
+                  <img src="./screenshots/patient-report-management-02-add-patient-tab-1781001338184.png" alt="02-add-patient-tab" onerror="this.style.display='none'">
+                  <div class="screenshot-label">02-add-patient-tab</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/patient-report-management-05-validation-error-empty-form-1781001343522.png')">
+                  <img src="./screenshots/patient-report-management-05-validation-error-empty-form-1781001343522.png" alt="05-validation-error-empty-form" onerror="this.style.display='none'">
+                  <div class="screenshot-label">05-validation-error-empty-form</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/patient-report-management-06-patient-saved-success-1781001347906.png')">
+                  <img src="./screenshots/patient-report-management-06-patient-saved-success-1781001347906.png" alt="06-patient-saved-success" onerror="this.style.display='none'">
+                  <div class="screenshot-label">06-patient-saved-success</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/patient-report-management-07-bogus-search-1781001349865.png')">
+                  <img src="./screenshots/patient-report-management-07-bogus-search-1781001349865.png" alt="07-bogus-search" onerror="this.style.display='none'">
+                  <div class="screenshot-label">07-bogus-search</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/patient-report-management-08-search-results-1781001351514.png')">
+                  <img src="./screenshots/patient-report-management-08-search-results-1781001351514.png" alt="08-search-results" onerror="this.style.display='none'">
+                  <div class="screenshot-label">08-search-results</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/patient-report-management-09-patient-session-active-1781001353521.png')">
+                  <img src="./screenshots/patient-report-management-09-patient-session-active-1781001353521.png" alt="09-patient-session-active" onerror="this.style.display='none'">
+                  <div class="screenshot-label">09-patient-session-active</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/patient-report-management-10-modules-unlocked-1781001353666.png')">
+                  <img src="./screenshots/patient-report-management-10-modules-unlocked-1781001353666.png" alt="10-modules-unlocked" onerror="this.style.display='none'">
+                  <div class="screenshot-label">10-modules-unlocked</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/patient-report-management-11-patient-profile-1781001356074.png')">
+                  <img src="./screenshots/patient-report-management-11-patient-profile-1781001356074.png" alt="11-patient-profile" onerror="this.style.display='none'">
+                  <div class="screenshot-label">11-patient-profile</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/patient-report-management-12-patient-profile-details-1781001356177.png')">
+                  <img src="./screenshots/patient-report-management-12-patient-profile-details-1781001356177.png" alt="12-patient-profile-details" onerror="this.style.display='none'">
+                  <div class="screenshot-label">12-patient-profile-details</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/patient-report-management-13-edit-patient-form-1781001356641.png')">
+                  <img src="./screenshots/patient-report-management-13-edit-patient-form-1781001356641.png" alt="13-edit-patient-form" onerror="this.style.display='none'">
+                  <div class="screenshot-label">13-edit-patient-form</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/patient-report-management-13-edit-patient-filled-1781001357635.png')">
+                  <img src="./screenshots/patient-report-management-13-edit-patient-filled-1781001357635.png" alt="13-edit-patient-filled" onerror="this.style.display='none'">
+                  <div class="screenshot-label">13-edit-patient-filled</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/patient-report-management-13-post-edit-profile-1781001358132.png')">
+                  <img src="./screenshots/patient-report-management-13-post-edit-profile-1781001358132.png" alt="13-post-edit-profile" onerror="this.style.display='none'">
+                  <div class="screenshot-label">13-post-edit-profile</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/patient-report-management-14-verify-updated-details-1781001359069.png')">
+                  <img src="./screenshots/patient-report-management-14-verify-updated-details-1781001359069.png" alt="14-verify-updated-details" onerror="this.style.display='none'">
+                  <div class="screenshot-label">14-verify-updated-details</div>
+                </div>
+              
+            </div>
+          
+        </div>
+      </div>
+    
+      <div class="suite-section">
+        <div class="suite-header" onclick="toggleSuite(2)">
+          <div class="suite-title">
+            <span class="badge badge-passed">PASSED</span>
+            <span>Report Management & Form Validation</span>
+          </div>
+          <div style="font-size:0.875rem;color:var(--text-muted)">24.11s &nbsp;▾</div>
+        </div>
+        <div class="suite-body" id="suite-body-2" style="display:none">
+          
+
+          <div class="log-title">Execution Log</div>
+          <div class="log-container">
+            <div class="log-info">[4:05:59 PM] === Report Management & Form Validation Suite ===</div><div class="log-info">[4:06:00 PM] Already logged in, on dashboard.</div><div class="log-info">[4:06:00 PM] [1] Navigating to test patient profile via Search...</div><div class="log-info">[4:06:02 PM] On patient profile: http://localhost:5173/patient/PT013</div><div class="log-info">[4:06:02 PM] Screenshot saved: report-management-form-validation-01-patient-profile-pre-report-1781001362260.png</div><div class="log-info">[4:06:02 PM] [2] Clicking "Add Report" button...</div><div class="log-pass">[4:06:02 PM] ✔ Add Report page loaded.</div><div class="log-info">[4:06:02 PM] Screenshot saved: report-management-form-validation-02-add-report-page-1781001362741.png</div><div class="log-info">[4:06:02 PM] [3] Verifying Add Report form elements...</div><div class="log-pass">[4:06:02 PM] ✔ All Add Report form elements found.</div><div class="log-info">[4:06:02 PM] [4] Checking Save button is disabled with empty fields...</div><div class="log-pass">[4:06:02 PM] ✔ Save button is disabled when fields are empty.</div><div class="log-info">[4:06:02 PM] Screenshot saved: report-management-form-validation-04-save-btn-disabled-empty-1781001362843.png</div><div class="log-info">[4:06:02 PM] [5] Fill only Report Type → save should remain disabled...</div><div class="log-pass">[4:06:03 PM] ✔ Save button still disabled with only Report Type filled.</div><div class="log-info">[4:06:03 PM] Screenshot saved: report-management-form-validation-05-save-btn-disabled-partial-1781001363287.png</div><div class="log-info">[4:06:03 PM] [6] Filling all required fields...</div><div class="log-pass">[4:06:04 PM] ✔ Save button is now enabled after filling all required fields.</div><div class="log-info">[4:06:04 PM] Screenshot saved: report-management-form-validation-06-report-form-filled-enabled-1781001364228.png</div><div class="log-info">[4:06:04 PM] [7] Submitting the report...</div><div class="log-pass">[4:06:06 PM] ✔ Report saved, redirected back to patient profile.</div><div class="log-info">[4:06:06 PM] Screenshot saved: report-management-form-validation-07-report-saved-redirect-1781001366346.png</div><div class="log-info">[4:06:06 PM] [7a] Adding second report with extreme text length...</div><div class="log-pass">[4:06:19 PM] ✔ Extreme length report saved successfully.</div><div class="log-info">[4:06:19 PM] [8] Verifying newly added report appears in Disease History...</div><div class="log-pass">[4:06:19 PM] ✔ Report found in history: "Blood Test Analysis"</div><div class="log-info">[4:06:19 PM] Screenshot saved: report-management-form-validation-08-report-in-disease-history-1781001379814.png</div><div class="log-info">[4:06:19 PM] [9] Testing Edit Report flow...</div><div class="log-pass">[4:06:20 PM] ✔ Edit Report loaded with prefilled Report Type: "Extreme Stress Test"</div><div class="log-info">[4:06:20 PM] Screenshot saved: report-management-form-validation-09-edit-report-prefilled-1781001380506.png</div><div class="log-pass">[4:06:21 PM] ✔ Navigated back from Edit Report.</div><div class="log-info">[4:06:21 PM] [10] Testing Download Report flow...</div><div class="log-pass">[4:06:22 PM] ✔ Download alert: "Report successfully downloaded and added to 'My Downloads'!"</div><div class="log-info">[4:06:22 PM] Screenshot saved: report-management-form-validation-10-download-triggered-1781001382447.png</div><div class="log-pass">[4:06:23 PM] ✔ My Downloads page loaded.</div><div class="log-info">[4:06:23 PM] Screenshot saved: report-management-form-validation-10-my-downloads-page-1781001383181.png</div><div class="log-info">[4:06:23 PM] [11] Testing Delete Report cancellation...</div><div class="log-info">[4:06:23 PM] ℹ No reports available to test delete flows.</div><div class="log-info">[4:06:23 PM] === Report Management & Form Validation Suite COMPLETE ===</div>
+          </div>
+
+          
+            <div class="log-title">Captured Screenshots (10)</div>
+            <div class="screenshot-gallery">
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/report-management-form-validation-01-patient-profile-pre-report-1781001362260.png')">
+                  <img src="./screenshots/report-management-form-validation-01-patient-profile-pre-report-1781001362260.png" alt="01-patient-profile-pre-report" onerror="this.style.display='none'">
+                  <div class="screenshot-label">01-patient-profile-pre-report</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/report-management-form-validation-02-add-report-page-1781001362741.png')">
+                  <img src="./screenshots/report-management-form-validation-02-add-report-page-1781001362741.png" alt="02-add-report-page" onerror="this.style.display='none'">
+                  <div class="screenshot-label">02-add-report-page</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/report-management-form-validation-04-save-btn-disabled-empty-1781001362843.png')">
+                  <img src="./screenshots/report-management-form-validation-04-save-btn-disabled-empty-1781001362843.png" alt="04-save-btn-disabled-empty" onerror="this.style.display='none'">
+                  <div class="screenshot-label">04-save-btn-disabled-empty</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/report-management-form-validation-05-save-btn-disabled-partial-1781001363287.png')">
+                  <img src="./screenshots/report-management-form-validation-05-save-btn-disabled-partial-1781001363287.png" alt="05-save-btn-disabled-partial" onerror="this.style.display='none'">
+                  <div class="screenshot-label">05-save-btn-disabled-partial</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/report-management-form-validation-06-report-form-filled-enabled-1781001364228.png')">
+                  <img src="./screenshots/report-management-form-validation-06-report-form-filled-enabled-1781001364228.png" alt="06-report-form-filled-enabled" onerror="this.style.display='none'">
+                  <div class="screenshot-label">06-report-form-filled-enabled</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/report-management-form-validation-07-report-saved-redirect-1781001366346.png')">
+                  <img src="./screenshots/report-management-form-validation-07-report-saved-redirect-1781001366346.png" alt="07-report-saved-redirect" onerror="this.style.display='none'">
+                  <div class="screenshot-label">07-report-saved-redirect</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/report-management-form-validation-08-report-in-disease-history-1781001379814.png')">
+                  <img src="./screenshots/report-management-form-validation-08-report-in-disease-history-1781001379814.png" alt="08-report-in-disease-history" onerror="this.style.display='none'">
+                  <div class="screenshot-label">08-report-in-disease-history</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/report-management-form-validation-09-edit-report-prefilled-1781001380506.png')">
+                  <img src="./screenshots/report-management-form-validation-09-edit-report-prefilled-1781001380506.png" alt="09-edit-report-prefilled" onerror="this.style.display='none'">
+                  <div class="screenshot-label">09-edit-report-prefilled</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/report-management-form-validation-10-download-triggered-1781001382447.png')">
+                  <img src="./screenshots/report-management-form-validation-10-download-triggered-1781001382447.png" alt="10-download-triggered" onerror="this.style.display='none'">
+                  <div class="screenshot-label">10-download-triggered</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/report-management-form-validation-10-my-downloads-page-1781001383181.png')">
+                  <img src="./screenshots/report-management-form-validation-10-my-downloads-page-1781001383181.png" alt="10-my-downloads-page" onerror="this.style.display='none'">
+                  <div class="screenshot-label">10-my-downloads-page</div>
+                </div>
+              
+            </div>
+          
+        </div>
+      </div>
+    
+      <div class="suite-section">
+        <div class="suite-header" onclick="toggleSuite(3)">
+          <div class="suite-title">
+            <span class="badge badge-passed">PASSED</span>
+            <span>Clinical Analysis Modules Navigation</span>
+          </div>
+          <div style="font-size:0.875rem;color:var(--text-muted)">31.34s &nbsp;▾</div>
+        </div>
+        <div class="suite-body" id="suite-body-3" style="display:none">
+          
+
+          <div class="log-title">Execution Log</div>
+          <div class="log-container">
+            <div class="log-info">[4:06:23 PM] === Clinical Analysis Modules Navigation Suite ===</div><div class="log-info">[4:06:24 PM] [0] Testing direct URL access without session...</div><div class="log-pass">[4:06:24 PM] ✔ Sessionless direct access rejected correctly.</div><div class="log-info">[4:06:24 PM] [1] Selecting test patient for session...</div><div class="log-info">[4:06:26 PM] ℹ Patient "John Doe Test SWT" selected as session.</div><div class="log-info">[4:06:27 PM] Screenshot saved: clinical-analysis-modules-navigation-01-home-patient-selected-1781001387905.png</div><div class="log-info">[4:06:27 PM] [2] Verifying module tiles are unlocked...</div><div class="log-pass">[4:06:27 PM] ✔ Tiles unlocked – no "Locked" badge visible.</div><div class="log-info">[4:06:28 PM] Screenshot saved: clinical-analysis-modules-navigation-02-tiles-unlocked-1781001387992.png</div><div class="log-info">[4:06:28 PM] [3] Clicking Breast Cancer tile...</div><div class="log-pass">[4:06:28 PM] ✔ Breast module page loaded.</div><div class="log-info">[4:06:28 PM] Screenshot saved: clinical-analysis-modules-navigation-03-breast-module-page-1781001388480.png</div><div class="log-info">[4:06:28 PM] [4] Verifying breast module options (ER, PR, HER2, Ki67)...</div><div class="log-pass">[4:06:28 PM] ✔ All 4 breast assessment cards found: ER, PR, HER2, Ki67.</div><div class="log-info">[4:06:28 PM] Screenshot saved: clinical-analysis-modules-navigation-04-breast-options-1781001388560.png</div><div class="log-info">[4:06:28 PM] [5] Clicking ER Assessment option...</div><div class="log-pass">[4:06:29 PM] ✔ ER Assessment page loaded.</div><div class="log-info">[4:06:29 PM] Screenshot saved: clinical-analysis-modules-navigation-05-er-assessment-page-1781001389061.png</div><div class="log-info">[4:06:29 PM] [6] Verifying ER Assessment page content...</div><div class="log-pass">[4:06:29 PM] ✔ ER Assessment page content verified.</div><div class="log-info">[4:06:29 PM] Screenshot saved: clinical-analysis-modules-navigation-06-er-page-content-1781001389154.png</div><div class="log-info">[4:06:29 PM] [7] Navigating back to Breast module page...</div><div class="log-pass">[4:06:29 PM] ✔ Back on Breast module page.</div><div class="log-info">[4:06:29 PM] Screenshot saved: clinical-analysis-modules-navigation-07-back-to-breast-module-1781001389251.png</div><div class="log-info">[4:06:29 PM] [8] Clicking Ki67 Proliferation option...</div><div class="log-pass">[4:06:29 PM] ✔ Ki67 Proliferation page loaded.</div><div class="log-info">[4:06:29 PM] Screenshot saved: clinical-analysis-modules-navigation-08-ki67-page-1781001389752.png</div><div class="log-info">[4:06:29 PM] [9] Verifying Ki67 page content...</div><div class="log-pass">[4:06:29 PM] ✔ Ki67 page content verified.</div><div class="log-info">[4:06:29 PM] Screenshot saved: clinical-analysis-modules-navigation-09-ki67-content-1781001389842.png</div><div class="log-info">[4:06:29 PM] [10] Going back to Breast module to test Guidelines...</div><div class="log-pass">[4:06:30 PM] ✔ Breast Guidelines page loaded.</div><div class="log-info">[4:06:30 PM] Screenshot saved: clinical-analysis-modules-navigation-10-breast-guidelines-1781001390349.png</div><div class="log-info">[4:06:30 PM] [11] Navigating back to Home tab and restoring session...</div><div class="log-info">[4:06:32 PM] ℹ Patient "John Doe Test SWT" selected as session.</div><div class="log-info">[4:06:33 PM] Screenshot saved: clinical-analysis-modules-navigation-11-back-home-tab-1781001393823.png</div><div class="log-info">[4:06:33 PM] [12] Clicking Gastrointestinal tile...</div><div class="log-pass">[4:06:34 PM] ✔ GIT (Gastrointestinal) module page loaded.</div><div class="log-info">[4:06:34 PM] Screenshot saved: clinical-analysis-modules-navigation-12-git-module-page-1781001394332.png</div><div class="log-info">[4:06:34 PM] [13] Verifying GIT module options...</div><div class="log-pass">[4:06:34 PM] ✔ GIT module page has expected content (Adenocarcinoma/GIST/NET).</div><div class="log-info">[4:06:34 PM] Screenshot saved: clinical-analysis-modules-navigation-13-git-options-1781001394379.png</div><div class="log-info">[4:06:34 PM] [14] Navigating to Head & Neck module and restoring session...</div><div class="log-info">[4:06:36 PM] ℹ Patient "John Doe Test SWT" selected as session.</div><div class="log-pass">[4:06:38 PM] ✔ Head & Neck module page loaded.</div><div class="log-pass">[4:06:38 PM] ✔ Head & Neck module content verified.</div><div class="log-info">[4:06:38 PM] Screenshot saved: clinical-analysis-modules-navigation-14-headneck-module-1781001398255.png</div><div class="log-info">[4:06:38 PM] [14a] Navigating to Thyroid module and restoring session...</div><div class="log-info">[4:06:40 PM] ℹ Patient "John Doe Test SWT" selected as session.</div><div class="log-pass">[4:06:42 PM] ✔ Thyroid module page loaded.</div><div class="log-pass">[4:06:42 PM] ✔ Thyroid module content verified.</div><div class="log-info">[4:06:42 PM] [14b] Navigating to Lungs module and restoring session...</div><div class="log-info">[4:06:44 PM] ℹ Patient "John Doe Test SWT" selected as session.</div><div class="log-pass">[4:06:46 PM] ✔ Lungs module page loaded.</div><div class="log-pass">[4:06:46 PM] ✔ Lungs module content verified.</div><div class="log-info">[4:06:46 PM] [14c] Navigating to Soft Tissue module and restoring session...</div><div class="log-info">[4:06:48 PM] ℹ Patient "John Doe Test SWT" selected as session.</div><div class="log-pass">[4:06:49 PM] ✔ Soft Tissue module page loaded.</div><div class="log-pass">[4:06:49 PM] ✔ Soft Tissue module content verified.</div><div class="log-info">[4:06:49 PM] [15] Clearing patient session and verifying tiles show "Locked"...</div><div class="log-info">[4:06:52 PM] ℹ Patient "John Doe Test SWT" selected as session.</div><div class="log-pass">[4:06:54 PM] ✔ Session cleared.</div><div class="log-pass">[4:06:54 PM] ✔ "Locked" badge visible on module tiles after session cleared.</div><div class="log-info">[4:06:54 PM] Screenshot saved: clinical-analysis-modules-navigation-15-tiles-locked-after-clear-1781001414491.png</div><div class="log-info">[4:06:54 PM] === Clinical Analysis Modules Navigation Suite COMPLETE ===</div>
+          </div>
+
+          
+            <div class="log-title">Captured Screenshots (15)</div>
+            <div class="screenshot-gallery">
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/clinical-analysis-modules-navigation-01-home-patient-selected-1781001387905.png')">
+                  <img src="./screenshots/clinical-analysis-modules-navigation-01-home-patient-selected-1781001387905.png" alt="01-home-patient-selected" onerror="this.style.display='none'">
+                  <div class="screenshot-label">01-home-patient-selected</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/clinical-analysis-modules-navigation-02-tiles-unlocked-1781001387992.png')">
+                  <img src="./screenshots/clinical-analysis-modules-navigation-02-tiles-unlocked-1781001387992.png" alt="02-tiles-unlocked" onerror="this.style.display='none'">
+                  <div class="screenshot-label">02-tiles-unlocked</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/clinical-analysis-modules-navigation-03-breast-module-page-1781001388480.png')">
+                  <img src="./screenshots/clinical-analysis-modules-navigation-03-breast-module-page-1781001388480.png" alt="03-breast-module-page" onerror="this.style.display='none'">
+                  <div class="screenshot-label">03-breast-module-page</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/clinical-analysis-modules-navigation-04-breast-options-1781001388560.png')">
+                  <img src="./screenshots/clinical-analysis-modules-navigation-04-breast-options-1781001388560.png" alt="04-breast-options" onerror="this.style.display='none'">
+                  <div class="screenshot-label">04-breast-options</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/clinical-analysis-modules-navigation-05-er-assessment-page-1781001389061.png')">
+                  <img src="./screenshots/clinical-analysis-modules-navigation-05-er-assessment-page-1781001389061.png" alt="05-er-assessment-page" onerror="this.style.display='none'">
+                  <div class="screenshot-label">05-er-assessment-page</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/clinical-analysis-modules-navigation-06-er-page-content-1781001389154.png')">
+                  <img src="./screenshots/clinical-analysis-modules-navigation-06-er-page-content-1781001389154.png" alt="06-er-page-content" onerror="this.style.display='none'">
+                  <div class="screenshot-label">06-er-page-content</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/clinical-analysis-modules-navigation-07-back-to-breast-module-1781001389251.png')">
+                  <img src="./screenshots/clinical-analysis-modules-navigation-07-back-to-breast-module-1781001389251.png" alt="07-back-to-breast-module" onerror="this.style.display='none'">
+                  <div class="screenshot-label">07-back-to-breast-module</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/clinical-analysis-modules-navigation-08-ki67-page-1781001389752.png')">
+                  <img src="./screenshots/clinical-analysis-modules-navigation-08-ki67-page-1781001389752.png" alt="08-ki67-page" onerror="this.style.display='none'">
+                  <div class="screenshot-label">08-ki67-page</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/clinical-analysis-modules-navigation-09-ki67-content-1781001389842.png')">
+                  <img src="./screenshots/clinical-analysis-modules-navigation-09-ki67-content-1781001389842.png" alt="09-ki67-content" onerror="this.style.display='none'">
+                  <div class="screenshot-label">09-ki67-content</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/clinical-analysis-modules-navigation-10-breast-guidelines-1781001390349.png')">
+                  <img src="./screenshots/clinical-analysis-modules-navigation-10-breast-guidelines-1781001390349.png" alt="10-breast-guidelines" onerror="this.style.display='none'">
+                  <div class="screenshot-label">10-breast-guidelines</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/clinical-analysis-modules-navigation-11-back-home-tab-1781001393823.png')">
+                  <img src="./screenshots/clinical-analysis-modules-navigation-11-back-home-tab-1781001393823.png" alt="11-back-home-tab" onerror="this.style.display='none'">
+                  <div class="screenshot-label">11-back-home-tab</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/clinical-analysis-modules-navigation-12-git-module-page-1781001394332.png')">
+                  <img src="./screenshots/clinical-analysis-modules-navigation-12-git-module-page-1781001394332.png" alt="12-git-module-page" onerror="this.style.display='none'">
+                  <div class="screenshot-label">12-git-module-page</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/clinical-analysis-modules-navigation-13-git-options-1781001394379.png')">
+                  <img src="./screenshots/clinical-analysis-modules-navigation-13-git-options-1781001394379.png" alt="13-git-options" onerror="this.style.display='none'">
+                  <div class="screenshot-label">13-git-options</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/clinical-analysis-modules-navigation-14-headneck-module-1781001398255.png')">
+                  <img src="./screenshots/clinical-analysis-modules-navigation-14-headneck-module-1781001398255.png" alt="14-headneck-module" onerror="this.style.display='none'">
+                  <div class="screenshot-label">14-headneck-module</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/clinical-analysis-modules-navigation-15-tiles-locked-after-clear-1781001414491.png')">
+                  <img src="./screenshots/clinical-analysis-modules-navigation-15-tiles-locked-after-clear-1781001414491.png" alt="15-tiles-locked-after-clear" onerror="this.style.display='none'">
+                  <div class="screenshot-label">15-tiles-locked-after-clear</div>
+                </div>
+              
+            </div>
+          
+        </div>
+      </div>
+    
+      <div class="suite-section">
+        <div class="suite-header" onclick="toggleSuite(4)">
+          <div class="suite-title">
+            <span class="badge badge-passed">PASSED</span>
+            <span>Doctor Profile & Logout Flow</span>
+          </div>
+          <div style="font-size:0.875rem;color:var(--text-muted)">14.30s &nbsp;▾</div>
+        </div>
+        <div class="suite-body" id="suite-body-4" style="display:none">
+          
+
+          <div class="log-title">Execution Log</div>
+          <div class="log-container">
+            <div class="log-info">[4:06:54 PM] === Doctor Profile & Logout Flow Suite ===</div><div class="log-info">[4:06:55 PM] Already logged in, on dashboard.</div><div class="log-info">[4:06:55 PM] [1] Clicking My Profile tab...</div><div class="log-pass">[4:06:56 PM] ✔ Profile tab clicked.</div><div class="log-info">[4:06:57 PM] Screenshot saved: doctor-profile-logout-flow-01-profile-tab-loaded-1781001416938.png</div><div class="log-info">[4:06:57 PM] [2] Verifying doctor name...</div><div class="log-pass">[4:06:57 PM] ✔ Doctor name: "Dr. Selenium Test"</div><div class="log-info">[4:06:57 PM] Screenshot saved: doctor-profile-logout-flow-02-profile-name-verified-1781001417045.png</div><div class="log-info">[4:06:57 PM] [3] Verifying license number visible...</div><div class="log-pass">[4:06:57 PM] ✔ License "SEL172178" visible.</div><div class="log-info">[4:06:57 PM] Screenshot saved: doctor-profile-logout-flow-03-profile-info-visible-1781001417101.png</div><div class="log-info">[4:06:57 PM] [4] Verifying Settings section items...</div><div class="log-pass">[4:06:57 PM] ✔ All 4 Settings items found.</div><div class="log-info">[4:06:57 PM] Screenshot saved: doctor-profile-logout-flow-04-settings-items-1781001417174.png</div><div class="log-info">[4:06:57 PM] [5] Clicking Edit Profile toggle...</div><div class="log-pass">[4:06:58 PM] ✔ Edit Profile form visible with all fields.</div><div class="log-info">[4:06:58 PM] Screenshot saved: doctor-profile-logout-flow-05-edit-profile-form-open-1781001418164.png</div><div class="log-info">[4:06:58 PM] [6] Updating Specialization, Hospital, Phone...</div><div class="log-info">[4:06:59 PM] Screenshot saved: doctor-profile-logout-flow-06-profile-fields-updated-1781001419613.png</div><div class="log-info">[4:06:59 PM] [7] Saving profile changes...</div><div class="log-pass">[4:07:00 PM] ✔ Profile saved: ""</div><div class="log-info">[4:07:00 PM] Screenshot saved: doctor-profile-logout-flow-07-profile-saved-success-1781001420116.png</div><div class="log-info">[4:07:00 PM] [8] Waiting for edit mode to auto-close...</div><div class="log-pass">[4:07:01 PM] ✔ Edit mode closed automatically.</div><div class="log-info">[4:07:01 PM] Screenshot saved: doctor-profile-logout-flow-08-edit-mode-closed-1781001421468.png</div><div class="log-info">[4:07:01 PM] [9] Verifying updated values...</div><div class="log-pass">[4:07:01 PM] ✔ Updated specialization visible.</div><div class="log-pass">[4:07:01 PM] ✔ Updated hospital visible.</div><div class="log-info">[4:07:01 PM] Screenshot saved: doctor-profile-logout-flow-09-profile-updated-values-1781001421590.png</div><div class="log-info">[4:07:01 PM] [10] Navigating to My Downloads...</div><div class="log-pass">[4:07:03 PM] ✔ My Downloads page loaded.</div><div class="log-info">[4:07:03 PM] Screenshot saved: doctor-profile-logout-flow-10-my-downloads-1781001423098.png</div><div class="log-info">[4:07:03 PM] [11] Navigating to Privacy Policy...</div><div class="log-pass">[4:07:04 PM] ✔ Privacy Policy page loaded.</div><div class="log-pass">[4:07:04 PM] ✔ Privacy Policy content verified.</div><div class="log-info">[4:07:04 PM] Screenshot saved: doctor-profile-logout-flow-11-privacy-policy-1781001424612.png</div><div class="log-info">[4:07:04 PM] [12] Navigating to Terms & Conditions...</div><div class="log-pass">[4:07:06 PM] ✔ Terms & Conditions page loaded.</div><div class="log-pass">[4:07:06 PM] ✔ Terms & Conditions content verified.</div><div class="log-info">[4:07:06 PM] Screenshot saved: doctor-profile-logout-flow-12-terms-and-conditions-1781001426146.png</div><div class="log-info">[4:07:07 PM] [13] Testing Logout Cancellation...</div><div class="log-pass">[4:07:08 PM] ✔ Logout canceled successfully, session remains active.</div><div class="log-info">[4:07:08 PM] [14] Testing Logout...</div><div class="log-info">[4:07:08 PM] Logout confirm dialog: "Are you sure you want to log out?"</div><div class="log-pass">[4:07:08 PM] ✔ Logged out, redirected to /login.</div><div class="log-info">[4:07:08 PM] Screenshot saved: doctor-profile-logout-flow-13-logged-out-1781001428619.png</div><div class="log-info">[4:07:08 PM] [Bonus] Verifying /dashboard redirect after logout...</div><div class="log-pass">[4:07:08 PM] ✔ Protected route correctly redirects to /login after logout.</div><div class="log-info">[4:07:08 PM] Screenshot saved: doctor-profile-logout-flow-14-protected-redirect-after-logout-1781001428790.png</div><div class="log-info">[4:07:08 PM] === Doctor Profile & Logout Flow Suite COMPLETE ===</div>
+          </div>
+
+          
+            <div class="log-title">Captured Screenshots (14)</div>
+            <div class="screenshot-gallery">
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/doctor-profile-logout-flow-01-profile-tab-loaded-1781001416938.png')">
+                  <img src="./screenshots/doctor-profile-logout-flow-01-profile-tab-loaded-1781001416938.png" alt="01-profile-tab-loaded" onerror="this.style.display='none'">
+                  <div class="screenshot-label">01-profile-tab-loaded</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/doctor-profile-logout-flow-02-profile-name-verified-1781001417045.png')">
+                  <img src="./screenshots/doctor-profile-logout-flow-02-profile-name-verified-1781001417045.png" alt="02-profile-name-verified" onerror="this.style.display='none'">
+                  <div class="screenshot-label">02-profile-name-verified</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/doctor-profile-logout-flow-03-profile-info-visible-1781001417101.png')">
+                  <img src="./screenshots/doctor-profile-logout-flow-03-profile-info-visible-1781001417101.png" alt="03-profile-info-visible" onerror="this.style.display='none'">
+                  <div class="screenshot-label">03-profile-info-visible</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/doctor-profile-logout-flow-04-settings-items-1781001417174.png')">
+                  <img src="./screenshots/doctor-profile-logout-flow-04-settings-items-1781001417174.png" alt="04-settings-items" onerror="this.style.display='none'">
+                  <div class="screenshot-label">04-settings-items</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/doctor-profile-logout-flow-05-edit-profile-form-open-1781001418164.png')">
+                  <img src="./screenshots/doctor-profile-logout-flow-05-edit-profile-form-open-1781001418164.png" alt="05-edit-profile-form-open" onerror="this.style.display='none'">
+                  <div class="screenshot-label">05-edit-profile-form-open</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/doctor-profile-logout-flow-06-profile-fields-updated-1781001419613.png')">
+                  <img src="./screenshots/doctor-profile-logout-flow-06-profile-fields-updated-1781001419613.png" alt="06-profile-fields-updated" onerror="this.style.display='none'">
+                  <div class="screenshot-label">06-profile-fields-updated</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/doctor-profile-logout-flow-07-profile-saved-success-1781001420116.png')">
+                  <img src="./screenshots/doctor-profile-logout-flow-07-profile-saved-success-1781001420116.png" alt="07-profile-saved-success" onerror="this.style.display='none'">
+                  <div class="screenshot-label">07-profile-saved-success</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/doctor-profile-logout-flow-08-edit-mode-closed-1781001421468.png')">
+                  <img src="./screenshots/doctor-profile-logout-flow-08-edit-mode-closed-1781001421468.png" alt="08-edit-mode-closed" onerror="this.style.display='none'">
+                  <div class="screenshot-label">08-edit-mode-closed</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/doctor-profile-logout-flow-09-profile-updated-values-1781001421590.png')">
+                  <img src="./screenshots/doctor-profile-logout-flow-09-profile-updated-values-1781001421590.png" alt="09-profile-updated-values" onerror="this.style.display='none'">
+                  <div class="screenshot-label">09-profile-updated-values</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/doctor-profile-logout-flow-10-my-downloads-1781001423098.png')">
+                  <img src="./screenshots/doctor-profile-logout-flow-10-my-downloads-1781001423098.png" alt="10-my-downloads" onerror="this.style.display='none'">
+                  <div class="screenshot-label">10-my-downloads</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/doctor-profile-logout-flow-11-privacy-policy-1781001424612.png')">
+                  <img src="./screenshots/doctor-profile-logout-flow-11-privacy-policy-1781001424612.png" alt="11-privacy-policy" onerror="this.style.display='none'">
+                  <div class="screenshot-label">11-privacy-policy</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/doctor-profile-logout-flow-12-terms-and-conditions-1781001426146.png')">
+                  <img src="./screenshots/doctor-profile-logout-flow-12-terms-and-conditions-1781001426146.png" alt="12-terms-and-conditions" onerror="this.style.display='none'">
+                  <div class="screenshot-label">12-terms-and-conditions</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/doctor-profile-logout-flow-13-logged-out-1781001428619.png')">
+                  <img src="./screenshots/doctor-profile-logout-flow-13-logged-out-1781001428619.png" alt="13-logged-out" onerror="this.style.display='none'">
+                  <div class="screenshot-label">13-logged-out</div>
+                </div>
+              
+                <div class="screenshot-card" onclick="openModal('./screenshots/doctor-profile-logout-flow-14-protected-redirect-after-logout-1781001428790.png')">
+                  <img src="./screenshots/doctor-profile-logout-flow-14-protected-redirect-after-logout-1781001428790.png" alt="14-protected-redirect-after-logout" onerror="this.style.display='none'">
+                  <div class="screenshot-label">14-protected-redirect-after-logout</div>
+                </div>
+              
+            </div>
+          
+        </div>
+      </div>
+    
+  </div>
+
+  <div id="modal" class="modal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <img id="modal-img" src="" alt="Screenshot">
+    </div>
+  </div>
+
+  <script>
+    // Auto-expand failed suites
+    document.querySelectorAll('.suite-body').forEach((body, idx) => {
+      const header = document.querySelector(`.suite-header:nth-of-type(${idx + 1})`);
+      if (body.id && document.querySelector(`#suite-body-${idx}`)) {
+        const badge = document.querySelector(`#suite-body-${idx}`)?.previousElementSibling?.querySelector('.badge');
+        if (badge && badge.textContent === 'FAILED') {
+          document.getElementById(`suite-body-${idx}`).style.display = 'block';
+        }
+      }
+    });
+    // Actually expand failed suites properly
+    
+    
+    
+    
+    
+
+    function toggleSuite(idx) {
+      const body = document.getElementById('suite-body-' + idx);
+      body.style.display = body.style.display === 'none' ? 'block' : 'none';
+    }
+    function openModal(src) {
+      document.getElementById('modal-img').src = src;
+      document.getElementById('modal').style.display = 'flex';
+    }
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
