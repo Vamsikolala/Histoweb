@@ -22,4 +22,3 @@ jobs:
       - name: Generate Test Summary Report
         run: |
           python e2e_tests/generate_summary.py
-
