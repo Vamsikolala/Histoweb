@@ -73,6 +73,7 @@ Interpretation: ${totalScore <= 2 ? 'The sample is PR Negative. Hormone therapy 
 
       const data = await response.json();
       if (data.status) {
+        alert("Assessment saved successfully!");
         navigate(`/patient/${patientId}/modules/breast/pr-hscore`, {
           state: { initialIntensity: selectedIntensity, initialProportion: selectedProportion }
         });

@@ -74,6 +74,7 @@ Interpretation: ${totalScore <= 2 ? 'The sample is ER Negative. Hormone therapy 
 
       const data = await response.json();
       if (data.status) {
+        alert("Assessment saved successfully!");
         // Navigate to H-Score page passing the Allred values
         navigate(`/patient/${patientId}/modules/breast/er-hscore`, {
           state: { initialIntensity: selectedIntensity, initialProportion: selectedProportion }

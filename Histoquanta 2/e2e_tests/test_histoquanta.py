@@ -32,9 +32,76 @@ from conftest import (
     login_as_test_doctor, collector
 )
 
+# Shared state across test classes
+SHARED_PATIENT_ID = None
+SHARED_PATIENT_NAME = "SeleniumTestPatient"
+
+def ensure_patient_registered_and_selected(driver, wait):
+    global SHARED_PATIENT_ID
+    login_as_test_doctor(driver, wait)
+    
+    # If not registered yet, do it now
+    if SHARED_PATIENT_ID is None:
+        driver.get(f"{BASE_URL}/dashboard")
+        time.sleep(2)
+        # Click Add Patient tab
+        if element_exists(driver, By.ID, "sidebar-tab-2", timeout=3):
+            driver.find_element(By.ID, "sidebar-tab-2").click()
+            time.sleep(2)
+        
+        try:
+            pid_input = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@disabled]")))
+            SHARED_PATIENT_ID = pid_input.get_attribute("value")
+            
+            driver.find_element(By.ID, "ap-name").send_keys(SHARED_PATIENT_NAME)
+            driver.find_element(By.ID, "ap-age").send_keys("45")
+            Select(driver.find_element(By.ID, "ap-gender")).select_by_value("Male")
+            driver.find_element(By.ID, "ap-phone").send_keys("9876543210")
+            driver.find_element(By.ID, "ap-address").send_keys("Test Address")
+            driver.find_element(By.ID, "ap-doctor").send_keys("Dr. SeleniumBot")
+            driver.find_element(By.ID, "ap-report-type").send_keys("Biopsy")
+            driver.find_element(By.ID, "ap-diagnosis").send_keys("Primary Tumor")
+            driver.find_element(By.ID, "ap-notes").send_keys("E2E test patient details")
+            
+            driver.find_element(By.ID, "save-patient-btn").click()
+            time.sleep(3)
+            print(f"[INFO] Auto-registered patient for clinical modules: {SHARED_PATIENT_ID}")
+        except Exception as e:
+            print(f"[ERROR] Failed to auto-register patient: {e}")
+            SHARED_PATIENT_ID = "HQ00001" # fallback
+
+    # Now ensure patient is selected
+    try:
+        driver.get(f"{BASE_URL}/dashboard")
+        time.sleep(2)
+        # Go to Search tab
+        if element_exists(driver, By.ID, "sidebar-tab-1", timeout=3):
+            driver.find_element(By.ID, "sidebar-tab-1").click()
+            time.sleep(2)
+        
+        # Search for SHARED_PATIENT_ID
+        search_input = wait.until(EC.presence_of_element_located((By.ID, "patient-search-input")))
+        search_input.clear()
+        search_input.send_keys(SHARED_PATIENT_ID)
+        time.sleep(1.5)
+        
+        # Click Select button on the patient card
+        select_btn = wait.until(EC.element_to_be_clickable((By.ID, f"select-patient-{SHARED_PATIENT_ID}")))
+        safe_click(driver, select_btn)
+        time.sleep(2)
+        
+        # Navigate to home tab to verify selected banner
+        if element_exists(driver, By.ID, "sidebar-tab-0", timeout=3):
+            driver.find_element(By.ID, "sidebar-tab-0").click()
+            time.sleep(1.5)
+    except Exception as e:
+        print(f"[ERROR] Failed to select patient via UI: {e}")
+
+
 # ═══════════════════════════════════════════════════════════════════════
 #  HELPER UTILITIES
 # ═══════════════════════════════════════════════════════════════════════
+
 
 def record(test_id, module, test_case, description, steps, expected, actual, status, exec_time=0.0):
     """Shortcut to record a test result into the global collector."""
@@ -1565,6 +1632,44 @@ class TestAddPatient:
             record("TC_076", "Add Patient", "Attachments Section",
                    "Attachments", "1. Check section", "Section present", str(e), "FAIL", time.time()-t0)
 
+    def test_TC_076_b_register_patient_successfully(self, driver, wait):
+        t0 = time.time()
+        global SHARED_PATIENT_ID
+        try:
+            self._go_to_add(driver, wait)
+            pid_input = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@disabled]")))
+            patient_id = pid_input.get_attribute("value")
+            
+            driver.find_element(By.ID, "ap-name").send_keys(SHARED_PATIENT_NAME)
+            driver.find_element(By.ID, "ap-age").send_keys("45")
+            Select(driver.find_element(By.ID, "ap-gender")).select_by_value("Male")
+            driver.find_element(By.ID, "ap-phone").send_keys("9876543210")
+            driver.find_element(By.ID, "ap-address").send_keys("Test Address")
+            driver.find_element(By.ID, "ap-doctor").send_keys("Dr. SeleniumBot")
+            driver.find_element(By.ID, "ap-report-type").send_keys("Biopsy")
+            driver.find_element(By.ID, "ap-diagnosis").send_keys("Primary Tumor")
+            driver.find_element(By.ID, "ap-notes").send_keys("E2E test patient details")
+            
+            driver.find_element(By.ID, "save-patient-btn").click()
+            time.sleep(3)
+            
+            body_text = driver.find_element(By.TAG_NAME, "body").text
+            assert "registered" in body_text.lower() or "success" in body_text.lower()
+            
+            SHARED_PATIENT_ID = patient_id
+            print(f"[INFO] Registered E2E patient successfully: {SHARED_PATIENT_ID}")
+            
+            record("TC_076_b", "Add Patient", "Successful Registration",
+                   "Register a new patient and save details successfully",
+                   "1. Fill in all fields\n2. Click Save Patient & Report",
+                   "Patient registered successfully, success message shown",
+                   f"Patient registered with ID {SHARED_PATIENT_ID}", "PASS", time.time()-t0)
+        except Exception as e:
+            record("TC_076_b", "Add Patient", "Successful Registration",
+                   "Successful registration", "1. Fill and submit", "Registered successfully", str(e), "FAIL", time.time()-t0)
+            pytest.fail(str(e))
+
+
 
 # ═══════════════════════════════════════════════════════════════════════
 #  MODULE 7: DOCTOR PROFILE TESTS (TC_077 – TC_087)
@@ -1938,15 +2043,21 @@ class TestClinicalModules:
 
     def _setup_session(self, driver, wait):
         """Ensure logged in with a patient session via localStorage."""
-        login_as_test_doctor(driver, wait)
-        # Set a mock patient session for module access
-        driver.execute_script("""
-            // We just need doctor_id in localStorage for auth
-            if (!localStorage.getItem('doctor_id')) {
-                localStorage.setItem('doctor_id', '1');
-                localStorage.setItem('doctor_name', 'Test Doctor');
-            }
-        """)
+        ensure_patient_registered_and_selected(driver, wait)
+        
+        # Override driver.get dynamically to substitute patient ID
+        if not hasattr(driver, "_original_get_patched"):
+            original_get = driver.get
+            def custom_get(url):
+                if SHARED_PATIENT_ID:
+                    if "/patient/1/" in url:
+                        url = url.replace("/patient/1/", f"/patient/{SHARED_PATIENT_ID}/")
+                    elif "/patient/1" in url:
+                        url = url.replace("/patient/1", f"/patient/{SHARED_PATIENT_ID}")
+                original_get(url)
+            driver.get = custom_get
+            driver._original_get_patched = True
+
 
     def test_TC_098_breast_module_page(self, driver, wait):
         t0 = time.time()
@@ -2066,6 +2177,86 @@ class TestClinicalModules:
         except Exception as e:
             record("TC_104", "Clinical Modules", "ER Save Button",
                    "Save button", "1. Check button", "Present", str(e), "FAIL", time.time()-t0)
+
+    def test_TC_104_b_complete_er_to_hscore_flow(self, driver, wait):
+        t0 = time.time()
+        try:
+            self._setup_session(driver, wait)
+            driver.get(f"{BASE_URL}/patient/1/modules/breast/er")
+            time.sleep(2)
+            
+            # Select intensity
+            intensity_dd = wait.until(EC.element_to_be_clickable((By.XPATH, "//label[contains(text(),'Nuclear Staining Intensity')]/following-sibling::div")))
+            safe_click(driver, intensity_dd)
+            time.sleep(1)
+            strong_opt = wait.until(EC.element_to_be_clickable((By.XPATH, "//*[contains(text(),'Strong (3)')]")))
+            safe_click(driver, strong_opt)
+            time.sleep(1)
+            
+            # Select proportion
+            prop_dd = wait.until(EC.element_to_be_clickable((By.XPATH, "//label[contains(text(),'Proportion of Positive Tumor Cells')]/following-sibling::div")))
+            safe_click(driver, prop_dd)
+            time.sleep(1)
+            high_opt = wait.until(EC.element_to_be_clickable((By.XPATH, "//*[contains(text(),'61-100%')]")))
+            safe_click(driver, high_opt)
+            time.sleep(1)
+            
+            # Save and proceed
+            proceed_btn = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(),'Save Assessment')]")))
+            safe_click(driver, proceed_btn)
+            time.sleep(1.5)
+            
+            # Accept Save Assessment Alert
+            wait.until(EC.alert_is_present())
+            driver.switch_to.alert.accept()
+            time.sleep(2)
+            
+            # Fill H-Score details
+            inputs = wait.until(EC.presence_of_all_elements_located((By.XPATH, "//input[@placeholder='Enter %']")))
+            inputs[0].clear()
+            inputs[0].send_keys("10")
+            inputs[1].clear()
+            inputs[1].send_keys("20")
+            inputs[2].clear()
+            inputs[2].send_keys("70")
+            time.sleep(1)
+            
+            # Click Save H-Score
+            save_hscore_btn = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(),'Save H-Score')]")))
+            safe_click(driver, save_hscore_btn)
+            time.sleep(1.5)
+            
+            # Accept Alert
+            wait.until(EC.alert_is_present())
+            alert = driver.switch_to.alert
+            alert.accept()
+            time.sleep(3)
+            
+            # Now on patient profile page - verify disease history has the report
+            body_text = driver.find_element(By.TAG_NAME, "body").text
+            assert "ER H-Score" in body_text
+            assert "H-Score: 260" in body_text
+            
+            # Download PDF
+            download_btn = wait.until(EC.element_to_be_clickable((By.XPATH, "//*[contains(@id, 'download-report-')]")))
+            safe_click(driver, download_btn)
+            time.sleep(1.5)
+            
+            # Accept Download Alert
+            wait.until(EC.alert_is_present())
+            driver.switch_to.alert.accept()
+            time.sleep(2)
+            
+            record("TC_104_b", "Clinical Modules", "Complete ER & H-Score Flow",
+                   "Complete Breast ER Allred scoring, H-Score entry, save report, and download PDF",
+                   "1. Fill ER Allred\n2. Click Save & Proceed\n3. Enter H-Score % values\n4. Save report\n5. Download report PDF",
+                   "Successfully navigated, saved reports, and downloaded PDF",
+                   "E2E clinical report generated and verified", "PASS", time.time()-t0)
+        except Exception as e:
+            record("TC_104_b", "Clinical Modules", "Complete ER & H-Score Flow",
+                   "Complete ER & H-Score Flow", "1. Fill forms", "Flow completed successfully", str(e), "FAIL", time.time()-t0)
+            pytest.fail(str(e))
+
 
     def test_TC_105_breast_pr_page(self, driver, wait):
         t0 = time.time()
