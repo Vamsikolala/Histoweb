@@ -97,12 +97,18 @@ def wait(driver):
 
 def login_as_test_doctor(driver, wait):
     """Helper: ensure logged in as the test doctor."""
-    driver.get(f"{BASE_URL}/login")
-    time.sleep(1)
+    if hasattr(driver, "session_id") and "mock" in driver.session_id:
+        return
+
+    driver.get(f"{BASE_URL}/dashboard")
+    time.sleep(1.5)
     # Check if already on dashboard (already logged in)
     if "/dashboard" in driver.current_url:
         return
 
+    # Try logging in
+    driver.get(f"{BASE_URL}/login")
+    time.sleep(1.5)
     try:
         license_input = wait.until(EC.presence_of_element_located((By.ID, "login-license")))
         license_input.clear()
@@ -113,9 +119,53 @@ def login_as_test_doctor(driver, wait):
         password_input.send_keys(TEST_PASSWORD)
 
         driver.find_element(By.ID, "login-submit").click()
-        time.sleep(2)
+        time.sleep(2.5)
     except Exception:
         pass
+
+    # If still not logged in, auto-signup the test doctor account
+    if "/dashboard" not in driver.current_url:
+        print("[INFO] Test account not found. Registering test doctor account...")
+        driver.get(f"{BASE_URL}/signup")
+        time.sleep(1.5)
+        try:
+            name_input = wait.until(EC.presence_of_element_located((By.ID, "signup-name")))
+            name_input.clear()
+            name_input.send_keys(TEST_NAME)
+
+            license_input = driver.find_element(By.ID, "signup-license")
+            license_input.clear()
+            license_input.send_keys(TEST_LICENSE)
+
+            email_input = driver.find_element(By.ID, "signup-email")
+            email_input.clear()
+            email_input.send_keys(TEST_EMAIL)
+
+            password_input = driver.find_element(By.ID, "signup-password")
+            password_input.clear()
+            password_input.send_keys(TEST_PASSWORD)
+
+            driver.find_element(By.ID, "signup-submit").click()
+            time.sleep(3)
+        except Exception:
+            pass
+
+        # Try logging in again after signup
+        driver.get(f"{BASE_URL}/login")
+        time.sleep(1.5)
+        try:
+            license_input = wait.until(EC.presence_of_element_located((By.ID, "login-license")))
+            license_input.clear()
+            license_input.send_keys(TEST_LICENSE)
+
+            password_input = driver.find_element(By.ID, "login-password")
+            password_input.clear()
+            password_input.send_keys(TEST_PASSWORD)
+
+            driver.find_element(By.ID, "login-submit").click()
+            time.sleep(3)
+        except Exception:
+            pass
 
 
 # ─── Test Result Collector ───
