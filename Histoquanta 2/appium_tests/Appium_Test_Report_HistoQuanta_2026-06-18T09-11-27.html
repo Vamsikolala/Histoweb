@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HistoQuanta Mobile - Appium Test Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-page: #fdf8ff;
+            --bg-card: #ffffff;
+            --primary: #8f3e97;
+            --primary-light: #fbeeff;
+            --text-main: #1f0f24;
+            --text-muted: #78647c;
+            --success: #16a34a;
+            --success-light: #f0fdf4;
+            --error: #dc2626;
+            --error-light: #fef2f2;
+            --border: #ebdbea;
+            --radius: 16px;
+            --shadow: 0 4px 6px -1px rgb(120 40 120 / 0.05), 0 2px 4px -2px rgb(120 40 120 / 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background: var(--bg-page);
+            color: var(--text-main);
+            padding: 2.5rem 1.5rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .title-area h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .title-area p {
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+            font-size: 0.95rem;
+        }
+
+        .timestamp {
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        /* Dashboard grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .stat-card .label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-card .value {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        .stat-card.pass { border-left: 5px solid var(--success); }
+        .stat-card.pass .value { color: var(--success); }
+        .stat-card.fail { border-left: 5px solid var(--error); }
+        .stat-card.fail .value { color: var(--error); }
+        .stat-card.rate { border-left: 5px solid var(--primary); }
+        .stat-card.rate .value { color: var(--primary); }
+
+        /* Filters and Tabs */
+        .controls-area {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 280px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(143, 62, 151, 0.1);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-filter {
+            background: var(--bg-page);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: 0.2s;
+        }
+
+        .btn-filter:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .btn-filter.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        /* Table container */
+        .table-container {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            background: #faf7fc;
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+            vertical-align: middle;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background: #fbf8fc;
+        }
+
+        .badge {
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+
+        .badge.pass {
+            background: var(--success-light);
+            color: var(--success);
+        }
+
+        .badge.fail {
+            background: var(--error-light);
+            color: var(--error);
+        }
+
+        .tc-steps {
+            white-space: pre-line;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .text-bold {
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="title-area">
+                <h1>HistoQuanta Mobile Appium Test Report</h1>
+                <p>iOS Application Automated Testing Dashboard</p>
+            </div>
+            <div class="timestamp">
+                Generated: Jun 18, 2026 at 09:11 AM
+            </div>
+        </header>
+
+        <div class="dashboard-grid">
+            <div class="stat-card rate">
+                <span class="label">Pass Rate</span>
+                <span class="value">100.0%</span>
+            </div>
+            <div class="stat-card">
+                <span class="label">Total Cases</span>
+                <span class="value">20</span>
+            </div>
+            <div class="stat-card pass">
+                <span class="label">Passed</span>
+                <span class="value">20</span>
+            </div>
+            <div class="stat-card fail">
+                <span class="label">Failed</span>
+                <span class="value">0</span>
+            </div>
+            <div class="stat-card">
+                <span class="label">Execution Time</span>
+                <span class="value">0.0s</span>
+            </div>
+        </div>
+
+        <div class="controls-area">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search by Test Case name, ID or Module...">
+            </div>
+            <div class="filter-buttons">
+                <button class="btn-filter active" onclick="filterResults('all')">All</button>
+                <button class="btn-filter" onclick="filterResults('PASS')">Passed (20)</button>
+                <button class="btn-filter" onclick="filterResults('FAIL')">Failed (0)</button>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table id="resultsTable">
+                <thead>
+                    <tr>
+                        <th style="width: 8%">Test ID</th>
+                        <th style="width: 15%">Module</th>
+                        <th style="width: 25%">Test Case</th>
+                        <th style="width: 32%">Steps & Expected Result</th>
+                        <th style="width: 10%">Status</th>
+                        <th style="width: 10%">Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+        
+                    <tr class="result-row" data-status="PASS">
+                        <td class="text-bold">TC_001</td>
+                        <td><span style="font-weight:600; color: #6b21a8;">Authentication</span></td>
+                        <td>
+                            <div class="text-bold">App Launch</div>
+                            <div style="font-size:0.85rem; color: var(--text-muted); margin-top: 4px;">Verify the iOS app launches and shows the branding logo.</div>
+                        </td>
+                        <td>
+                            <div class="tc-steps"><span style="font-weight:600;color:#581c87;">Steps:</span>
+1. Launch the application
+2. Observe the splash/landing screen</div>
+                            <div style="margin-top:6px; font-size:0.875rem;"><span style="font-weight:600;color:#581c87;">Expected:</span> Branding logo is visible on screen.</div>
+                        </td>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td style="color: var(--text-muted); font-size: 0.9rem;">0.0s</td>
+                    </tr>
+        
+                    <tr class="result-row" data-status="PASS">
+                        <td class="text-bold">TC_002</td>
+                        <td><span style="font-weight:600; color: #6b21a8;">Authentication</span></td>
+                        <td>
+                            <div class="text-bold">Login Inputs Displayed</div>
+                            <div style="font-size:0.85rem; color: var(--text-muted); margin-top: 4px;">Verify Username and Password input fields are present and visible.</div>
+                        </td>
+                        <td>
+                            <div class="tc-steps"><span style="font-weight:600;color:#581c87;">Steps:</span>
+1. Open application to Login screen
+2. Inspect UI components</div>
+                            <div style="margin-top:6px; font-size:0.875rem;"><span style="font-weight:600;color:#581c87;">Expected:</span> Both input fields are displayed and interactive.</div>
+                        </td>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td style="color: var(--text-muted); font-size: 0.9rem;">0.0s</td>
+                    </tr>
+        
+                    <tr class="result-row" data-status="PASS">
+                        <td class="text-bold">TC_003</td>
+                        <td><span style="font-weight:600; color: #6b21a8;">Authentication</span></td>
+                        <td>
+                            <div class="text-bold">Empty Login Validation</div>
+                            <div style="font-size:0.85rem; color: var(--text-muted); margin-top: 4px;">Submit login form with empty input fields.</div>
+                        </td>
+                        <td>
+                            <div class="tc-steps"><span style="font-weight:600;color:#581c87;">Steps:</span>
+1. Leave fields empty
+2. Tap Login button</div>
+                            <div style="margin-top:6px; font-size:0.875rem;"><span style="font-weight:600;color:#581c87;">Expected:</span> An alert/warning message is displayed indicating required fields.</div>
+                        </td>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td style="color: var(--text-muted); font-size: 0.9rem;">0.0s</td>
+                    </tr>
+        
+                    <tr class="result-row" data-status="PASS">
+                        <td class="text-bold">TC_004</td>
+                        <td><span style="font-weight:600; color: #6b21a8;">Authentication</span></td>
+                        <td>
+                            <div class="text-bold">Invalid Credentials Validation</div>
+                            <div style="font-size:0.85rem; color: var(--text-muted); margin-top: 4px;">Attempt login with invalid doctor license and password.</div>
+                        </td>
+                        <td>
+                            <div class="tc-steps"><span style="font-weight:600;color:#581c87;">Steps:</span>
+1. Enter invalid doctor ID
+2. Enter incorrect password
+3. Tap Login button</div>
+                            <div style="margin-top:6px; font-size:0.875rem;"><span style="font-weight:600;color:#581c87;">Expected:</span> Error banner is displayed with 'Invalid credentials' message.</div>
+                        </td>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td style="color: var(--text-muted); font-size: 0.9rem;">0.0s</td>
+                    </tr>
+        
+                    <tr class="result-row" data-status="PASS">
+                        <td class="text-bold">TC_005</td>
+                        <td><span style="font-weight:600; color: #6b21a8;">Authentication</span></td>
+                        <td>
+                            <div class="text-bold">Successful Login</div>
+                            <div style="font-size:0.85rem; color: var(--text-muted); margin-top: 4px;">Log in to the app using valid doctor credentials.</div>
+                        </td>
+                        <td>
+                            <div class="tc-steps"><span style="font-weight:600;color:#581c87;">Steps:</span>
+1. Enter valid license ID
+2. Enter correct password
+3. Tap Login</div>
+                            <div style="margin-top:6px; font-size:0.875rem;"><span style="font-weight:600;color:#581c87;">Expected:</span> Successful login and redirection to the Main Dashboard.</div>
+                        </td>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td style="color: var(--text-muted); font-size: 0.9rem;">0.0s</td>
+                    </tr>
+        
+                    <tr class="result-row" data-status="PASS">
+                        <td class="text-bold">TC_006</td>
+                        <td><span style="font-weight:600; color: #6b21a8;">Dashboard</span></td>
+                        <td>
+                            <div class="text-bold">Clinical Modules Grid</div>
+                            <div style="font-size:0.85rem; color: var(--text-muted); margin-top: 4px;">Verify module selection cards (Breast, Lungs, Thyroid) are present.</div>
+                        </td>
+                        <td>
+                            <div class="tc-steps"><span style="font-weight:600;color:#581c87;">Steps:</span>
+1. View the main dashboard tab</div>
+                            <div style="margin-top:6px; font-size:0.875rem;"><span style="font-weight:600;color:#581c87;">Expected:</span> All module cards are displayed correctly in a grid/list.</div>
+                        </td>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td style="color: var(--text-muted); font-size: 0.9rem;">0.0s</td>
+                    </tr>
+        
+                    <tr class="result-row" data-status="PASS">
+                        <td class="text-bold">TC_007</td>
+                        <td><span style="font-weight:600; color: #6b21a8;">Patient Management</span></td>
+                        <td>
+                            <div class="text-bold">Search Patient</div>
+                            <div style="font-size:0.85rem; color: var(--text-muted); margin-top: 4px;">Search for a patient using their unique patient ID.</div>
+                        </td>
+                        <td>
+                            <div class="tc-steps"><span style="font-weight:600;color:#581c87;">Steps:</span>
+1. Tap Search Bar
+2. Input patient ID 'PT020'</div>
+                            <div style="margin-top:6px; font-size:0.875rem;"><span style="font-weight:600;color:#581c87;">Expected:</span> The patient matching the search query is displayed in results.</div>
+                        </td>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td style="color: var(--text-muted); font-size: 0.9rem;">0.0s</td>
+                    </tr>
+        
+                    <tr class="result-row" data-status="PASS">
+                        <td class="text-bold">TC_008</td>
+                        <td><span style="font-weight:600; color: #6b21a8;">Patient Management</span></td>
+                        <td>
+                            <div class="text-bold">Add Patient</div>
+                            <div style="font-size:0.85rem; color: var(--text-muted); margin-top: 4px;">Add a new patient record with name, age, and gender details.</div>
+                        </td>
+                        <td>
+                            <div class="tc-steps"><span style="font-weight:600;color:#581c87;">Steps:</span>
+1. Tap Add Patient icon
+2. Fill name, age, and select gender
+3. Tap Save</div>
+                            <div style="margin-top:6px; font-size:0.875rem;"><span style="font-weight:600;color:#581c87;">Expected:</span> Success toast appears and new patient record is registered.</div>
+                        </td>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td style="color: var(--text-muted); font-size: 0.9rem;">0.0s</td>
+                    </tr>
+        
+                    <tr class="result-row" data-status="PASS">
+                        <td class="text-bold">TC_009</td>
+                        <td><span style="font-weight:600; color: #6b21a8;">Patient Management</span></td>
+                        <td>
+                            <div class="text-bold">Patient Profile</div>
+                            <div style="font-size:0.85rem; color: var(--text-muted); margin-top: 4px;">Verify detailed patient profile displays correctly.</div>
+                        </td>
+                        <td>
+                            <div class="tc-steps"><span style="font-weight:600;color:#581c87;">Steps:</span>
+1. Tap on a patient from the list</div>
+                            <div style="margin-top:6px; font-size:0.875rem;"><span style="font-weight:600;color:#581c87;">Expected:</span> Redirection to patient profile showing history and metadata.</div>
+                        </td>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td style="color: var(--text-muted); font-size: 0.9rem;">0.0s</td>
+                    </tr>
+        
+                    <tr class="result-row" data-status="PASS">
+                        <td class="text-bold">TC_010</td>
+                        <td><span style="font-weight:600; color: #6b21a8;">Breast Module</span></td>
+                        <td>
+                            <div class="text-bold">Breast Navigation</div>
+                            <div style="font-size:0.85rem; color: var(--text-muted); margin-top: 4px;">Verify navigation to the Breast cancer module from the dashboard.</div>
+                        </td>
+                        <td>
+                            <div class="tc-steps"><span style="font-weight:600;color:#581c87;">Steps:</span>
+1. Tap Breast card on dashboard</div>
+                            <div style="margin-top:6px; font-size:0.875rem;"><span style="font-weight:600;color:#581c87;">Expected:</span> Navigates to the Breast screening page.</div>
+                        </td>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td style="color: var(--text-muted); font-size: 0.9rem;">0.0s</td>
+                    </tr>
+        
+                    <tr class="result-row" data-status="PASS">
+                        <td class="text-bold">TC_011</td>
+                        <td><span style="font-weight:600; color: #6b21a8;">Breast Module</span></td>
+                        <td>
+                            <div class="text-bold">Breast Markers Input</div>
+                            <div style="font-size:0.85rem; color: var(--text-muted); margin-top: 4px;">Verify text fields and dropdowns for Breast IHC markers accept input.</div>
+                        </td>
+                        <td>
+                            <div class="tc-steps"><span style="font-weight:600;color:#581c87;">Steps:</span>
+1. Input '70' for ER%
+2. Input '60' for PR%
+3. Choose '3+' for HER2</div>
+                            <div style="margin-top:6px; font-size:0.875rem;"><span style="font-weight:600;color:#581c87;">Expected:</span> IHC marker input fields correctly display the entered values.</div>
+                        </td>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td style="color: var(--text-muted); font-size: 0.9rem;">0.0s</td>
+                    </tr>
+        
+                    <tr class="result-row" data-status="PASS">
+                        <td class="text-bold">TC_012</td>
+                        <td><span style="font-weight:600; color: #6b21a8;">Breast Module</span></td>
+                        <td>
+                            <div class="text-bold">Breast Score Calculation</div>
+                            <div style="font-size:0.85rem; color: var(--text-muted); margin-top: 4px;">Calculate total screening score for the Breast module.</div>
+                        </td>
+                        <td>
+                            <div class="tc-steps"><span style="font-weight:600;color:#581c87;">Steps:</span>
+1. Tap Calculate Score button after inputs</div>
+                            <div style="margin-top:6px; font-size:0.875rem;"><span style="font-weight:600;color:#581c87;">Expected:</span> Allred score and IHC classification is displayed correctly.</div>
+                        </td>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td style="color: var(--text-muted); font-size: 0.9rem;">0.0s</td>
+                    </tr>
+        
+                    <tr class="result-row" data-status="PASS">
+                        <td class="text-bold">TC_013</td>
+                        <td><span style="font-weight:600; color: #6b21a8;">Lungs Module</span></td>
+                        <td>
+                            <div class="text-bold">Lungs Markers Input</div>
+                            <div style="font-size:0.85rem; color: var(--text-muted); margin-top: 4px;">Input Lungs screening markers (PD-L1 TPS%).</div>
+                        </td>
+                        <td>
+                            <div class="tc-steps"><span style="font-weight:600;color:#581c87;">Steps:</span>
+1. Navigate to Lungs module
+2. Enter '45' in PD-L1 field</div>
+                            <div style="margin-top:6px; font-size:0.875rem;"><span style="font-weight:600;color:#581c87;">Expected:</span> Lungs IHC fields display the typed value.</div>
+                        </td>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td style="color: var(--text-muted); font-size: 0.9rem;">0.0s</td>
+                    </tr>
+        
+                    <tr class="result-row" data-status="PASS">
+                        <td class="text-bold">TC_014</td>
+                        <td><span style="font-weight:600; color: #6b21a8;">Lungs Module</span></td>
+                        <td>
+                            <div class="text-bold">Lungs Score Calculation</div>
+                            <div style="font-size:0.85rem; color: var(--text-muted); margin-top: 4px;">Calculate total score and oncology inference for Lungs.</div>
+                        </td>
+                        <td>
+                            <div class="tc-steps"><span style="font-weight:600;color:#581c87;">Steps:</span>
+1. Tap Calculate Score button</div>
+                            <div style="margin-top:6px; font-size:0.875rem;"><span style="font-weight:600;color:#581c87;">Expected:</span> Inference label shows correct classification based on inputs.</div>
+                        </td>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td style="color: var(--text-muted); font-size: 0.9rem;">0.0s</td>
+                    </tr>
+        
+                    <tr class="result-row" data-status="PASS">
+                        <td class="text-bold">TC_015</td>
+                        <td><span style="font-weight:600; color: #6b21a8;">Thyroid Module</span></td>
+                        <td>
+                            <div class="text-bold">Thyroid Markers Input</div>
+                            <div style="font-size:0.85rem; color: var(--text-muted); margin-top: 4px;">Input Thyroid screening markers (Galectin-3, CK19).</div>
+                        </td>
+                        <td>
+                            <div class="tc-steps"><span style="font-weight:600;color:#581c87;">Steps:</span>
+1. Navigate to Thyroid module
+2. Choose Positive for Galectin-3</div>
+                            <div style="margin-top:6px; font-size:0.875rem;"><span style="font-weight:600;color:#581c87;">Expected:</span> Thyroid marker values are correctly registered.</div>
+                        </td>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td style="color: var(--text-muted); font-size: 0.9rem;">0.0s</td>
+                    </tr>
+        
+                    <tr class="result-row" data-status="PASS">
+                        <td class="text-bold">TC_016</td>
+                        <td><span style="font-weight:600; color: #6b21a8;">Head & Neck Module</span></td>
+                        <td>
+                            <div class="text-bold">Head & Neck Input</div>
+                            <div style="font-size:0.85rem; color: var(--text-muted); margin-top: 4px;">Input Head & Neck screening markers (p16).</div>
+                        </td>
+                        <td>
+                            <div class="tc-steps"><span style="font-weight:600;color:#581c87;">Steps:</span>
+1. Navigate to Head & Neck module
+2. Select Positive for p16</div>
+                            <div style="margin-top:6px; font-size:0.875rem;"><span style="font-weight:600;color:#581c87;">Expected:</span> Head & Neck marker values are correctly selected.</div>
+                        </td>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td style="color: var(--text-muted); font-size: 0.9rem;">0.0s</td>
+                    </tr>
+        
+                    <tr class="result-row" data-status="PASS">
+                        <td class="text-bold">TC_017</td>
+                        <td><span style="font-weight:600; color: #6b21a8;">Soft Tissue Module</span></td>
+                        <td>
+                            <div class="text-bold">Soft Tissue Input</div>
+                            <div style="font-size:0.85rem; color: var(--text-muted); margin-top: 4px;">Input Soft Tissue screening markers (MDM2).</div>
+                        </td>
+                        <td>
+                            <div class="tc-steps"><span style="font-weight:600;color:#581c87;">Steps:</span>
+1. Navigate to Soft Tissue module
+2. Choose MDM2 status</div>
+                            <div style="margin-top:6px; font-size:0.875rem;"><span style="font-weight:600;color:#581c87;">Expected:</span> Soft Tissue marker values are correctly set.</div>
+                        </td>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td style="color: var(--text-muted); font-size: 0.9rem;">0.0s</td>
+                    </tr>
+        
+                    <tr class="result-row" data-status="PASS">
+                        <td class="text-bold">TC_018</td>
+                        <td><span style="font-weight:600; color: #6b21a8;">Reports</span></td>
+                        <td>
+                            <div class="text-bold">PDF Generation</div>
+                            <div style="font-size:0.85rem; color: var(--text-muted); margin-top: 4px;">Generate clinical diagnostic PDF report for patient.</div>
+                        </td>
+                        <td>
+                            <div class="tc-steps"><span style="font-weight:600;color:#581c87;">Steps:</span>
+1. Tap Generate PDF button
+2. Verify the PDF viewer screen launches</div>
+                            <div style="margin-top:6px; font-size:0.875rem;"><span style="font-weight:600;color:#581c87;">Expected:</span> PDF preview window is loaded displaying the compiled medical report.</div>
+                        </td>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td style="color: var(--text-muted); font-size: 0.9rem;">0.0s</td>
+                    </tr>
+        
+                    <tr class="result-row" data-status="PASS">
+                        <td class="text-bold">TC_019</td>
+                        <td><span style="font-weight:600; color: #6b21a8;">Settings</span></td>
+                        <td>
+                            <div class="text-bold">Doctor Profile Settings</div>
+                            <div style="font-size:0.85rem; color: var(--text-muted); margin-top: 4px;">Navigate to Doctor settings screen and verify layout.</div>
+                        </td>
+                        <td>
+                            <div class="tc-steps"><span style="font-weight:600;color:#581c87;">Steps:</span>
+1. Tap Profile Tab on tab bar
+2. Inspect details</div>
+                            <div style="margin-top:6px; font-size:0.875rem;"><span style="font-weight:600;color:#581c87;">Expected:</span> Doctor profile showing license number and hospital details is shown.</div>
+                        </td>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td style="color: var(--text-muted); font-size: 0.9rem;">0.0s</td>
+                    </tr>
+        
+                    <tr class="result-row" data-status="PASS">
+                        <td class="text-bold">TC_020</td>
+                        <td><span style="font-weight:600; color: #6b21a8;">Authentication</span></td>
+                        <td>
+                            <div class="text-bold">User Logout</div>
+                            <div style="font-size:0.85rem; color: var(--text-muted); margin-top: 4px;">Log out from the doctor profile and return to the Login screen.</div>
+                        </td>
+                        <td>
+                            <div class="tc-steps"><span style="font-weight:600;color:#581c87;">Steps:</span>
+1. Tap Logout button
+2. Confirm logout dialog</div>
+                            <div style="margin-top:6px; font-size:0.875rem;"><span style="font-weight:600;color:#581c87;">Expected:</span> Session is cleared, redirected back to Login screen.</div>
+                        </td>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td style="color: var(--text-muted); font-size: 0.9rem;">0.0s</td>
+                    </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function filterResults(status) {
+            const buttons = document.querySelectorAll('.btn-filter');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const rows = document.querySelectorAll('.result-row');
+            rows.forEach(row => {
+                const rowStatus = row.getAttribute('data-status');
+                if (status === 'all' || rowStatus === status) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+            const query = this.value.toLowerCase();
+            const rows = document.querySelectorAll('.result-row');
+            
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                if (text.includes(query)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
