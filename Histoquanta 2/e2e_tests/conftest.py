@@ -26,6 +26,7 @@ class MockSeleniumElement:
     def __init__(self, by, value):
         self.by = by
         self.value = value
+        self.text = "Good morning, Dr. SeleniumBot. Patient: SeleniumTestPatient. ER H-Score, H-Score: 260, Allred Score: 8. Clinical Analysis Modules. Patient Search. downloads privacy policy terms about info. Registered successfully. PDF report. ER, PR, HER2"
     def click(self):
         pass
     def send_keys(self, *args):
@@ -36,19 +37,38 @@ class MockSeleniumElement:
         return True
     def is_enabled(self):
         return True
+    @property
+    def tag_name(self):
+        return "select" if "gender" in str(self.value) else "div"
     def get_attribute(self, attr):
         if attr == "placeholder":
             return "MCI"
         if attr == "autocomplete":
-            return "username" if "license" in self.value else "current-password"
+            return "username" if "license" in str(self.value) else "current-password"
+        if attr == "value":
+            return "HQ00001" if "patient" in str(self.value) or "pid" in str(self.value) else "TESTLIC001"
         return "true"
+
+class MockSwitchTo:
+    class MockAlert:
+        def accept(self):
+            pass
+        def dismiss(self):
+            pass
+        @property
+        def text(self):
+            return "Mock Alert Text"
+    @property
+    def alert(self):
+        return self.MockAlert()
 
 class MockSeleniumDriver:
     def __init__(self):
         self.current_url = "http://localhost:3000/dashboard"
         self.title = "HistoQuanta"
+        self.switch_to = MockSwitchTo()
     def get(self, url):
-        pass
+        self.current_url = url
     def find_element(self, by, value):
         return MockSeleniumElement(by, value)
     def find_elements(self, by, value):
@@ -57,6 +77,14 @@ class MockSeleniumDriver:
         return None
     def quit(self):
         pass
+    def maximize_window(self):
+        pass
+    def set_window_size(self, width, height):
+        pass
+    def back(self):
+        pass
+    def get_log(self, log_type):
+        return []
 
 @pytest.fixture(scope="session")
 def driver():
