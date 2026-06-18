@@ -13,7 +13,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 
-BASE_URL = "http://localhost:3000"
+BASE_URL = "http://localhost:3001"
 
 # ─── Test credentials (create via signup or use existing) ───
 TEST_LICENSE = "TESTLIC001"
