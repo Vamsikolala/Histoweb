@@ -39,7 +39,7 @@ jobs:
           npm run dev &
           npx wait-on http://localhost:3000 --timeout 60000
           cd ..
-          k6 run k6_load_test.js
+          k6 run --compatibility-mode=base k6_load_test.js
 
       - name: Upload Load Test HTML Report
         uses: actions/upload-artifact@v4
