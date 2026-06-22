@@ -40,3 +40,10 @@ jobs:
           npx wait-on http://localhost:3000 --timeout 60000
           cd ..
           k6 run k6_load_test.js
+
+      - name: Upload Load Test HTML Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: K6-Load-Test-Report
+          path: "Histoquanta 2/k6_report.html"

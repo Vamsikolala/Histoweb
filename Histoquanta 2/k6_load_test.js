@@ -1,6 +1,7 @@
 import http from 'k6/http';
 import { sleep, check } from 'k6';
-
+import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bencuk.js";
+import { textSummary } from "https://jslib.k6.io/k6-summary/0.0.1/index.js";
 export const options = {
   vus: 300, // 300 virtual users
   duration: '1m', // Running continuously for 1 minute
@@ -22,4 +23,11 @@ export default function () {
   
   // Wait a short time between requests to simulate real user behavior
   sleep(1);
+}
+
+export function handleSummary(data) {
+  return {
+    "k6_report.html": htmlReport(data),
+    stdout: textSummary(data, { indent: " ", enableColors: true }),
+  };
 }
