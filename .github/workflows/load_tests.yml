@@ -39,11 +39,11 @@ jobs:
           npm run dev &
           npx wait-on http://localhost:3000 --timeout 60000
           cd ..
-          k6 run --compatibility-mode=base k6_load_test.js
+          k6 run k6_load_test.js
 
-      - name: Upload Load Test HTML Report
+      - name: Upload Load Test Text Report
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: K6-Load-Test-Report
-          path: "Histoquanta 2/k6_report.html"
+          name: K6-Load-Test-Report-TXT
+          path: "Histoquanta 2/k6_report.txt"
