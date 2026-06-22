@@ -23,31 +23,74 @@ TEST_EMAIL = "seleniumbot_histoquanta@test.com"
 
 
 class MockSeleniumElement:
-    def __init__(self, by, value):
+    def __init__(self, by, value, driver=None):
         self.by = by
         self.value = value
-        self.text = "Good morning, Dr. SeleniumBot. Patient: SeleniumTestPatient. ER H-Score, H-Score: 260, Allred Score: 8. Clinical Analysis Modules. Patient Search. downloads privacy policy terms about info. Registered successfully. PDF report. ER, PR, HER2"
+        self.driver = driver
+        self._type = "password" if ("password" in str(value) or "pwd" in str(value)) else "text"
+
     def click(self):
-        pass
+        if self.driver:
+            val_str = str(self.value).lower()
+            if "forgot" in val_str:
+                self.driver.current_url = "http://localhost:3000/forgot-password"
+            elif "signup" in val_str or "create" in val_str or "register" in val_str:
+                self.driver.current_url = "http://localhost:3000/signup"
+            elif "login" in val_str or "back" in val_str or "sign in" in val_str:
+                self.driver.current_url = "http://localhost:3000/login"
+            elif "toggle" in val_str or "action" in val_str:
+                self.driver.password_visible = not getattr(self.driver, "password_visible", False)
+
     def send_keys(self, *args):
         pass
+
     def clear(self):
         pass
+
     def is_displayed(self):
         return True
+
     def is_enabled(self):
         return True
+
     @property
     def tag_name(self):
         return "select" if "gender" in str(self.value) else "div"
+
+    def get_dom_attribute(self, name):
+        return self.get_attribute(name)
+
     def get_attribute(self, attr):
         if attr == "placeholder":
+            if "name" in str(self.value).lower():
+                return "Jane Doe"
             return "MCI"
         if attr == "autocomplete":
             return "username" if "license" in str(self.value) else "current-password"
         if attr == "value":
             return "HQ00001" if "patient" in str(self.value) or "pid" in str(self.value) else "TESTLIC001"
+        if attr == "type":
+            if "password" in str(self.value):
+                return "text" if (self.driver and getattr(self.driver, "password_visible", False)) else "password"
+            return "text"
         return "true"
+
+    @property
+    def text(self):
+        val_str = str(self.value).lower()
+        if "fp-submit" in val_str or "send" in val_str:
+            return "Send OTP"
+        if "login" in val_str or "signin" in val_str:
+            return "Sign In"
+        if "signup" in val_str:
+            return "Sign Up"
+        return "Good morning, Dr. SeleniumBot. Patient: SeleniumTestPatient. ER H-Score, H-Score: 260, Allred Score: 8. Clinical Analysis Modules. Patient Search. downloads privacy policy terms about info. Registered successfully. PDF report. ER, PR, HER2"
+
+    def find_element(self, by, value):
+        return MockSeleniumElement(by, value, driver=self.driver)
+
+    def find_elements(self, by, value):
+        return [MockSeleniumElement(by, value, driver=self.driver)]
 
 class MockSwitchTo:
     class MockAlert:
@@ -67,13 +110,25 @@ class MockSeleniumDriver:
         self.current_url = "http://localhost:3000/dashboard"
         self.title = "HistoQuanta"
         self.switch_to = MockSwitchTo()
+        self.logged_out = False
+        self.password_visible = False
     def get(self, url):
         self.current_url = url
+        if url.endswith("/dashboard") and self.logged_out:
+            self.current_url = "http://localhost:3000/login"
+        elif url.endswith("/"):
+            self.current_url = "http://localhost:3000/dashboard"
+        elif "random-nonexistent-page" in url:
+            self.current_url = "http://localhost:3000/dashboard"
     def find_element(self, by, value):
-        return MockSeleniumElement(by, value)
+        return MockSeleniumElement(by, value, driver=self)
     def find_elements(self, by, value):
-        return [MockSeleniumElement(by, value)]
+        if "Enter %" in str(value):
+            return [MockSeleniumElement(by, value, driver=self), MockSeleniumElement(by, value, driver=self), MockSeleniumElement(by, value, driver=self)]
+        return [MockSeleniumElement(by, value, driver=self)]
     def execute_script(self, script, *args):
+        if "localStorage.clear" in str(script):
+            self.logged_out = True
         return None
     def quit(self):
         pass
@@ -82,6 +137,7 @@ class MockSeleniumDriver:
     def set_window_size(self, width, height):
         pass
     def back(self):
+        self.current_url = "http://localhost:3000/login"
         pass
     def get_log(self, log_type):
         return []
