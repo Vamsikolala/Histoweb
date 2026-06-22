@@ -8,9 +8,9 @@
     "expected_result": "Login page loads with 'Welcome back' heading",
     "actual_result": "Login page loaded successfully",
     "status": "PASS",
-    "execution_time": 1.62,
+    "execution_time": 1.84,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:48:16"
+    "timestamp": "2026-06-22 10:30:59"
   },
   {
     "test_id": "TC_012",
@@ -21,9 +21,9 @@
     "expected_result": "Redirect to /dashboard",
     "actual_result": "Successfully logged in and redirected",
     "status": "PASS",
-    "execution_time": 5.94,
+    "execution_time": 5.54,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:48:22"
+    "timestamp": "2026-06-22 10:31:04"
   },
   {
     "test_id": "TC_016",
@@ -34,9 +34,9 @@
     "expected_result": "Heading displayed",
     "actual_result": "Signup page loaded successfully",
     "status": "PASS",
-    "execution_time": 1.39,
+    "execution_time": 1.13,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:48:24"
+    "timestamp": "2026-06-22 10:31:06"
   },
   {
     "test_id": "TC_029",
@@ -47,9 +47,9 @@
     "expected_result": "Success message or redirect",
     "actual_result": "Account already exists (expected for repeat runs)",
     "status": "PASS",
-    "execution_time": 11.56,
+    "execution_time": 9.7,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:48:35"
+    "timestamp": "2026-06-22 10:31:15"
   },
   {
     "test_id": "TC_031",
@@ -60,9 +60,9 @@
     "expected_result": "Page loads with 'Forgot password' heading",
     "actual_result": "Page loaded successfully",
     "status": "PASS",
-    "execution_time": 1.5,
+    "execution_time": 1.15,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:48:37"
+    "timestamp": "2026-06-22 10:31:16"
   },
   {
     "test_id": "TC_039",
@@ -73,9 +73,9 @@
     "expected_result": "Redirect to /login",
     "actual_result": "Redirected to login page",
     "status": "PASS",
-    "execution_time": 2.46,
+    "execution_time": 2.13,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:48:39"
+    "timestamp": "2026-06-22 10:31:19"
   },
   {
     "test_id": "TC_040",
@@ -86,9 +86,9 @@
     "expected_result": "Dashboard content visible",
     "actual_result": "Dashboard loaded with content: True",
     "status": "PASS",
-    "execution_time": 9.63,
+    "execution_time": 8.14,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:48:49"
+    "timestamp": "2026-06-22 10:31:27"
   },
   {
     "test_id": "TC_041",
@@ -99,9 +99,9 @@
     "expected_result": "Dashboard title or Patients heading shown",
     "actual_result": "Dashboard content found: True",
     "status": "PASS",
-    "execution_time": 4.46,
+    "execution_time": 3.75,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:48:53"
+    "timestamp": "2026-06-22 10:31:30"
   },
   {
     "test_id": "TC_042",
@@ -112,9 +112,9 @@
     "expected_result": "Doctor name with 'Dr.' prefix shown",
     "actual_result": "Doctor name with prefix found: True",
     "status": "PASS",
-    "execution_time": 4.52,
+    "execution_time": 3.77,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:48:58"
+    "timestamp": "2026-06-22 10:31:34"
   },
   {
     "test_id": "TC_043",
@@ -125,9 +125,9 @@
     "expected_result": "All 6 tissue modules visible (Breast, Thyroid, GIT, Soft Tissue, Head & Neck, Lungs)",
     "actual_result": "Found 6/6 tissue modules",
     "status": "PASS",
-    "execution_time": 4.36,
+    "execution_time": 3.75,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:49:02"
+    "timestamp": "2026-06-22 10:31:38"
   },
   {
     "test_id": "TC_044",
@@ -138,9 +138,9 @@
     "expected_result": "'No Patient Selected' banner visible",
     "actual_result": "Banner found: True",
     "status": "PASS",
-    "execution_time": 4.38,
+    "execution_time": 3.78,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:49:07"
+    "timestamp": "2026-06-22 10:31:42"
   },
   {
     "test_id": "TC_045",
@@ -151,9 +151,9 @@
     "expected_result": "Sidebar element exists on desktop viewport",
     "actual_result": "Sidebar present: True",
     "status": "PASS",
-    "execution_time": 4.32,
+    "execution_time": 3.72,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:49:11"
+    "timestamp": "2026-06-22 10:31:45"
   },
   {
     "test_id": "TC_046",
@@ -164,9 +164,9 @@
     "expected_result": "Logo element visible in sidebar",
     "actual_result": "Sidebar logo found: True",
     "status": "PASS",
-    "execution_time": 4.33,
+    "execution_time": 3.71,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:49:15"
+    "timestamp": "2026-06-22 10:31:49"
   },
   {
     "test_id": "TC_047",
@@ -177,9 +177,9 @@
     "expected_result": "Home tab button exists",
     "actual_result": "Home tab found: True",
     "status": "PASS",
-    "execution_time": 4.48,
+    "execution_time": 3.72,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:49:20"
+    "timestamp": "2026-06-22 10:31:53"
   },
   {
     "test_id": "TC_048",
@@ -190,9 +190,9 @@
     "expected_result": "Patient Search content visible",
     "actual_result": "Search tab works: True",
     "status": "PASS",
-    "execution_time": 5.68,
+    "execution_time": 4.83,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:49:25"
+    "timestamp": "2026-06-22 10:31:58"
   },
   {
     "test_id": "TC_049",
@@ -203,9 +203,9 @@
     "expected_result": "Patient Registry form visible",
     "actual_result": "Add Patient tab works: True",
     "status": "PASS",
-    "execution_time": 5.75,
+    "execution_time": 4.86,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:49:31"
+    "timestamp": "2026-06-22 10:32:03"
   },
   {
     "test_id": "TC_050",
@@ -216,9 +216,9 @@
     "expected_result": "Doctor profile content visible",
     "actual_result": "Profile tab works: True",
     "status": "PASS",
-    "execution_time": 5.62,
+    "execution_time": 4.84,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:49:37"
+    "timestamp": "2026-06-22 10:32:07"
   },
   {
     "test_id": "TC_051",
@@ -229,9 +229,9 @@
     "expected_result": "'Clinical Analysis Modules' heading visible",
     "actual_result": "Heading found: True",
     "status": "PASS",
-    "execution_time": 5.17,
+    "execution_time": 4.8,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:49:42"
+    "timestamp": "2026-06-22 10:32:12"
   },
   {
     "test_id": "TC_052",
@@ -242,9 +242,9 @@
     "expected_result": "Breast Cancer card visible",
     "actual_result": "Breast card found: True",
     "status": "PASS",
-    "execution_time": 5.46,
+    "execution_time": 4.79,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:49:47"
+    "timestamp": "2026-06-22 10:32:17"
   },
   {
     "test_id": "TC_053",
@@ -255,9 +255,9 @@
     "expected_result": "Patient Search heading visible",
     "actual_result": "Search tab loaded: True",
     "status": "PASS",
-    "execution_time": 6.61,
+    "execution_time": 5.88,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:49:54"
+    "timestamp": "2026-06-22 10:32:23"
   },
   {
     "test_id": "TC_054",
@@ -268,9 +268,9 @@
     "expected_result": "Search input field visible",
     "actual_result": "Search input found: True",
     "status": "PASS",
-    "execution_time": 6.53,
+    "execution_time": 5.82,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:50:01"
+    "timestamp": "2026-06-22 10:32:29"
   },
   {
     "test_id": "TC_055",
@@ -281,9 +281,9 @@
     "expected_result": "Placeholder mentions name/ID search",
     "actual_result": "Placeholder: 'Search by name, ID, diagnosis, or report type...'",
     "status": "PASS",
-    "execution_time": 6.54,
+    "execution_time": 5.79,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:50:07"
+    "timestamp": "2026-06-22 10:32:35"
   },
   {
     "test_id": "TC_056",
@@ -294,9 +294,9 @@
     "expected_result": "Refresh button visible",
     "actual_result": "Refresh button found: True",
     "status": "PASS",
-    "execution_time": 6.49,
+    "execution_time": 5.84,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:50:14"
+    "timestamp": "2026-06-22 10:32:40"
   },
   {
     "test_id": "TC_057",
@@ -307,9 +307,9 @@
     "expected_result": "No matching patients message",
     "actual_result": "No results shown: True",
     "status": "PASS",
-    "execution_time": 7.85,
+    "execution_time": 6.94,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:50:22"
+    "timestamp": "2026-06-22 10:32:47"
   },
   {
     "test_id": "TC_058",
@@ -320,9 +320,9 @@
     "expected_result": "Patient count shown (e.g. 'X patients registered')",
     "actual_result": "Patient count displayed: True",
     "status": "PASS",
-    "execution_time": 6.64,
+    "execution_time": 5.82,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:50:28"
+    "timestamp": "2026-06-22 10:32:53"
   },
   {
     "test_id": "TC_059",
@@ -333,9 +333,9 @@
     "expected_result": "Either patient cards or 'No patients' message",
     "actual_result": "Content state rendered: True",
     "status": "PASS",
-    "execution_time": 6.6,
+    "execution_time": 5.81,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:50:35"
+    "timestamp": "2026-06-22 10:32:59"
   },
   {
     "test_id": "TC_060",
@@ -346,9 +346,9 @@
     "expected_result": "Full list restored after clearing",
     "actual_result": "Search cleared and results restored",
     "status": "PASS",
-    "execution_time": 7.83,
+    "execution_time": 6.94,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:50:43"
+    "timestamp": "2026-06-22 10:33:06"
   },
   {
     "test_id": "TC_061",
@@ -357,11 +357,11 @@
     "description": "Verify patient cards display avatar initials",
     "steps": "1. Navigate to search tab\n2. Check for avatar elements",
     "expected_result": "Avatar elements present in patient cards",
-    "actual_result": "Found 8 avatar elements",
+    "actual_result": "Found 10 avatar elements",
     "status": "PASS",
-    "execution_time": 6.37,
+    "execution_time": 5.85,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:50:49"
+    "timestamp": "2026-06-22 10:33:12"
   },
   {
     "test_id": "TC_062",
@@ -370,11 +370,11 @@
     "description": "Verify 'Select' buttons are present for each patient",
     "steps": "1. Navigate to search tab\n2. Check for Select buttons",
     "expected_result": "Select buttons visible for patient cards",
-    "actual_result": "Found 7 select buttons",
+    "actual_result": "Found 9 select buttons",
     "status": "PASS",
-    "execution_time": 5.99,
+    "execution_time": 5.81,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:50:55"
+    "timestamp": "2026-06-22 10:33:18"
   },
   {
     "test_id": "TC_063",
@@ -383,11 +383,11 @@
     "description": "Verify delete buttons exist for patient management",
     "steps": "1. Navigate to search tab\n2. Check for delete buttons",
     "expected_result": "Delete buttons visible",
-    "actual_result": "Found 7 delete buttons",
+    "actual_result": "Found 9 delete buttons",
     "status": "PASS",
-    "execution_time": 5.97,
+    "execution_time": 5.82,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:51:01"
+    "timestamp": "2026-06-22 10:33:23"
   },
   {
     "test_id": "TC_064",
@@ -398,9 +398,9 @@
     "expected_result": "Patient Registry form visible",
     "actual_result": "Form loaded: True",
     "status": "PASS",
-    "execution_time": 6.06,
+    "execution_time": 5.81,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:51:07"
+    "timestamp": "2026-06-22 10:33:29"
   },
   {
     "test_id": "TC_065",
@@ -411,9 +411,9 @@
     "expected_result": "Patient ID field is disabled with auto value",
     "actual_result": "Auto-generated ID found: True",
     "status": "PASS",
-    "execution_time": 6.08,
+    "execution_time": 5.83,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:51:13"
+    "timestamp": "2026-06-22 10:33:35"
   },
   {
     "test_id": "TC_066",
@@ -424,9 +424,9 @@
     "expected_result": "Name field visible",
     "actual_result": "Name field found: True",
     "status": "PASS",
-    "execution_time": 6.1,
+    "execution_time": 5.82,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:51:19"
+    "timestamp": "2026-06-22 10:33:41"
   },
   {
     "test_id": "TC_067",
@@ -437,9 +437,9 @@
     "expected_result": "Age field visible",
     "actual_result": "Age field found: True",
     "status": "PASS",
-    "execution_time": 6.03,
+    "execution_time": 5.8,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:51:25"
+    "timestamp": "2026-06-22 10:33:47"
   },
   {
     "test_id": "TC_068",
@@ -450,9 +450,9 @@
     "expected_result": "Dropdown contains Male, Female, Other",
     "actual_result": "Options: ['Select', 'Male', 'Female', 'Other']",
     "status": "PASS",
-    "execution_time": 6.13,
+    "execution_time": 5.87,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:51:31"
+    "timestamp": "2026-06-22 10:33:53"
   },
   {
     "test_id": "TC_069",
@@ -463,9 +463,9 @@
     "expected_result": "Phone field visible",
     "actual_result": "Phone field found: True",
     "status": "PASS",
-    "execution_time": 6.02,
+    "execution_time": 5.86,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:51:37"
+    "timestamp": "2026-06-22 10:33:58"
   },
   {
     "test_id": "TC_070",
@@ -476,9 +476,9 @@
     "expected_result": "Address field visible",
     "actual_result": "Address field found: True",
     "status": "PASS",
-    "execution_time": 6.04,
+    "execution_time": 5.86,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:51:43"
+    "timestamp": "2026-06-22 10:34:04"
   },
   {
     "test_id": "TC_071",
@@ -489,9 +489,9 @@
     "expected_result": "Report type field visible",
     "actual_result": "Report type field found: True",
     "status": "PASS",
-    "execution_time": 6.16,
+    "execution_time": 5.81,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:51:50"
+    "timestamp": "2026-06-22 10:34:10"
   },
   {
     "test_id": "TC_072",
@@ -502,9 +502,9 @@
     "expected_result": "Save button visible",
     "actual_result": "Save button found: True",
     "status": "PASS",
-    "execution_time": 6.06,
+    "execution_time": 5.8,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:51:56"
+    "timestamp": "2026-06-22 10:34:16"
   },
   {
     "test_id": "TC_073",
@@ -515,9 +515,9 @@
     "expected_result": "Validation error message displayed",
     "actual_result": "Validation error shown: True",
     "status": "PASS",
-    "execution_time": 7.37,
+    "execution_time": 7.0,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:52:03"
+    "timestamp": "2026-06-22 10:34:23"
   },
   {
     "test_id": "TC_074",
@@ -528,9 +528,9 @@
     "expected_result": "Digits are stripped, only letters remain",
     "actual_result": "Input value after typing: 'TestName'",
     "status": "PASS",
-    "execution_time": 6.85,
+    "execution_time": 6.47,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:52:10"
+    "timestamp": "2026-06-22 10:34:29"
   },
   {
     "test_id": "TC_075",
@@ -541,9 +541,9 @@
     "expected_result": "Only digits remain, max 10 chars",
     "actual_result": "Phone value: '1234567890' (len=10)",
     "status": "PASS",
-    "execution_time": 6.89,
+    "execution_time": 6.53,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:52:17"
+    "timestamp": "2026-06-22 10:34:36"
   },
   {
     "test_id": "TC_076",
@@ -554,9 +554,9 @@
     "expected_result": "Attachments section with buttons visible",
     "actual_result": "Attachments section found: True",
     "status": "PASS",
-    "execution_time": 6.11,
+    "execution_time": 5.85,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:52:23"
+    "timestamp": "2026-06-22 10:34:42"
   },
   {
     "test_id": "TC_076_b",
@@ -565,11 +565,11 @@
     "description": "Register a new patient and save details successfully",
     "steps": "1. Fill in all fields\n2. Click Save Patient & Report",
     "expected_result": "Patient registered successfully, success message shown",
-    "actual_result": "Patient registered with ID PT008",
+    "actual_result": "Patient registered with ID PT010",
     "status": "PASS",
-    "execution_time": 11.12,
+    "execution_time": 9.64,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:52:34"
+    "timestamp": "2026-06-22 10:34:51"
   },
   {
     "test_id": "TC_077",
@@ -580,9 +580,9 @@
     "expected_result": "Profile content visible",
     "actual_result": "Profile loaded: True",
     "status": "PASS",
-    "execution_time": 6.11,
+    "execution_time": 5.88,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:52:40"
+    "timestamp": "2026-06-22 10:34:57"
   },
   {
     "test_id": "TC_078",
@@ -593,9 +593,9 @@
     "expected_result": "Edit Profile button visible",
     "actual_result": "Edit toggle found: True",
     "status": "PASS",
-    "execution_time": 6.02,
+    "execution_time": 5.8,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:52:46"
+    "timestamp": "2026-06-22 10:35:03"
   },
   {
     "test_id": "TC_079",
@@ -606,9 +606,9 @@
     "expected_result": "Editable form fields appear",
     "actual_result": "Edit form shown: True",
     "status": "PASS",
-    "execution_time": 7.14,
+    "execution_time": 6.86,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:52:53"
+    "timestamp": "2026-06-22 10:35:10"
   },
   {
     "test_id": "TC_080",
@@ -619,9 +619,9 @@
     "expected_result": "Returns to view mode (edit fields hidden)",
     "actual_result": "Returned to view mode: True",
     "status": "PASS",
-    "execution_time": 13.95,
+    "execution_time": 13.45,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:53:07"
+    "timestamp": "2026-06-22 10:35:23"
   },
   {
     "test_id": "TC_081",
@@ -632,9 +632,9 @@
     "expected_result": "Log Out button visible",
     "actual_result": "Logout button found: True",
     "status": "PASS",
-    "execution_time": 6.7,
+    "execution_time": 5.86,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:53:14"
+    "timestamp": "2026-06-22 10:35:29"
   },
   {
     "test_id": "TC_082",
@@ -645,9 +645,9 @@
     "expected_result": "'My Downloads' link visible",
     "actual_result": "Downloads link found: True",
     "status": "PASS",
-    "execution_time": 6.6,
+    "execution_time": 5.86,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:53:21"
+    "timestamp": "2026-06-22 10:35:35"
   },
   {
     "test_id": "TC_083",
@@ -658,9 +658,9 @@
     "expected_result": "Privacy Policy link visible",
     "actual_result": "Privacy link found: True",
     "status": "PASS",
-    "execution_time": 6.66,
+    "execution_time": 5.94,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:53:27"
+    "timestamp": "2026-06-22 10:35:41"
   },
   {
     "test_id": "TC_084",
@@ -671,9 +671,9 @@
     "expected_result": "Terms & Conditions link visible",
     "actual_result": "Terms link found: True",
     "status": "PASS",
-    "execution_time": 6.56,
+    "execution_time": 5.94,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:53:34"
+    "timestamp": "2026-06-22 10:35:47"
   },
   {
     "test_id": "TC_085",
@@ -684,9 +684,9 @@
     "expected_result": "About HistoQuanta link visible",
     "actual_result": "About link found: True",
     "status": "PASS",
-    "execution_time": 6.6,
+    "execution_time": 5.88,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:53:40"
+    "timestamp": "2026-06-22 10:35:53"
   },
   {
     "test_id": "TC_086",
@@ -697,9 +697,9 @@
     "expected_result": "All contact info fields visible",
     "actual_result": "Found 3/3 contact fields",
     "status": "PASS",
-    "execution_time": 6.75,
+    "execution_time": 5.84,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:53:47"
+    "timestamp": "2026-06-22 10:35:59"
   },
   {
     "test_id": "TC_087",
@@ -710,9 +710,9 @@
     "expected_result": "Large avatar element visible",
     "actual_result": "Avatar found: True",
     "status": "PASS",
-    "execution_time": 6.73,
+    "execution_time": 5.83,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:53:54"
+    "timestamp": "2026-06-22 10:36:05"
   },
   {
     "test_id": "TC_088",
@@ -723,9 +723,9 @@
     "expected_result": "URL redirects to /dashboard or /login",
     "actual_result": "Current URL: http://localhost:3000/dashboard",
     "status": "PASS",
-    "execution_time": 4.5,
+    "execution_time": 3.85,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:53:58"
+    "timestamp": "2026-06-22 10:36:08"
   },
   {
     "test_id": "TC_089",
@@ -736,9 +736,9 @@
     "expected_result": "Redirects to /dashboard",
     "actual_result": "Redirected to: http://localhost:3000/dashboard",
     "status": "PASS",
-    "execution_time": 4.45,
+    "execution_time": 3.76,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:54:03"
+    "timestamp": "2026-06-22 10:36:12"
   },
   {
     "test_id": "TC_090",
@@ -749,9 +749,9 @@
     "expected_result": "Privacy policy content visible",
     "actual_result": "Content loaded: True",
     "status": "PASS",
-    "execution_time": 4.63,
+    "execution_time": 3.77,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:54:07"
+    "timestamp": "2026-06-22 10:36:16"
   },
   {
     "test_id": "TC_091",
@@ -762,9 +762,9 @@
     "expected_result": "Terms content visible",
     "actual_result": "Content loaded: True",
     "status": "PASS",
-    "execution_time": 4.54,
+    "execution_time": 3.75,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:54:12"
+    "timestamp": "2026-06-22 10:36:20"
   },
   {
     "test_id": "TC_092",
@@ -775,9 +775,9 @@
     "expected_result": "About content visible",
     "actual_result": "Content loaded: True",
     "status": "PASS",
-    "execution_time": 4.48,
+    "execution_time": 3.75,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:54:16"
+    "timestamp": "2026-06-22 10:36:23"
   },
   {
     "test_id": "TC_093",
@@ -788,9 +788,9 @@
     "expected_result": "Downloads content visible",
     "actual_result": "Content loaded: True",
     "status": "PASS",
-    "execution_time": 4.52,
+    "execution_time": 3.75,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:54:21"
+    "timestamp": "2026-06-22 10:36:27"
   },
   {
     "test_id": "TC_094",
@@ -801,9 +801,9 @@
     "expected_result": "Redirects to /login",
     "actual_result": "Redirected to: http://localhost:3000/login",
     "status": "PASS",
-    "execution_time": 2.45,
+    "execution_time": 2.13,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:54:23"
+    "timestamp": "2026-06-22 10:36:29"
   },
   {
     "test_id": "TC_095",
@@ -814,9 +814,9 @@
     "expected_result": "Redirects to /login",
     "actual_result": "Redirected to: http://localhost:3000/login",
     "status": "PASS",
-    "execution_time": 2.42,
+    "execution_time": 2.9,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:54:26"
+    "timestamp": "2026-06-22 10:36:32"
   },
   {
     "test_id": "TC_096",
@@ -827,9 +827,9 @@
     "expected_result": "Returns to previous page",
     "actual_result": "After back: http://localhost:3000/dashboard",
     "status": "PASS",
-    "execution_time": 11.72,
+    "execution_time": 9.52,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:54:38"
+    "timestamp": "2026-06-22 10:36:42"
   },
   {
     "test_id": "TC_097",
@@ -840,9 +840,9 @@
     "expected_result": "Page title is non-empty",
     "actual_result": "Page title: 'webfrontend'",
     "status": "PASS",
-    "execution_time": 1.53,
+    "execution_time": 1.04,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:54:39"
+    "timestamp": "2026-06-22 10:36:43"
   },
   {
     "test_id": "TC_098",
@@ -853,9 +853,9 @@
     "expected_result": "Breast module page with ER/PR/HER2/Ki67 options",
     "actual_result": "Breast module loaded: True",
     "status": "PASS",
-    "execution_time": 14.77,
+    "execution_time": 13.35,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:54:54"
+    "timestamp": "2026-06-22 10:36:56"
   },
   {
     "test_id": "TC_099",
@@ -866,9 +866,9 @@
     "expected_result": "ER Allred scoring form visible",
     "actual_result": "ER form loaded: True",
     "status": "PASS",
-    "execution_time": 14.71,
+    "execution_time": 13.48,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:55:09"
+    "timestamp": "2026-06-22 10:37:10"
   },
   {
     "test_id": "TC_100",
@@ -879,9 +879,9 @@
     "expected_result": "Intensity dropdown visible",
     "actual_result": "Intensity dropdown found: True",
     "status": "PASS",
-    "execution_time": 14.66,
+    "execution_time": 13.47,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:55:23"
+    "timestamp": "2026-06-22 10:37:23"
   },
   {
     "test_id": "TC_101",
@@ -892,9 +892,9 @@
     "expected_result": "Proportion dropdown visible",
     "actual_result": "Proportion dropdown found: True",
     "status": "PASS",
-    "execution_time": 14.7,
+    "execution_time": 13.17,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:55:38"
+    "timestamp": "2026-06-22 10:37:36"
   },
   {
     "test_id": "TC_102",
@@ -905,385 +905,385 @@
     "expected_result": "Score and inference label visible",
     "actual_result": "Score display found: True",
     "status": "PASS",
-    "execution_time": 14.32,
+    "execution_time": 13.17,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:55:52"
+    "timestamp": "2026-06-22 10:37:49"
   },
   {
     "test_id": "TC_103",
     "module": "Clinical Modules",
     "test_case": "ER Reference Table",
-    "description": "Reference table",
-    "steps": "1. Check table",
-    "expected_result": "Present",
-    "actual_result": "Message: invalid session id: session deleted as the browser has closed the connection\nfrom disconnected: not connected to DevTools\n  (Session info: chrome=148.0.7778.217)\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1ea0]\n\tchromedriver!(No symbol) [0x6a0dbe]\n\tchromedriver!(No symbol) [0x6bf98e]\n\tchromedriver!(No symbol) [0x723cdc]\n\tchromedriver!(No symbol) [0x73a2a9]\n\tchromedriver!(No symbol) [0x71d516]\n\tchromedriver!(No symbol) [0x6f08e9]\n\tchromedriver!(No symbol) [0x6f16a4]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!GetHandleVerifier [0x8b3e68+18ea8]\n\tchromedriver!GetHandleVerifier [0x8b4015+19055]\n\tchromedriver!GetHandleVerifier [0x89d65f+269f]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 15.03,
+    "description": "Verify Allred Scoring reference table is displayed",
+    "steps": "1. Navigate to ER form\n2. Check for reference table",
+    "expected_result": "Reference table visible",
+    "actual_result": "Reference table found: True",
+    "status": "PASS",
+    "execution_time": 13.21,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:07"
+    "timestamp": "2026-06-22 10:38:03"
   },
   {
     "test_id": "TC_104",
     "module": "Clinical Modules",
     "test_case": "ER Save Button",
-    "description": "Save button",
-    "steps": "1. Check button",
-    "expected_result": "Present",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.83,
+    "description": "Verify 'Save Assessment & Proceed to H-Score' button exists",
+    "steps": "1. Check for save button text",
+    "expected_result": "Save button visible",
+    "actual_result": "Save button found: True",
+    "status": "PASS",
+    "execution_time": 13.21,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:08"
+    "timestamp": "2026-06-22 10:38:16"
   },
   {
     "test_id": "TC_104_b",
     "module": "Clinical Modules",
     "test_case": "Complete ER & H-Score Flow",
-    "description": "Complete ER & H-Score Flow",
-    "steps": "1. Fill forms",
-    "expected_result": "Flow completed successfully",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.0,
+    "description": "Complete Breast ER Allred scoring, H-Score entry, save report, and download PDF",
+    "steps": "1. Fill ER Allred\n2. Click Save & Proceed\n3. Enter H-Score % values\n4. Save report\n5. Download report PDF",
+    "expected_result": "Successfully navigated, saved reports, and downloaded PDF",
+    "actual_result": "E2E clinical report generated and verified",
+    "status": "PASS",
+    "execution_time": 33.5,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:08"
+    "timestamp": "2026-06-22 10:38:49"
   },
   {
     "test_id": "TC_105",
     "module": "Clinical Modules",
     "test_case": "Breast PR Page",
-    "description": "PR page",
-    "steps": "1. Navigate",
-    "expected_result": "Page loads",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.01,
+    "description": "Verify PR scoring page loads",
+    "steps": "1. Navigate to /patient/1/modules/breast/pr",
+    "expected_result": "PR scoring form visible",
+    "actual_result": "PR page loaded: True",
+    "status": "PASS",
+    "execution_time": 13.27,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:09"
+    "timestamp": "2026-06-22 10:39:03"
   },
   {
     "test_id": "TC_106",
     "module": "Clinical Modules",
     "test_case": "Breast HER2 Page",
-    "description": "HER2 page",
-    "steps": "1. Navigate",
-    "expected_result": "Page loads",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.01,
+    "description": "Verify HER2 scoring page loads",
+    "steps": "1. Navigate to /patient/1/modules/breast/her2",
+    "expected_result": "HER2 scoring form visible",
+    "actual_result": "HER2 page loaded: True",
+    "status": "PASS",
+    "execution_time": 13.17,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:09"
+    "timestamp": "2026-06-22 10:39:16"
   },
   {
     "test_id": "TC_107",
     "module": "Clinical Modules",
     "test_case": "Breast Ki67 Page",
-    "description": "Ki67 page",
-    "steps": "1. Navigate",
-    "expected_result": "Page loads",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.0,
+    "description": "Verify Ki67 scoring page loads",
+    "steps": "1. Navigate to /patient/1/modules/breast/ki67",
+    "expected_result": "Ki67 scoring form visible",
+    "actual_result": "Ki67 page loaded: True",
+    "status": "PASS",
+    "execution_time": 13.2,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:09"
+    "timestamp": "2026-06-22 10:39:29"
   },
   {
     "test_id": "TC_108",
     "module": "Clinical Modules",
     "test_case": "GIT Module Page",
-    "description": "GIT module",
-    "steps": "1. Navigate",
-    "expected_result": "Page loads",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.0,
+    "description": "Verify GIT module page loads with sub-options",
+    "steps": "1. Navigate to /patient/1/modules/git",
+    "expected_result": "GIT module with Adenocarcinoma/NET/GIST options",
+    "actual_result": "GIT module loaded: True",
+    "status": "PASS",
+    "execution_time": 13.17,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:09"
+    "timestamp": "2026-06-22 10:39:42"
   },
   {
     "test_id": "TC_109",
     "module": "Clinical Modules",
     "test_case": "GIT Adenocarcinoma Page",
-    "description": "Adenocarcinoma",
-    "steps": "1. Navigate",
-    "expected_result": "Page loads",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.0,
+    "description": "Verify Adenocarcinoma sub-module page loads",
+    "steps": "1. Navigate to /patient/1/modules/git/adenocarcinoma",
+    "expected_result": "Adenocarcinoma page with Surgical/Biopsy options",
+    "actual_result": "Adenocarcinoma loaded: True",
+    "status": "PASS",
+    "execution_time": 13.23,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:09"
+    "timestamp": "2026-06-22 10:39:55"
   },
   {
     "test_id": "TC_110",
     "module": "Clinical Modules",
     "test_case": "Lungs Module Page",
-    "description": "Lungs module",
-    "steps": "1. Navigate",
-    "expected_result": "Page loads",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.0,
+    "description": "Verify Lungs HER2 module page loads",
+    "steps": "1. Navigate to /patient/1/modules/lungs",
+    "expected_result": "Lungs module with HER2 scoring",
+    "actual_result": "Lungs module loaded: True",
+    "status": "PASS",
+    "execution_time": 13.2,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:09"
+    "timestamp": "2026-06-22 10:40:09"
   },
   {
     "test_id": "TC_111",
     "module": "Clinical Modules",
     "test_case": "Thyroid Module Page",
-    "description": "Thyroid module",
-    "steps": "1. Navigate",
-    "expected_result": "Page loads",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.0,
+    "description": "Verify Thyroid Ki67 module page loads",
+    "steps": "1. Navigate to /patient/1/modules/thyroid",
+    "expected_result": "Thyroid module with Ki67 scoring",
+    "actual_result": "Thyroid module loaded: True",
+    "status": "PASS",
+    "execution_time": 13.11,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:09"
+    "timestamp": "2026-06-22 10:40:22"
   },
   {
     "test_id": "TC_112",
     "module": "Clinical Modules",
     "test_case": "Head & Neck Module Page",
-    "description": "Head & Neck",
-    "steps": "1. Navigate",
-    "expected_result": "Page loads",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.0,
+    "description": "Verify Head & Neck module page loads",
+    "steps": "1. Navigate to /patient/1/modules/headneck",
+    "expected_result": "Head & Neck module with P16/HER2 options",
+    "actual_result": "Head & Neck loaded: True",
+    "status": "PASS",
+    "execution_time": 13.15,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:09"
+    "timestamp": "2026-06-22 10:40:35"
   },
   {
     "test_id": "TC_113",
     "module": "Clinical Modules",
     "test_case": "Soft Tissue Module Page",
-    "description": "Soft Tissue",
-    "steps": "1. Navigate",
-    "expected_result": "Page loads",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.0,
+    "description": "Verify Soft Tissue Ki67 module page loads",
+    "steps": "1. Navigate to /patient/1/modules/softtissue",
+    "expected_result": "Soft Tissue module with Ki67 scoring",
+    "actual_result": "Soft Tissue loaded: True",
+    "status": "PASS",
+    "execution_time": 13.17,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:10"
+    "timestamp": "2026-06-22 10:40:48"
   },
   {
     "test_id": "TC_114",
     "module": "Clinical Modules",
     "test_case": "Breast Guidelines Page",
-    "description": "Guidelines",
-    "steps": "1. Navigate",
-    "expected_result": "Content loads",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.0,
+    "description": "Verify Breast guidelines page loads",
+    "steps": "1. Navigate to /patient/1/modules/breast/guidelines",
+    "expected_result": "Guidelines content visible",
+    "actual_result": "Guidelines loaded: True",
+    "status": "PASS",
+    "execution_time": 13.25,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:10"
+    "timestamp": "2026-06-22 10:41:01"
   },
   {
     "test_id": "TC_115",
     "module": "Clinical Modules",
     "test_case": "Modules Hub Page",
-    "description": "Modules hub",
-    "steps": "1. Navigate",
-    "expected_result": "Hub loads",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.0,
+    "description": "Verify Clinical Modules hub page loads with tissue selection",
+    "steps": "1. Navigate to /patient/1/modules",
+    "expected_result": "Modules hub with tissue type selection",
+    "actual_result": "Modules hub loaded: True",
+    "status": "PASS",
+    "execution_time": 13.19,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:10"
+    "timestamp": "2026-06-22 10:41:14"
   },
   {
     "test_id": "TC_116",
     "module": "UI/UX",
     "test_case": "CSS Variables Loaded",
-    "description": "CSS variables",
-    "steps": "1. Check variables",
-    "expected_result": "Variables loaded",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.0,
+    "description": "Verify CSS custom properties (design tokens) are loaded",
+    "steps": "1. Check --primary CSS variable value",
+    "expected_result": "CSS variable --primary has a value",
+    "actual_result": "--primary value: '#0066FF'",
+    "status": "PASS",
+    "execution_time": 1.11,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:10"
+    "timestamp": "2026-06-22 10:41:16"
   },
   {
     "test_id": "TC_117",
     "module": "UI/UX",
     "test_case": "No Console Errors",
-    "description": "Console errors",
-    "steps": "1. Check logs",
-    "expected_result": "No errors",
-    "actual_result": "Log check not supported: Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
+    "description": "Verify no SEVERE console errors on login page",
+    "steps": "1. Navigate to /login\n2. Check browser console logs",
+    "expected_result": "No SEVERE level errors",
+    "actual_result": "Severe errors: 0",
     "status": "PASS",
-    "execution_time": 0.0,
+    "execution_time": 2.1,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:10"
+    "timestamp": "2026-06-22 10:41:18"
   },
   {
     "test_id": "TC_118",
     "module": "UI/UX",
     "test_case": "Mobile Viewport",
-    "description": "Mobile viewport",
-    "steps": "1. Resize",
-    "expected_result": "Page renders",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.0,
+    "description": "Verify login page renders on mobile viewport (375x812)",
+    "steps": "1. Set viewport to 375x812\n2. Load /login",
+    "expected_result": "Page renders without breaking",
+    "actual_result": "Page rendered on mobile viewport",
+    "status": "PASS",
+    "execution_time": 3.48,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:10"
+    "timestamp": "2026-06-22 10:41:21"
   },
   {
     "test_id": "TC_119",
     "module": "UI/UX",
     "test_case": "Tablet Viewport",
-    "description": "Tablet viewport",
-    "steps": "1. Resize",
-    "expected_result": "Page renders",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.0,
+    "description": "Verify login page renders on tablet viewport (768x1024)",
+    "steps": "1. Set viewport to 768x1024\n2. Load /login",
+    "expected_result": "Page renders without breaking",
+    "actual_result": "Page rendered on tablet viewport",
+    "status": "PASS",
+    "execution_time": 3.48,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:10"
+    "timestamp": "2026-06-22 10:41:25"
   },
   {
     "test_id": "TC_120",
     "module": "UI/UX",
     "test_case": "Keyboard Submit (Enter)",
-    "description": "Keyboard submit",
-    "steps": "1. Press Enter",
-    "expected_result": "Form submits",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.01,
+    "description": "Pressing Enter in password field submits the login form",
+    "steps": "1. Fill fields\n2. Press Enter in password field",
+    "expected_result": "Form is submitted",
+    "actual_result": "Form submitted via Enter key",
+    "status": "PASS",
+    "execution_time": 3.32,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:10"
+    "timestamp": "2026-06-22 10:41:28"
   },
   {
     "test_id": "TC_121",
     "module": "UI/UX",
     "test_case": "Page Animation Classes",
-    "description": "Animations",
-    "steps": "1. Check classes",
-    "expected_result": "Classes present",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.0,
+    "description": "Verify fade-in-up animation classes are applied",
+    "steps": "1. Navigate to /login\n2. Check for animate-fade-in-up elements",
+    "expected_result": "Animation class elements present",
+    "actual_result": "Found 1 animated elements",
+    "status": "PASS",
+    "execution_time": 1.12,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:10"
+    "timestamp": "2026-06-22 10:41:29"
   },
   {
     "test_id": "TC_122",
     "module": "Security",
     "test_case": "XSS Protection - Login",
-    "description": "XSS protection",
-    "steps": "1. Inject script",
-    "expected_result": "No execution",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.0,
+    "description": "Verify XSS script in license field does not execute",
+    "steps": "1. Enter <script>alert('xss')</script> in license\n2. Submit",
+    "expected_result": "No JavaScript alert popup",
+    "actual_result": "XSS triggered: False",
+    "status": "PASS",
+    "execution_time": 3.44,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:10"
+    "timestamp": "2026-06-22 10:41:33"
   },
   {
     "test_id": "TC_123",
     "module": "Security",
     "test_case": "XSS Protection - Signup",
-    "description": "XSS signup",
-    "steps": "1. Inject payload",
-    "expected_result": "No execution",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.0,
+    "description": "Verify XSS payload in signup name field does not execute",
+    "steps": "1. Enter XSS payload in name\n2. Submit",
+    "expected_result": "No JavaScript alert popup",
+    "actual_result": "XSS triggered: False",
+    "status": "PASS",
+    "execution_time": 3.61,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:10"
+    "timestamp": "2026-06-22 10:41:36"
   },
   {
     "test_id": "TC_124",
     "module": "Security",
     "test_case": "SQL Injection - Login",
-    "description": "SQL injection",
-    "steps": "1. Inject SQL",
-    "expected_result": "No bypass",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.0,
+    "description": "Verify SQL injection payload does not bypass authentication",
+    "steps": "1. Enter SQL injection in license\n2. Submit",
+    "expected_result": "Login fails, no bypass",
+    "actual_result": "Not on dashboard: True",
+    "status": "PASS",
+    "execution_time": 4.42,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:10"
+    "timestamp": "2026-06-22 10:41:41"
   },
   {
     "test_id": "TC_125",
     "module": "Security",
     "test_case": "LocalStorage Doctor ID",
-    "description": "LocalStorage",
-    "steps": "1. Check storage",
-    "expected_result": "ID set",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.0,
+    "description": "Verify doctor_id is stored in localStorage after login",
+    "steps": "1. Login\n2. Check localStorage.getItem('doctor_id')",
+    "expected_result": "doctor_id is set in localStorage",
+    "actual_result": "doctor_id: 12",
+    "status": "PASS",
+    "execution_time": 6.0,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:10"
+    "timestamp": "2026-06-22 10:41:47"
   },
   {
     "test_id": "TC_126",
     "module": "UI/UX",
     "test_case": "Form Labels",
-    "description": "Form labels",
-    "steps": "1. Check labels",
-    "expected_result": "Labels present",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.0,
+    "description": "Verify form labels 'License Number' and 'Password' are displayed",
+    "steps": "1. Check form labels on login page",
+    "expected_result": "Both labels visible",
+    "actual_result": "Labels: ['License Number', 'Password']",
+    "status": "PASS",
+    "execution_time": 1.15,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:10"
+    "timestamp": "2026-06-22 10:41:48"
   },
   {
     "test_id": "TC_127",
     "module": "Clinical Modules",
     "test_case": "GIT NET Page",
-    "description": "NET page",
-    "steps": "1. Navigate",
-    "expected_result": "Page loads",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.0,
+    "description": "Verify GIT NET sub-module page loads",
+    "steps": "1. Navigate to /patient/1/modules/git/net",
+    "expected_result": "NET page content visible",
+    "actual_result": "NET page loaded: True",
+    "status": "PASS",
+    "execution_time": 8.11,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:10"
+    "timestamp": "2026-06-22 10:41:56"
   },
   {
     "test_id": "TC_128",
     "module": "Clinical Modules",
     "test_case": "GIT GIST Page",
-    "description": "GIST page",
-    "steps": "1. Navigate",
-    "expected_result": "Page loads",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.0,
+    "description": "Verify GIT GIST sub-module page loads",
+    "steps": "1. Navigate to /patient/1/modules/git/gist",
+    "expected_result": "GIST page content visible",
+    "actual_result": "GIST page loaded: True",
+    "status": "PASS",
+    "execution_time": 3.76,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:10"
+    "timestamp": "2026-06-22 10:42:00"
   },
   {
     "test_id": "TC_129",
     "module": "Clinical Modules",
     "test_case": "Head & Neck P16 Page",
-    "description": "P16 page",
-    "steps": "1. Navigate",
-    "expected_result": "Page loads",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.0,
+    "description": "Verify Head & Neck P16 module page loads",
+    "steps": "1. Navigate to /patient/1/modules/headneck/p16",
+    "expected_result": "P16 module content visible",
+    "actual_result": "P16 page loaded: True",
+    "status": "PASS",
+    "execution_time": 3.73,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:10"
+    "timestamp": "2026-06-22 10:42:03"
   },
   {
     "test_id": "TC_130",
     "module": "Clinical Modules",
     "test_case": "Head & Neck HER2 Page",
-    "description": "HER2 page",
-    "steps": "1. Navigate",
-    "expected_result": "Page loads",
-    "actual_result": "Message: invalid session id\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x8ab593+105d3]\n\tchromedriver!GetHandleVerifier [0x8ab6c4+10704]\n\tchromedriver!(No symbol) [0x6b1cde]\n\tchromedriver!(No symbol) [0x6efb77]\n\tchromedriver!(No symbol) [0x71d636]\n\tchromedriver!(No symbol) [0x718861]\n\tchromedriver!(No symbol) [0x718241]\n\tchromedriver!(No symbol) [0x68502e]\n\tchromedriver!(No symbol) [0x6855ce]\n\tchromedriver!(No symbol) [0x685aad]\n\tchromedriver!GetHandleVerifier [0xb33014+298054]\n\tchromedriver!GetHandleVerifier [0xb2e603+293643]\n\tchromedriver!GetHandleVerifier [0xb4ea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x8c54e8+2a528]\n\tchromedriver!GetHandleVerifier [0x8ccd1d+31d5d]\n\tchromedriver!(No symbol) [0x684ba6]\n\tchromedriver!(No symbol) [0x6841e0]\n\tchromedriver!GetHandleVerifier [0xc987af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x76cd5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77b5e12b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77b5e0b1+231]\n",
-    "status": "FAIL",
-    "execution_time": 0.0,
+    "description": "Verify Head & Neck HER2 module page loads",
+    "steps": "1. Navigate to /patient/1/modules/headneck/her2",
+    "expected_result": "HER2 module content visible",
+    "actual_result": "HER2 page loaded: True",
+    "status": "PASS",
+    "execution_time": 3.72,
     "screenshot": "",
-    "timestamp": "2026-06-18 14:56:10"
+    "timestamp": "2026-06-22 10:42:07"
   }
 ]
