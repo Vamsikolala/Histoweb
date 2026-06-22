@@ -21,22 +21,24 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install -r appium_tests/requirements.txt
+          pip install -r "Histoquanta 2/appium_tests/requirements.txt"
 
       - name: Run Appium Tests & Generate Reports
         env:
           CI: 'true'
         run: |
+          cd "Histoquanta 2"
           python appium_tests/run_tests.py
 
       - name: Upload Excel Test Report
         uses: actions/upload-artifact@v4
         with:
           name: Appium-Excel-Test-Report
-          path: appium_tests/Appium_Test_Report_HistoQuanta_*.xlsx
+          path: Histoquanta 2/appium_tests/Appium_Test_Report_HistoQuanta_*.xlsx
 
       - name: Generate Appium Test Summary Report
         env:
           GITHUB_STEP_SUMMARY: ${{ github.step_summary }}
         run: |
+          cd "Histoquanta 2"
           python appium_tests/generate_summary.py
