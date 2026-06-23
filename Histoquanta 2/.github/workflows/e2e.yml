@@ -164,7 +164,7 @@ jobs:
           npx wait-on http://127.0.0.1:3000 --timeout 60000
 
       - name: OWASP ZAP Baseline Scan
-        uses: zaproxy/action-baseline@v0.12.0
+        uses: zaproxy/action-baseline@v0.15.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           target: 'http://127.0.0.1:3000'
