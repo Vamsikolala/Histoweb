@@ -99,9 +99,7 @@ jobs:
       - name: Setup Database
         run: |
           sudo systemctl start mysql.service
-          mysql -uroot -proot -e "CREATE DATABASE IF NOT EXISTS histoquanta;"
-          mysql -uroot -proot -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '';"
-          mysql -uroot -proot -e "FLUSH PRIVILEGES;"
+          mysql -uroot -proot -e "CREATE DATABASE IF NOT EXISTS histoquanta; ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY ''; FLUSH PRIVILEGES;"
           mysql -u root histoquanta < ../histoquanta.sql
 
       - name: Start HistoQuanta server
