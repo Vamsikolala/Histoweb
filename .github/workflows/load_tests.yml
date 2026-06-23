@@ -21,38 +21,34 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install Frontend Dependencies
+      - name: Install Node dependencies
         run: |
           cd "Histoquanta 2/web"
           npm ci || npm install
 
-      - name: Install k6
+      - name: Start HistoQuanta server
         run: |
-          curl -L -o k6.tar.gz https://github.com/grafana/k6/releases/download/v0.51.0/k6-v0.51.0-linux-amd64.tar.gz
-          tar -xzf k6.tar.gz
-          sudo mv k6-v0.51.0-linux-amd64/k6 /usr/local/bin/k6
-
-      - name: Start Vite Frontend Server & Run k6 Load Test
-        env:
-          TARGET_URL: http://127.0.0.1:3000
-        run: |
+          php -S 127.0.0.1:8000 -t "Histoquanta 2/backend" &
           cd "Histoquanta 2/web"
           npm run dev &
-          npx wait-on http://127.0.0.1:3000 --timeout 60000
-          cd ..
-          k6 run k6_load_test.js
 
-      - name: Generate Load Test Summary Report
-        if: always()
+      - name: Wait for server ready
+        run: |
+          npx wait-on http://127.0.0.1:8000 --timeout 15000
+          npx wait-on http://127.0.0.1:3000 --timeout 60000
+
+      - name: Run Load Testing Suite (Fast CI Mode)
         env:
+          TARGET_URL: http://127.0.0.1:3000
           GITHUB_STEP_SUMMARY: ${{ github.step_summary }}
         run: |
+          pip install aiohttp
           cd "Histoquanta 2"
-          python load_tests/generate_summary.py
+          python load_tests/run_load_test.py
 
-      - name: Upload Load Test Text Report
+      - name: Upload Load CSV Report
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: K6-Load-Test-Report-TXT
-          path: "Histoquanta 2/k6_report.txt"
+          name: Load-CSV-Report
+          path: "Histoquanta 2/load_report.csv"
