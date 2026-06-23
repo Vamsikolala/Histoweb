@@ -46,7 +46,7 @@ jobs:
           python e2e_tests/generate_summary.py
 
   mobile-test-report:
-    name: 📱 Appium — Android Tests (20)
+    name: 📱 Appium — iOS Tests (20)
     runs-on: ubuntu-latest
 
     steps:
