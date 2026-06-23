@@ -175,5 +175,6 @@ jobs:
           target: 'http://127.0.0.1:3000'
           rules_file_name: '.zap/rules.tsv'
           allow_issue_writing: false
+          artifact_name: 'zap-scan'
           fail_action: false
 
