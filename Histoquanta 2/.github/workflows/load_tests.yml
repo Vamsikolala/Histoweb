@@ -22,7 +22,7 @@ jobs:
 
       - name: Install Frontend Dependencies
         run: |
-          cd "Histoquanta 2/web"
+          cd web
           npm ci || npm install
 
       - name: Install k6
@@ -35,7 +35,7 @@ jobs:
         env:
           TARGET_URL: http://127.0.0.1:3000
         run: |
-          cd "Histoquanta 2/web"
+          cd web
           npm run dev &
           npx wait-on http://127.0.0.1:3000 --timeout 60000
           cd ..
@@ -46,4 +46,4 @@ jobs:
         if: always()
         with:
           name: K6-Load-Test-Report-TXT
-          path: "Histoquanta 2/k6_report.txt"
+          path: k6_report.txt
