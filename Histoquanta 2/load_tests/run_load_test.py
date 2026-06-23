@@ -205,6 +205,22 @@ async def main():
     print(f"Throughput: {throughput_kb:.2f} KB/s")
     print("-" * 55)
     
+    print("\n" + "-" * 85)
+    print("                              ENDPOINT BREAKDOWN")
+    print("-" * 85)
+    print(f"{'Endpoint Name':<32} | {'Requests':<8} | {'Avg Time':<10} | {'p95 Time':<10} | {'Error Rate':<10}")
+    print("-" * 85)
+    for ep in ENDPOINTS:
+        stats = metrics.endpoint_stats[ep["name"]]
+        ep_count = stats["count"]
+        ep_failed = stats["failed"]
+        ep_err_pct = (ep_failed / max(1, ep_count)) * 100.0
+        ep_times = sorted(stats["times"]) if stats["times"] else [0]
+        ep_avg = sum(ep_times) / len(ep_times)
+        ep_p95 = ep_times[min(len(ep_times) - 1, int(len(ep_times) * 0.95))]
+        print(f"{ep['name']:<32} | {ep_count:<8} | {ep_avg:>7.1f} ms | {ep_p95:>7.1f} ms | {ep_err_pct:>9.1f}%")
+    print("-" * 85)
+    
     # Write to GITHUB_STEP_SUMMARY
     summary_file = os.environ.get("GITHUB_STEP_SUMMARY")
     if summary_file:
