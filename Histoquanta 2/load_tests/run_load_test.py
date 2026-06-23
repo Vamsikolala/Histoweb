@@ -9,12 +9,34 @@ from datetime import datetime
 # Configuration
 TEST_DURATION = 15  # seconds
 TARGET_URL = os.environ.get("TARGET_URL", "http://127.0.0.1:3000")
+
+# Defined 22 API endpoints with methods and mock payloads
 ENDPOINTS = [
-    {"name": "Frontend Homepage", "path": "/"},
-    {"name": "Get Next Patient ID", "path": "/get_next_patient_id.php"},
-    {"name": "Get Patients List", "path": "/get_patients.php"},
+    {"name": "add_analysis_report.php", "path": "/add_analysis_report.php", "method": "POST", "data": {"patient_id": "999", "report_text": "Load test report text"}},
+    {"name": "add_disease.php", "path": "/add_disease.php", "method": "POST", "data": {"patient_id": "999", "module_name": "Breast", "score": "3+"}},
+    {"name": "add_patient.php", "path": "/add_patient.php", "method": "POST", "data": {"patient_id": "999", "name": "Load Test Patient", "age": "45", "gender": "Female"}},
+    {"name": "check_doctor.php", "path": "/check_doctor.php?email=test@example.com", "method": "GET"},
+    {"name": "delete_patient.php", "path": "/delete_patient.php", "method": "POST", "data": {"patient_id": "999"}},
+    {"name": "delete_report.php", "path": "/delete_report.php", "method": "POST", "data": {"report_id": "999"}},
+    {"name": "doctor_login.php", "path": "/doctor_login.php", "method": "POST", "data": {"email": "test@example.com", "password": "password"}},
+    {"name": "doctor_profile.php", "path": "/doctor_profile.php", "method": "GET"},
+    {"name": "doctor_signup.php", "path": "/doctor_signup.php", "method": "POST", "data": {"name": "Load Doc", "email": "test@example.com", "password": "password"}},
+    {"name": "forgot_password.php", "path": "/forgot_password.php", "method": "POST", "data": {"email": "test@example.com"}},
+    {"name": "forgot_password_request.php", "path": "/forgot_password_request.php", "method": "POST", "data": {"email": "test@example.com"}},
+    {"name": "get_next_patient_id.php", "path": "/get_next_patient_id.php", "method": "GET"},
+    {"name": "get_patients.php", "path": "/get_patients.php", "method": "GET"},
+    {"name": "patient_profile.php", "path": "/patient_profile.php?patient_id=999", "method": "GET"},
+    {"name": "reset_password_otp.php", "path": "/reset_password_otp.php", "method": "POST", "data": {"email": "test@example.com", "otp": "123456", "new_password": "pass"}},
+    {"name": "search_patient.php", "path": "/search_patient.php?query=test", "method": "GET"},
+    {"name": "send_otp.php", "path": "/send_otp.php", "method": "POST", "data": {"email": "test@example.com"}},
+    {"name": "update_doctor_profile.php", "path": "/update_doctor_profile.php", "method": "POST", "data": {"email": "test@example.com", "name": "Load Test Doc"}},
+    {"name": "update_patient.php", "path": "/update_patient.php", "method": "POST", "data": {"patient_id": "999", "name": "Updated Load Patient"}},
+    {"name": "verify_otp.php", "path": "/verify_otp.php", "method": "POST", "data": {"email": "test@example.com", "otp": "123456"}},
+    {"name": "check_files.php", "path": "/check_files.php", "method": "GET"},
+    {"name": "check_data.php", "path": "/check_data.php", "method": "GET"},
 ]
-CONCURRENT_TASKS = 20  # Max concurrent coroutines to simulate high VU load in Python
+
+CONCURRENT_TASKS = 20  # Max concurrent coroutines
 
 class LoadTestMetrics:
     def __init__(self):
@@ -37,23 +59,31 @@ async def send_request(session):
     res_time_ms = 0
     
     try:
-        async with session.get(url, timeout=5) as response:
-            status = response.status
-            content = await response.read()
-            metrics.bytes_transferred += len(content)
-            res_time_ms = int((time.time() - start) * 1000)
+        if endpoint["method"] == "POST":
+            async with session.post(url, data=endpoint.get("data", {}), timeout=5) as response:
+                status = response.status
+                content = await response.read()
+        else:
+            async with session.get(url, timeout=5) as response:
+                status = response.status
+                content = await response.read()
+                
+        metrics.bytes_transferred += len(content)
+        res_time_ms = int((time.time() - start) * 1000)
+        
+        # Log data
+        metrics.total_requests += 1
+        metrics.response_times.append(res_time_ms)
+        
+        ep_stat = metrics.endpoint_stats[endpoint["name"]]
+        ep_stat["count"] += 1
+        ep_stat["times"].append(res_time_ms)
+        
+        # Any status >= 500 indicates a server failure or database crash
+        if status >= 500:
+            metrics.failed_requests += 1
+            ep_stat["failed"] += 1
             
-            # Log data
-            metrics.total_requests += 1
-            metrics.response_times.append(res_time_ms)
-            
-            ep_stat = metrics.endpoint_stats[endpoint["name"]]
-            ep_stat["count"] += 1
-            ep_stat["times"].append(res_time_ms)
-            
-            if status != 200:
-                metrics.failed_requests += 1
-                ep_stat["failed"] += 1
     except Exception as e:
         res_time_ms = int((time.time() - start) * 1000)
         metrics.total_requests += 1
@@ -73,7 +103,7 @@ async def send_request(session):
 async def request_worker(session, stop_event):
     while not stop_event.is_set():
         await send_request(session)
-        # Yield control briefly to simulate concurrent user arrivals
+        # Yield control briefly
         await asyncio.sleep(0.01)
 
 async def progress_reporter(stop_event):
