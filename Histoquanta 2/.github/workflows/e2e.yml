@@ -127,3 +127,47 @@ jobs:
         with:
           name: Load-CSV-Report
           path: load_report.csv
+
+  security-scan:
+    name: 🛡️ OWASP ZAP — Vulnerability Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Node dependencies
+        run: |
+          cd web
+          npm ci || npm install
+
+      - name: Setup Database
+        run: |
+          sudo systemctl start mysql.service
+          mysql -uroot -proot -e "CREATE DATABASE IF NOT EXISTS histoquanta; ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY ''; FLUSH PRIVILEGES;"
+          mysql -u root histoquanta < ../histoquanta.sql
+
+      - name: Start HistoQuanta server
+        run: |
+          php -S 127.0.0.1:8000 -t backend &
+          cd web
+          npm run dev &
+
+      - name: Wait for server ready
+        run: |
+          npx wait-on http://127.0.0.1:8000 --timeout 15000
+          npx wait-on http://127.0.0.1:3000 --timeout 60000
+
+      - name: OWASP ZAP Baseline Scan
+        uses: zaproxy/action-baseline@v0.12.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          target: 'http://127.0.0.1:3000'
+          rules_file_name: '.zap/rules.tsv'
+          fail_action: false
+
