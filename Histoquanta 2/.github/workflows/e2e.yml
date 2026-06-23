@@ -169,5 +169,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           target: 'http://127.0.0.1:3000'
           rules_file_name: '.zap/rules.tsv'
+          create_issue: false
           fail_action: false
 
