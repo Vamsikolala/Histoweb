@@ -27,6 +27,7 @@ export default function () {
 export function handleSummary(data) {
   return {
     "k6_report.txt": textSummary(data, { indent: " ", enableColors: false }),
+    "summary.json": JSON.stringify(data, null, 2),
     stdout: textSummary(data, { indent: " ", enableColors: true }),
   };
 }

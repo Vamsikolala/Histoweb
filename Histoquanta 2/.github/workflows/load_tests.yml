@@ -41,6 +41,13 @@ jobs:
           cd ..
           k6 run k6_load_test.js
 
+      - name: Generate Load Test Summary Report
+        if: always()
+        env:
+          GITHUB_STEP_SUMMARY: ${{ github.step_summary }}
+        run: |
+          python load_tests/generate_summary.py
+
       - name: Upload Load Test Text Report
         uses: actions/upload-artifact@v4
         if: always()

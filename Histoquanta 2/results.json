@@ -1,0 +1,15 @@
+[
+  {
+    "test_id": "TC_001",
+    "module": "Login",
+    "test_case": "Login Page Load",
+    "description": "Verify the login page loads and displays 'Welcome back'",
+    "steps": "1. Navigate to /login",
+    "expected_result": "Login page loads with 'Welcome back' heading",
+    "actual_result": "Login page loaded successfully",
+    "status": "PASS",
+    "execution_time": 1.0,
+    "screenshot": "",
+    "timestamp": "2026-06-22 10:16:54"
+  }
+]
