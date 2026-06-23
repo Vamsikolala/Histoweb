@@ -53,6 +53,9 @@ class MockSeleniumElement:
     def is_enabled(self):
         return True
 
+    def is_selected(self):
+        return False
+
     @property
     def tag_name(self):
         return "select" if "gender" in str(self.value) else "div"
