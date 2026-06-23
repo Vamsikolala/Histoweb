@@ -8,6 +8,7 @@ on:
 
 jobs:
   test-report:
+    name: 🌐 Selenium — Website Tests (132)
     runs-on: ubuntu-latest
 
     steps:
