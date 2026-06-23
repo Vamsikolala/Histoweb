@@ -171,9 +171,8 @@ jobs:
       - name: OWASP ZAP Baseline Scan
         uses: zaproxy/action-baseline@v0.12.0
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ""
           target: 'http://127.0.0.1:3000'
           rules_file_name: '.zap/rules.tsv'
-          create_issue: false
           fail_action: false
 
