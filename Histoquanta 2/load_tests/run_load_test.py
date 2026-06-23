@@ -7,7 +7,7 @@ import random
 from datetime import datetime
 
 # Configuration
-TEST_DURATION = 15  # seconds
+TEST_DURATION = int(os.environ.get("TEST_DURATION", "100"))  # seconds
 TARGET_URL = os.environ.get("TARGET_URL", "http://127.0.0.1:3000")
 
 # Defined 22 API endpoints with methods and mock payloads
