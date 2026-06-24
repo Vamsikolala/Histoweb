@@ -78,6 +78,11 @@ describe('Extra Authentication & Signup Validation', () => {
 });
 
 describe('Extra Patient Field Validation', () => {
+  before(async () => {
+    const { loginAsDoctor } = require('../helpers/utils');
+    await loginAsDoctor();
+  });
+
   // 6. Negative Age Input Validation
   it('should strip negative signs from age input field', async () => {
     const exists = await elementExists('ap-age-field');

@@ -19,6 +19,11 @@ const {
 } = require('../helpers/utils');
 
 describe('Clinical Module Navigation', () => {
+  before(async () => {
+    const { loginAsDoctor } = require('../helpers/utils');
+    await loginAsDoctor();
+  });
+
   // ------------------------------------------------------------------
   // 1. Dashboard / Tissue Types screen loads
   // ------------------------------------------------------------------

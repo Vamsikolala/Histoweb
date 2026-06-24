@@ -111,6 +111,44 @@ async function handleAlert(action = 'accept') {
   }
 }
 
+/**
+ * Automate doctor login, automatically signing up first if the doctor does not exist
+ */
+async function loginAsDoctor() {
+  await waitForSplashToFinish();
+  
+  const onLogin = await elementExists('login-license-field');
+  if (onLogin) {
+    // Attempt login
+    await typeIntoField('login-license-field', config.testDoctor.licenseNo);
+    await typeIntoField('login-password-field', config.testDoctor.password);
+    await tapElement('login-submit-btn');
+    await browser.pause(3000);
+    
+    // Check if we are still on login screen (means doctor didn't exist yet)
+    const stillOnLogin = await elementExists('login-submit-btn', 2000);
+    if (stillOnLogin) {
+      // Go to signup
+      await tapElement('login-signup-link');
+      await browser.pause(1000);
+      
+      // Sign up the test doctor
+      await typeIntoField('signup-name-field', config.testDoctor.name);
+      await typeIntoField('signup-license-field', config.testDoctor.licenseNo);
+      await typeIntoField('signup-email-field', config.testDoctor.email);
+      await typeIntoField('signup-password-field', config.testDoctor.password);
+      await tapElement('signup-submit-btn');
+      await browser.pause(3000); // Completes signup and returns to login page
+      
+      // Now login with the newly created account
+      await typeIntoField('login-license-field', config.testDoctor.licenseNo);
+      await typeIntoField('login-password-field', config.testDoctor.password);
+      await tapElement('login-submit-btn');
+      await browser.pause(3000);
+    }
+  }
+}
+
 module.exports = {
   waitForElement,
   waitForDisplayed,
@@ -121,5 +159,6 @@ module.exports = {
   takeScreenshot,
   waitForSplashToFinish,
   scrollDown,
-  handleAlert
+  handleAlert,
+  loginAsDoctor
 };

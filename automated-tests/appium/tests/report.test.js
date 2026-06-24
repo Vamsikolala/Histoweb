@@ -14,6 +14,11 @@ const {
 } = require('../helpers/utils');
 
 describe('Report Management', () => {
+  before(async () => {
+    const { loginAsDoctor } = require('../helpers/utils');
+    await loginAsDoctor();
+  });
+
   // ------------------------------------------------------------------
   // 1. Patient profile header shows name
   // ------------------------------------------------------------------

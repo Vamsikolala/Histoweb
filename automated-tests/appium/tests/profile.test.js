@@ -17,6 +17,11 @@ const {
 } = require('../helpers/utils');
 
 describe('Doctor Profile & Logout', () => {
+  before(async () => {
+    const { loginAsDoctor } = require('../helpers/utils');
+    await loginAsDoctor();
+  });
+
   // ------------------------------------------------------------------
   // 1. Doctor name visible on profile
   // ------------------------------------------------------------------

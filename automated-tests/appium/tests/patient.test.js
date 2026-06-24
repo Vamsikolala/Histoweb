@@ -18,6 +18,11 @@ const {
 const config = require('../config');
 
 describe('Patient Management', () => {
+  before(async () => {
+    const { loginAsDoctor } = require('../helpers/utils');
+    await loginAsDoctor();
+  });
+
   // ------------------------------------------------------------------
   // 1. Add Patient form fields present
   // ------------------------------------------------------------------
