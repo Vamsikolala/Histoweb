@@ -41,6 +41,7 @@ struct SearchPatientView: View {
 
                     TextField("Search by name, report type, diagnosis", text: $searchText)
                         .foregroundColor(.black)
+                        .accessibilityIdentifier("search-input")
                 }
                                 .padding(.vertical, 12)
                                 .background(Color.white)
@@ -90,6 +91,7 @@ struct SearchPatientView: View {
                                     patientCard(patient)
                                 }
                                 .buttonStyle(PlainButtonStyle())
+                                .accessibilityIdentifier("search-patient-card-\(patient.patient_id)")
                             }
                         }
                         .padding(.horizontal)

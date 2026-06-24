@@ -202,6 +202,7 @@ struct PatientProfileView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(currentPatient.name)
                         .font(.system(size: 22, weight: .bold))
+                        .accessibilityIdentifier("patient-name-header")
                     Text("\(currentPatient.gender), \(currentPatient.age) years")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
@@ -216,6 +217,7 @@ struct PatientProfileView: View {
                         .font(.system(size: 28))
                         .foregroundColor(.blue)
                 }
+                .accessibilityIdentifier("patient-edit-btn")
             }
             
             Divider()
@@ -240,6 +242,7 @@ struct PatientProfileView: View {
             } label: {
                 actionButton(title: "Add Report", icon: "plus.circle.fill", color: .blue)
             }
+            .accessibilityIdentifier("patient-add-report-btn")
         }
     }
 

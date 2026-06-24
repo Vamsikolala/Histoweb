@@ -41,10 +41,14 @@ struct DoctorSignupView: View {
                             VStack(spacing: 20) {
                                 VStack(spacing: 16) {
                                     customTextField(icon: "person.fill", placeholder: "Full Name", text: $name)
+                                        .accessibilityIdentifier("signup-name-field")
                                     customTextField(icon: "doc.text.fill", placeholder: "License Number", text: $licenseNo)
+                                        .accessibilityIdentifier("signup-license-field")
                                     customTextField(icon: "envelope.fill", placeholder: "Email Address", text: $email)
+                                        .accessibilityIdentifier("signup-email-field")
                                         .keyboardType(.emailAddress)
                                     customSecureField(icon: "lock.fill", placeholder: "Password", text: $password)
+                                        .accessibilityIdentifier("signup-password-field")
                                 }
                                 
                                 if !errorMessage.isEmpty {
@@ -52,6 +56,7 @@ struct DoctorSignupView: View {
                                         .foregroundColor(.red)
                                         .font(.system(size: 14, weight: .medium))
                                         .frame(maxWidth: .infinity, alignment: .leading)
+                                        .accessibilityIdentifier("signup-error-text")
                                 }
                                 
                                 if isSuccess {
@@ -78,6 +83,7 @@ struct DoctorSignupView: View {
                                     .shadow(color: Color.blue.opacity(0.3), radius: 8, x: 0, y: 4)
                                 }
                                 .disabled(isLoading || isSuccess)
+                                .accessibilityIdentifier("signup-submit-btn")
                                 .padding(.top, 10)
                                 
                                 HStack {
@@ -89,6 +95,7 @@ struct DoctorSignupView: View {
                                             .font(.system(size: 14, weight: .bold))
                                             .foregroundColor(.blue)
                                     }
+                                    .accessibilityIdentifier("signup-login-link")
                                 }
                             }
                             .padding(.top, 55)

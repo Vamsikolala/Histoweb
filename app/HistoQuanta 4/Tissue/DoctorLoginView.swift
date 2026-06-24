@@ -64,7 +64,9 @@ struct DoctorLoginView: View {
                                     
                                 VStack(spacing: 16) {
                                     customTextField(icon: "doc.text.fill", placeholder: "License Number", text: $licenseNumber)
+                                        .accessibilityIdentifier("login-license-field")
                                     customSecureField(icon: "lock.fill", placeholder: "Password", text: $password)
+                                        .accessibilityIdentifier("login-password-field")
                                 }
                                 
                                 // Error Message
@@ -73,6 +75,7 @@ struct DoctorLoginView: View {
                                         .foregroundColor(.red)
                                         .font(.system(size: 14, weight: .medium))
                                         .frame(maxWidth: .infinity, alignment: .leading)
+                                        .accessibilityIdentifier("login-error-text")
                                 }
 
                                 Button(action: { navManager.navigate(to: .forgotPassword) }) {
@@ -81,6 +84,7 @@ struct DoctorLoginView: View {
                                         .foregroundColor(.blue)
                                         .frame(maxWidth: .infinity, alignment: .trailing)
                                 }
+                                .accessibilityIdentifier("login-forgot-password-link")
 
                                 // Login Button
                                 Button(action: loginDoctor) {
@@ -101,6 +105,7 @@ struct DoctorLoginView: View {
                                     .shadow(color: Color.blue.opacity(0.3), radius: 8, x: 0, y: 4)
                                 }
                                 .disabled(isLoading)
+                                .accessibilityIdentifier("login-submit-btn")
 
                                 HStack {
                                     Text("Don't have an account?")
@@ -111,6 +116,7 @@ struct DoctorLoginView: View {
                                             .font(.system(size: 14, weight: .bold))
                                             .foregroundColor(.blue)
                                     }
+                                    .accessibilityIdentifier("login-signup-link")
                                 }
                                 .padding(.top, 10)
                             }

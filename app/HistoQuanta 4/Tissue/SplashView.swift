@@ -24,10 +24,12 @@ struct SplashView: View {
                     Text("HistoQuanta")
                         .font(.system(size: 36, weight: .bold))
                         .foregroundColor(.white)
+                        .accessibilityIdentifier("splash-title")
 
                     Text("Standardized Microscopy Analysis")
                         .font(.system(size: 16))
                         .foregroundColor(.white.opacity(0.85))
+                        .accessibilityIdentifier("splash-subtitle")
                 }
                 .scaleEffect(scale)
                 .opacity(opacity)

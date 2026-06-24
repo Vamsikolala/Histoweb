@@ -48,6 +48,7 @@ struct ForgotPasswordView: View {
                                 .foregroundColor(.blue)
                         }
                     }
+                    .accessibilityIdentifier("forgot-back-btn")
                     Spacer()
                 }
                 .padding(.horizontal, 24)
@@ -101,6 +102,7 @@ struct ForgotPasswordView: View {
                             .shadow(color: Color.blue.opacity(0.3), radius: 8, x: 0, y: 4)
                         }
                         .disabled(isLoading || (isSuccess && currentStep == .newPassword))
+                        .accessibilityIdentifier("forgot-submit-btn")
                     }
                     .padding(.top, 55)
                     .padding(.horizontal, 30)
@@ -157,6 +159,7 @@ struct ForgotPasswordView: View {
                 .padding(.bottom, 5)
                 
             customTextField(icon: "envelope.fill", placeholder: "Registered Email", text: $email)
+                .accessibilityIdentifier("forgot-email-field")
                 .keyboardType(.emailAddress)
         }
     }
@@ -170,6 +173,7 @@ struct ForgotPasswordView: View {
                 .padding(.bottom, 5)
                 
             customTextField(icon: "number.circle.fill", placeholder: "Enter 6-digit OTP", text: $otp)
+                .accessibilityIdentifier("forgot-otp-field")
                 .keyboardType(.numberPad)
         }
     }
@@ -183,7 +187,9 @@ struct ForgotPasswordView: View {
                 .padding(.bottom, 5)
                 
             customSecureField(icon: "lock.fill", placeholder: "New Password", text: $newPassword)
+                .accessibilityIdentifier("forgot-new-password-field")
             customSecureField(icon: "lock.fill", placeholder: "Confirm Password", text: $confirmPassword)
+                .accessibilityIdentifier("forgot-confirm-password-field")
         }
     }
     

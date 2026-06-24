@@ -113,14 +113,20 @@ struct AddPatientView: View {
                         VStack(alignment: .leading, spacing: 18) {
                         
                         formField("Patient ID", text: $patientID, icon: "number", iconColor: .blue)
+                            .accessibilityIdentifier("ap-id-field")
                         formField("Full Name", text: $patientName, icon: "person.fill", iconColor: .blue)
+                            .accessibilityIdentifier("ap-name-field")
                         formField("Age", text: $age, icon: "calendar", iconColor: .orange)
+                            .accessibilityIdentifier("ap-age-field")
                         genderView
+                            .accessibilityIdentifier("ap-gender-picker")
                         
                         Divider().padding(.vertical, 2)
                         
                         formField("Phone Number", text: $phone, icon: "phone.fill", iconColor: .green)
+                            .accessibilityIdentifier("ap-phone-field")
                         formField("Address", text: $address, icon: "location.fill", iconColor: .purple)
+                            .accessibilityIdentifier("ap-address-field")
                         
                         Divider().padding(.vertical, 2)
                         
@@ -255,6 +261,7 @@ struct AddPatientView: View {
                         .cornerRadius(18)
                         .shadow(color: Color.blue.opacity(0.2), radius: 8, x: 0, y: 4)
                     }
+                    .accessibilityIdentifier("ap-submit-btn")
                     .padding(.horizontal, 20)
 
                 }

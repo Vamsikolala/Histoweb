@@ -101,6 +101,7 @@ struct DoctorProfileView: View {
                                 Text(doctorName.isEmpty ? "Doctor Name" : doctorName)
                                     .font(.system(size: 24, weight: .bold))
                                     .foregroundColor(.white)
+                                    .accessibilityIdentifier("profile-doctor-name")
                                 Text(specialization.isEmpty ? "Specialization" : specialization)
                                     .font(.subheadline)
                                     .foregroundColor(.white.opacity(0.9))
@@ -134,6 +135,7 @@ struct DoctorProfileView: View {
                             .background(Color.white.opacity(0.2))
                             .clipShape(Circle())
                     }
+                    .accessibilityIdentifier("profile-edit-btn")
                     .padding(.trailing, 20)
                     .padding(.top, 70) // Adjusted for safe area
                 }
@@ -256,10 +258,13 @@ struct DoctorProfileView: View {
                 .padding(.leading, 8)
                 VStack(spacing: 0) {
                     MenuRow(icon: "shield.fill", iconColor: .blue, title: "Privacy Policy", action: { navManager.navigate(to: .privacyPolicy) })
+                        .accessibilityIdentifier("profile-privacy-btn")
                     Divider().padding(.leading, 60)
                     MenuRow(icon: "doc.plaintext.fill", iconColor: .purple, title: "Terms & Conditions", action: { navManager.navigate(to: .termsAndConditions) })
+                        .accessibilityIdentifier("profile-terms-btn")
                     Divider().padding(.leading, 60)
                     MenuRow(icon: "info.bubble.fill", iconColor: .cyan, title: "About", action: { navManager.navigate(to: .about) })
+                        .accessibilityIdentifier("profile-about-btn")
                 }
                 .background(Color.white)
                 .cornerRadius(20)
@@ -364,6 +369,7 @@ struct DoctorProfileView: View {
             )
             .overlay(RoundedRectangle(cornerRadius: 18).stroke(Color.red.opacity(0.08), lineWidth: 1))
         }
+        .accessibilityIdentifier("profile-logout-btn")
         .padding(.horizontal, 20)
         .padding(.top, 6)
     }

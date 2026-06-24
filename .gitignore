@@ -1,0 +1,29 @@
+# macOS
+.DS_Store
+*.swp
+
+# Node.js
+node_modules/
+package-lock.json
+
+# Test Reports & Screenshots
+automated-tests/reports/
+automated-tests/appium/reports/
+e2e_tests/E2E_Test_Report_*.xlsx
+
+# Xcode Build Artifacts
+app/HistoQuanta\ 4/build/
+app/HistoQuanta\ 4/build_output.txt
+xcuserdata/
+*.xcuserdata/
+DerivedData/
+*.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+
+# IDE
+.idea/
+.vscode/
+*.code-workspace
+
+# Environment
+.env
+.env.local

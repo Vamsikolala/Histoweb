@@ -1,0 +1,18 @@
+{
+  "name": "histoquanta-appium-ios-tests",
+  "version": "1.0.0",
+  "description": "Appium iOS test suite for HistoQuanta native app using WebdriverIO + XCUITest",
+  "main": "wdio.conf.js",
+  "scripts": {
+    "test": "npx wdio run wdio.conf.js",
+    "test:ci": "npx wdio run wdio.conf.js --ci"
+  },
+  "dependencies": {
+    "@wdio/cli": "^9.0.0",
+    "@wdio/local-runner": "^9.0.0",
+    "@wdio/mocha-framework": "^9.0.0",
+    "@wdio/spec-reporter": "^9.0.0",
+    "appium": "^2.5.0",
+    "appium-xcuitest-driver": "^7.0.0"
+  }
+}
