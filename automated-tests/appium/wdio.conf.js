@@ -7,6 +7,7 @@ exports.config = {
   // ====================
   runner: 'local',
   port: 4723,
+  maxInstances: 1,
 
   // ==================
   // Specify Test Files
