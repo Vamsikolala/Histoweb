@@ -2,7 +2,7 @@
 
 Automated mobile testing for the HistoQuanta iOS app using **WebdriverIO** + **Appium XCUITest Driver**.
 
-## Test Coverage (20 Tests)
+## Test Coverage (40 Tests)
 
 | Test File           | Tests | Description                                      |
 |---------------------|-------|--------------------------------------------------|
@@ -12,6 +12,7 @@ Automated mobile testing for the HistoQuanta iOS app using **WebdriverIO** + **A
 | `report.test.js`    | 4     | Patient profile, Add/Edit report buttons         |
 | `clinical.test.js`  | 4     | Dashboard tiles, module navigation               |
 | `profile.test.js`   | 7     | Doctor profile, settings, logout flow            |
+| `extra.test.js`     | 20    | Extra validation & navigation flows (extended)   |
 
 ## Prerequisites
 
