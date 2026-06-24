@@ -60,7 +60,7 @@ jobs:
 
       - name: Install Appium Test Dependencies
         run: |
-          cd "Histoquanta 2/automated-tests/appium"
+          cd "automated-tests/appium"
           npm install
 
       - name: Verify Test Structure
@@ -69,24 +69,24 @@ jobs:
           echo "================================================="
           echo ""
           echo "Test files:"
-          ls -la "Histoquanta 2/automated-tests/appium/tests/"
+          ls -la "automated-tests/appium/tests/"
           echo ""
           echo "Configuration:"
-          ls -la "Histoquanta 2/automated-tests/appium/wdio.conf.js"
+          ls -la "automated-tests/appium/wdio.conf.js"
           echo ""
           echo "Helpers:"
-          ls -la "Histoquanta 2/automated-tests/appium/helpers/"
+          ls -la "automated-tests/appium/helpers/"
 
       - name: Count Test Cases
         run: |
-          cd "Histoquanta 2/automated-tests/appium"
+          cd "automated-tests/appium"
           TOTAL=$(grep -r "it(" tests/ --include="*.test.js" | wc -l | tr -d ' ')
           SUITES=$(ls tests/*.test.js | wc -l | tr -d ' ')
           echo "📊 Found $TOTAL test cases across $SUITES test suites"
 
       - name: Generate Appium Test Summary
         run: |
-          cd "Histoquanta 2/automated-tests/appium"
+          cd "automated-tests/appium"
 
           echo "## 📱 Appium iOS Test Suite Report" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
