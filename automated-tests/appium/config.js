@@ -13,7 +13,7 @@ module.exports = {
   // iOS Simulator target
   simulator: {
     deviceName: 'iPhone 15 Pro',
-    platformVersion: '17.5'
+    platformVersion: '18.2'
   },
 
   // Test doctor credentials (randomized to avoid DB conflicts)
