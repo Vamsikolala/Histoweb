@@ -1,0 +1,15 @@
+[
+  {
+    "test_id": "TC_076_b",
+    "module": "Add Patient",
+    "test_case": "Successful Registration",
+    "description": "Register a new patient and save details successfully",
+    "steps": "1. Fill in all fields\n2. Click Save Patient & Report",
+    "expected_result": "Patient registered successfully, success message shown",
+    "actual_result": "Patient registered with ID TESTLIC001",
+    "status": "PASS",
+    "execution_time": 8.5,
+    "screenshot": "",
+    "timestamp": "2026-06-23 10:42:30"
+  }
+]

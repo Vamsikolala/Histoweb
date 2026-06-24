@@ -1,0 +1,5 @@
+[2026-05-25 08:32:12] Request: {"doctor_id":"3","name":"Dr. Hari","specialization":"Pathology","hospital_name":"City Hospital","email":"test@test.com","phone_number":"1234567890"} Files: []
+[2026-05-26 08:32:25] Request: {"doctor_id":"3","name":"Dr. Hari","specialization":"Pathology","hospital_name":"Saveetha","email":"Hari@gmail.com","phone_number":"9632587415"} Files: []
+[2026-05-26 09:00:54] Request: {"doctor_id":"3","name":"Dr. Hari","specialization":"Pathology","hospital_name":"Saveetha","email":"Hari@gmail.com","phone_number":"9632587415"} Files: []
+[2026-05-30 07:46:30] Request: {"doctor_id":"3","name":"Dr. Hari","specialization":"Pathology","hospital_name":"Saveetha","email":"Hari@gmail.com","phone_number":"9632587415"} Files: {"profile_pic":{"name":"profile.jpg","full_path":"profile.jpg","type":"","tmp_name":"","error":1,"size":0}}
+[2026-05-30 07:59:19] Request: {"doctor_id":"3","name":"Dr. Hari","specialization":"Pathology","hospital_name":"Saveetha","email":"kolalavamsi123@gmail.com","phone_number":"9632587415"} Files: {"profile_pic":{"name":"profile.jpg","full_path":"profile.jpg","type":"","tmp_name":"","error":1,"size":0}}

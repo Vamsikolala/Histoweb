@@ -1,0 +1,5 @@
+/* App-level overrides — keep this minimal; all design tokens are in index.css */
+
+#root {
+  min-height: 100vh;
+}

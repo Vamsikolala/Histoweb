@@ -1,0 +1,237 @@
+--- DOCTORS ---
+Array
+(
+    [doctor_id] => 1
+    [name] => Dr. Antigravity
+    [email] => 
+)
+Array
+(
+    [doctor_id] => 2
+    [name] => Dr. Sarah Smith
+    [email] => 
+)
+Array
+(
+    [doctor_id] => 3
+    [name] => Dr.Suguna
+    [email] => 
+)
+Array
+(
+    [doctor_id] => 4
+    [name] => Dr.priya
+    [email] => Priya@gmail.com
+)
+Array
+(
+    [doctor_id] => 5
+    [name] => Dr.Nandha
+    [email] => kolalavamsi123@gmail.com
+)
+Array
+(
+    [doctor_id] => 6
+    [name] => Bandha
+    [email] => vamsik2062.sse@saveetha.com
+)
+Array
+(
+    [doctor_id] => 7
+    [name] => Test Doctor
+    [email] => test@example.com
+)
+Array
+(
+    [doctor_id] => 8
+    [name] => Dr.priya
+    [email] => priya@gmail.com
+)
+
+--- PATIENTS (First 10) ---
+Array
+(
+    [patient_id] => 1
+    [name] => K Vamsi
+    [doctor_id] => 4
+    [created_at] => 2026-04-03 16:12:55
+)
+Array
+(
+    [patient_id] => 10
+    [name] => Deva
+    [doctor_id] => 8
+    [created_at] => 2026-04-22 09:50:11
+)
+Array
+(
+    [patient_id] => 2
+    [name] => Hari
+    [doctor_id] => 4
+    [created_at] => 2026-04-07 15:38:38
+)
+Array
+(
+    [patient_id] => 3
+    [name] => Hari
+    [doctor_id] => 4
+    [created_at] => 2026-04-07 15:45:29
+)
+Array
+(
+    [patient_id] => 4
+    [name] => Hari
+    [doctor_id] => 4
+    [created_at] => 2026-04-07 15:48:16
+)
+Array
+(
+    [patient_id] => 5
+    [name] => Balaji
+    [doctor_id] => 4
+    [created_at] => 2026-04-07 15:53:29
+)
+Array
+(
+    [patient_id] => 6
+    [name] => Test Patient
+    [doctor_id] => 1
+    [created_at] => 2026-04-22 09:28:01
+)
+Array
+(
+    [patient_id] => 7
+    [name] => Test Patient 1
+    [doctor_id] => 1
+    [created_at] => 2026-04-22 09:33:22
+)
+Array
+(
+    [patient_id] => 8
+    [name] => New Test
+    [doctor_id] => 1
+    [created_at] => 2026-04-22 09:34:00
+)
+Array
+(
+    [patient_id] => 9
+    [name] => Hari
+    [doctor_id] => 4
+    [created_at] => 2026-04-22 09:36:12
+)
+
+--- REPORTS IN 'disease' TABLE (First 10) ---
+Array
+(
+    [disease_id] => 1
+    [patient_id] => 1
+    [doctor_id] => 4
+    [created_at] => 2026-04-03 16:12:55
+)
+Array
+(
+    [disease_id] => 2
+    [patient_id] => 4
+    [doctor_id] => 4
+    [created_at] => 2026-04-07 15:48:16
+)
+Array
+(
+    [disease_id] => 3
+    [patient_id] => 5
+    [doctor_id] => 4
+    [created_at] => 2026-04-07 15:53:29
+)
+Array
+(
+    [disease_id] => 4
+    [patient_id] => PT003
+    [doctor_id] => 4
+    [created_at] => 2026-04-08 15:58:20
+)
+Array
+(
+    [disease_id] => 5
+    [patient_id] => 9
+    [doctor_id] => 4
+    [created_at] => 2026-04-22 09:36:12
+)
+Array
+(
+    [disease_id] => 6
+    [patient_id] => 10
+    [doctor_id] => 8
+    [created_at] => 2026-04-22 09:50:11
+)
+
+--- REPORTS IN 'patient_analysis_reports' TABLE (First 10) ---
+Array
+(
+    [id] => 1
+    [patient_id] => 10
+    [doctor_id] => 8
+    [created_at] => 2026-04-22 14:27:54
+)
+Array
+(
+    [id] => 2
+    [patient_id] => 10
+    [doctor_id] => 8
+    [created_at] => 2026-04-22 14:27:55
+)
+Array
+(
+    [id] => 3
+    [patient_id] => 10
+    [doctor_id] => 8
+    [created_at] => 2026-04-22 14:28:18
+)
+Array
+(
+    [id] => 4
+    [patient_id] => 10
+    [doctor_id] => 8
+    [created_at] => 2026-04-22 14:28:40
+)
+Array
+(
+    [id] => 5
+    [patient_id] => 10
+    [doctor_id] => 8
+    [created_at] => 2026-04-22 14:28:54
+)
+Array
+(
+    [id] => 6
+    [patient_id] => 10
+    [doctor_id] => 8
+    [created_at] => 2026-04-22 14:29:05
+)
+Array
+(
+    [id] => 7
+    [patient_id] => 10
+    [doctor_id] => 8
+    [created_at] => 2026-04-22 14:29:11
+)
+Array
+(
+    [id] => 8
+    [patient_id] => 10
+    [doctor_id] => 8
+    [created_at] => 2026-04-22 14:30:14
+)
+Array
+(
+    [id] => 9
+    [patient_id] => 10
+    [doctor_id] => 8
+    [created_at] => 2026-04-22 14:30:32
+)
+Array
+(
+    [id] => 10
+    [patient_id] => 10
+    [doctor_id] => 8
+    [created_at] => 2026-04-22 14:30:32
+)

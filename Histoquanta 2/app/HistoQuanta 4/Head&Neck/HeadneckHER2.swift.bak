@@ -1,0 +1,389 @@
+import SwiftUI
+
+struct HeadneckHER2: View {
+    @Environment(\.dismiss) private var dismiss
+    @StateObject private var patientSession = PatientSessionManager.shared
+    @AppStorage("doctor_id") private var doctorID: Int = 0
+    
+    @State private var selectedIntensity = "0"
+    @State private var selectedPercentage = "> 10%"
+    
+    @State private var isSaving = false
+    @State private var showSaveAlert = false
+    @State private var showSavedToast = false
+    @State private var alertMessage = ""
+
+    let intensityOptions = ["0", "1+", "2+", "3+"]
+    let percentageOptions = ["> 10%", "≤ 10%"]
+
+    var inference: String {
+        if selectedIntensity == "3+" && selectedPercentage == "> 10%" {
+            return "Positive"
+        } else if selectedIntensity == "2+" {
+            return "Equivocal"
+        } else {
+            return "Negative"
+        }
+    }
+
+    var resultText: String {
+        switch inference {
+        case "Positive":
+            return "HER2 Positive (Score 3+) — High HER2 expression detected. Eligible for anti-HER2 targeted therapy. Correlate with clinical findings."
+        case "Equivocal":
+            return "HER2 Equivocal (Score 2+) — Intermediate result. ISH (FISH/SISH) reflex testing required to confirm amplification status."
+        default:
+            if selectedIntensity == "1+" {
+                return "HER2 Negative (Score 1+) — Incomplete or weak membrane staining. Not eligible for anti-HER2 therapy."
+            } else {
+                return "HER2 Negative (Score 0) — No staining observed. Not eligible for anti-HER2 therapy."
+            }
+        }
+    }
+
+    var interpretationCriteria: String {
+        switch selectedIntensity {
+        case "3+":
+            return selectedPercentage == "> 10%"
+                ? "Complete, intense membrane staining in >10% of tumor cells — Strong HER2 overexpression."
+                : "Complete, intense membrane staining but in ≤10% of tumor cells — Does not meet 3+ threshold; consider 2+ equivocal."
+        case "2+":
+            return "Weak to moderate complete membrane staining in >10% of tumor cells\n\nor\n\nIntense complete staining in ≤10% of tumor cells — Equivocal; ISH testing recommended."
+        case "1+":
+            return "Incomplete, faint/barely perceptible membrane staining in >10% of tumor cells — Negative result."
+        default:
+            return "No staining (absent membrane staining)\n\nor\n\nIncomplete faint staining in ≤10% of tumor cells — Negative result."
+        }
+    }
+
+    var inferenceColor: Color {
+        switch inference {
+        case "Positive": return .green
+        case "Equivocal": return .orange
+        case "Negative": return .red
+        default: return .gray
+        }
+    }
+
+    var body: some View {
+        ZStack {
+            VStack(spacing: 0) {
+                headerSection
+
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 20) {
+                        
+                        // Selection Section
+                        VStack(alignment: .leading, spacing: 16) {
+                            Text("Select Intensity of Staining:")
+                                .font(.system(size: 16, weight: .semibold))
+                                .foregroundColor(.black)
+                            
+                            Picker("Intensity", selection: $selectedIntensity) {
+                                ForEach(intensityOptions, id: \.self) { option in
+                                    Text(option).tag(option)
+                                }
+                            }
+                            .pickerStyle(.segmented)
+                            
+                            Text("Percentage of Tumor Cells:")
+                                .font(.system(size: 16, weight: .semibold))
+                                .foregroundColor(.black)
+                            
+                            Picker("Percentage", selection: $selectedPercentage) {
+                                ForEach(percentageOptions, id: \.self) { option in
+                                    Text(option).tag(option)
+                                }
+                            }
+                            .pickerStyle(.segmented)
+                        }
+                        .padding(20)
+                        .background(Color.white)
+                        .cornerRadius(18)
+                        .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 3)
+
+                        // Interpretation Criteria Card
+                        VStack(alignment: .leading, spacing: 15) {
+                            Text("INTERPRETATION CRITERIA:")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(.black)
+
+                            Text(interpretationCriteria)
+                                .font(.system(size: 15))
+                                .foregroundColor(.black.opacity(0.8))
+                                .lineSpacing(4)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(20)
+                        .background(Color.white)
+                        .cornerRadius(18)
+                        .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 3)
+
+                        // Result Card
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("RESULT")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(.blue)
+
+                            Text(resultText)
+                                .font(.system(size: 16))
+                                .foregroundColor(inferenceColor)
+                                .multilineTextAlignment(.leading)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(24)
+                        .background(Color.white)
+                        .cornerRadius(18)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 18)
+                                .stroke(inferenceColor.opacity(0.2), lineWidth: 2)
+                        )
+                        .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 3)
+
+                        // Legend / Guidelines Card
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("Scoring Legend")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(.black)
+                                
+                            VStack(alignment: .leading, spacing: 6) {
+                                scoringLegendRow(label: "3+", text: "Complete membrane staining (>10%)", color: .green)
+                                scoringLegendRow(label: "2+", text: "Moderate membrane staining", color: .orange)
+                                scoringLegendRow(label: "1+", text: "Incomplete/Weak staining", color: .red)
+                                scoringLegendRow(label: "0", text: "No staining", color: .gray)
+                            }
+                        }
+                        .padding(18)
+                        .background(Color.white)
+                        .cornerRadius(18)
+                        .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 3)
+
+                        if let patient = patientSession.currentPatient {
+                            Button(action: saveAnalysis) {
+                                HStack {
+                                    if isSaving {
+                                        ProgressView().tint(.white).padding(.trailing, 8)
+                                    } else {
+                                        Image(systemName: "checkmark.circle.fill")
+                                    }
+                                    Text("Save to \(patient.name)'s Report")
+                                        .fontWeight(.bold)
+                                }
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity, minHeight: 54)
+                                .background(LinearGradient(colors: [Color.blue, Color.cyan], startPoint: .leading, endPoint: .trailing))
+                                .cornerRadius(16)
+                                .shadow(color: Color.blue.opacity(0.3), radius: 8)
+                            }
+                            .disabled(isSaving)
+                            .padding(.top, 10)
+                        }
+
+                        Spacer()
+                    }
+                    .padding(.horizontal, 18)
+                    .padding(.top, 18)
+                    .padding(.bottom, 24)
+                }
+            }
+            
+            // Toast Overlay
+            if showSavedToast {
+                VStack {
+                    Spacer()
+                    HStack {
+                        Image(systemName: "checkmark.circle.fill")
+                        Text("Report Saved")
+                    }
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundColor(.white)
+                    .padding(.vertical, 12)
+                    .padding(.horizontal, 24)
+                    .background(Color.green)
+                    .cornerRadius(25)
+                    .padding(.bottom, 50)
+                }
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+                .zIndex(100)
+            }
+        }
+        .background(
+            LinearGradient(
+                colors: [
+                    Color(red: 0.95, green: 0.97, blue: 1.0),
+                    Color.white
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
+        )
+        .alert("Status", isPresented: $showSaveAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(alertMessage)
+        }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
+    }
+
+    var headerSection: some View {
+        ZStack {
+            LinearGradient(
+                colors: [
+                    Color(red: 0.30, green: 0.67, blue: 0.98),
+                    Color(red: 0.55, green: 0.87, blue: 1.0)
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .ignoresSafeArea(edges: .top)
+
+            VStack(spacing: 16) {
+                HStack {
+                    Button(action: { dismiss() }) {
+                        ZStack {
+                            Circle()
+                                .fill(Color.white.opacity(0.22))
+                                .frame(width: 40, height: 40)
+
+                            Image(systemName: "chevron.left")
+                                .font(.system(size: 18, weight: .bold))
+                                .foregroundColor(.white)
+                        }
+                    }
+
+                    Spacer()
+
+                    Text("Head & Neck")
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundColor(.white)
+
+                    Spacer()
+
+                    Color.clear.frame(width: 40, height: 40)
+                }
+                .padding(.horizontal, 18)
+                .padding(.top, 12)
+
+                VStack(spacing: 6) {
+                    Text("HER2 Analysis")
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundColor(.white)
+
+                    Text("Evaluate tumor cell percentage and intensity")
+                        .font(.system(size: 14))
+                        .foregroundColor(.white.opacity(0.92))
+                }
+                .padding(.bottom, 18)
+            }
+        }
+        .frame(height: 185)
+        .clipShape(
+            RoundedCorner(radius: 28, corners: [.bottomLeft, .bottomRight])
+        )
+    }
+    
+    @ViewBuilder
+    func scoringLegendRow(label: String, text: String, color: Color) -> some View {
+        HStack(spacing: 10) {
+            Text(label)
+                .font(.system(size: 14, weight: .bold))
+                .foregroundColor(.white)
+                .frame(width: 35, height: 24)
+                .background(color)
+                .cornerRadius(6)
+            
+            Text(text)
+                .font(.system(size: 14))
+                .foregroundColor(.black.opacity(0.7))
+        }
+    }
+    
+    func saveAnalysis() {
+        guard doctorID > 0 else { alertMessage = "Login Error: Doctor ID not found. Please log out and log in again."; showSaveAlert = true; return }
+        guard let patient = patientSession.currentPatient else { alertMessage = "No Patient Selected: Please search for and select a patient before saving."; showSaveAlert = true; return }
+        isSaving = true
+        
+        let reportType = "Head & Neck - HER2 Analysis"
+        let diagnosisText = "HER2 \(inference)"
+        let notesText = "Intensity: \(selectedIntensity), Cells: \(selectedPercentage)"
+        _ = diagnosisText
+        _ = notesText
+        let fullReport = """
+        CLINICAL ANALYSIS REPORT: HEAD & NECK HER2
+        -------------------------------------------
+        Patient Name: \(patient.name)
+        Patient ID: \(patient.patient_id)
+        
+        STAINING INTENSITY: \(selectedIntensity)
+        PERCENTAGE OF TUMOR CELLS: \(selectedPercentage)
+        
+        INFERENCE: \(inference)
+        
+        Interpretation: \(resultText)
+        """
+        
+        
+        let serverIP = "10.58.160.100:8080"
+        
+        let urlString = "http://\(serverIP)/add_analysis_report.php"
+        guard let url = URL(string: urlString) else {
+            alertMessage = "Device Error: Invalid URL"
+            showSaveAlert = true
+            isSaving = false
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        
+        let bodyParameters = [
+            "doctor_id": "\(doctorID)",
+            "patient_id": patient.patient_id,
+            "tissue_type": "Head & Neck",
+            "marker": "HER2",
+            "total_score": "Score \(selectedIntensity)",
+            "inference": fullReport
+        ]
+        
+        let bodyString = bodyParameters.map { "\($0.key)=\($0.value.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")" }.joined(separator: "&")
+        request.httpBody = bodyString.data(using: .utf8)
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            DispatchQueue.main.async {
+                isSaving = false
+                if let error = error {
+                    alertMessage = "Network error: \(error.localizedDescription)"
+                    showSaveAlert = true
+                } else if let data = data, let result = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
+                    if result["status"] as? Bool == true {
+                        withAnimation {
+                            showSavedToast = true
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                            withAnimation {
+                                showSavedToast = false
+                            }
+                        }
+                    } else {
+                        alertMessage = "Error: \(result["message"] ?? "Unknown error")"
+                        showSaveAlert = true
+                    }
+                } else {
+                    alertMessage = "Invalid response from server"
+                    showSaveAlert = true
+                }
+            }
+        }.resume()
+    }
+}
+
+struct HeadneckHER2_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            HeadneckHER2()
+        }
+    }
+}
