@@ -72,9 +72,6 @@ export const HomeTab: React.FC<HomeTabProps> = ({ onNavigateToSearch }) => {
               <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: 'var(--text-sm)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px', margin: 0 }}>
                 {greeting},
               </p>
-              <h1 style={{ color: 'white', fontSize: 'var(--text-3xl)', fontWeight: 900, margin: '8px 0 4px', letterSpacing: '-0.5px' }}>
-                {displayName}
-              </h1>
               {specialization && (
                 <div style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--sp-2)', background: 'rgba(255,255,255,0.12)', padding: '4px 12px', borderRadius: '99px', marginTop: 'var(--sp-1)' }}>
                   <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#60a5fa' }} />
