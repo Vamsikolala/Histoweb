@@ -106,9 +106,6 @@ async def send_request(session):
 
 async def request_worker(session, stop_event):
     while not stop_event.is_set():
-        if metrics.total_requests >= 300:
-            stop_event.set()
-            break
         await send_request(session)
         # Yield control briefly
         await asyncio.sleep(0.01)
