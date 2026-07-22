@@ -28,7 +28,7 @@ def main():
     start = time.time()
     exit_code = subprocess.call([
         sys.executable, "-m", "pytest",
-        "test_appium_histoquanta.py",
+        ".",  # Run all test files in the directory
         "-v",
         "--tb=short",
         "--no-header",
