@@ -2,9 +2,9 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-# Generate 150 test data variations
+# Generate 300 test data variations
 test_data_matrix = []
-for i in range(1, 151):
+for i in range(1, 301):
     test_data_matrix.append((
         f"patient_{i}", 
         f"Test User {i}", 

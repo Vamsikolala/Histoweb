@@ -1,8 +1,8 @@
 import pytest
 
-# Generate 150 test data variations for mobile
+# Generate 300 test data variations for mobile
 mobile_test_matrix = []
-for i in range(1, 151):
+for i in range(1, 301):
     mobile_test_matrix.append((
         f"mob_pat_{i}", 
         f"Mobile User {i}", 
