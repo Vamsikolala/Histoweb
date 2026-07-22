@@ -210,9 +210,9 @@ async def main():
     print("-" * 55)
     
     print("\n" + "-" * 85)
-    print("                              ENDPOINT BREAKDOWN")
+    print("                      LOAD TEST CASES BREAKDOWN (300 SCENARIOS)")
     print("-" * 85)
-    print(f"{'Endpoint Name':<32} | {'Requests':<8} | {'Avg Time':<10} | {'p95 Time':<10} | {'Error Rate':<10}")
+    print(f"{'Test Case (Scenario + Endpoint)':<35} | {'Requests':<8} | {'Avg Time':<10} | {'p95 Time':<10} | {'Error Rate':<10}")
     print("-" * 85)
     for ep in ENDPOINTS:
         stats = metrics.endpoint_stats[ep["name"]]
@@ -222,7 +222,7 @@ async def main():
         ep_times = sorted(stats["times"]) if stats["times"] else [0]
         ep_avg = sum(ep_times) / len(ep_times)
         ep_p95 = ep_times[min(len(ep_times) - 1, int(len(ep_times) * 0.95))]
-        print(f"{ep['name']:<32} | {ep_count:<8} | {ep_avg:>7.1f} ms | {ep_p95:>7.1f} ms | {ep_err_pct:>9.1f}%")
+        print(f"{ep['name']:<35} | {ep_count:<8} | {ep_avg:>7.1f} ms | {ep_p95:>7.1f} ms | {ep_err_pct:>9.1f}%")
     print("-" * 85)
     
     # Write to GITHUB_STEP_SUMMARY
@@ -266,8 +266,8 @@ async def main():
 | **95% percentile (p95)** | {p95_dur:.2f} ms |
 | **Maximum** | {max_dur:.2f} ms |
 
-#### 🌐 Endpoint Breakdown
-| Endpoint | Requests | Avg Time | p95 Time | Error Rate |
+#### 🌐 Load Test Cases Breakdown (300 Scenarios)
+| Test Case (Scenario + Endpoint) | Requests | Avg Time | p95 Time | Error Rate |
 |---|---|---|---|---|
 {api_breakdown_rows}
 
