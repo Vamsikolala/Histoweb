@@ -27,15 +27,18 @@ jobs:
     - name: Run E2E Tests (Selenium)
       run: |
         cd e2e_tests
-        pytest test_histoquanta.py -v --html=report.html --self-contained-html
+        pytest . -v --html=report.html --self-contained-html
       env:
         HEADLESS_MODE: "true"
         API_BASE_URL: "http://localhost:8000"
     - name: Upload E2E Test Report
+      if: always()
       uses: actions/upload-artifact@v3
       with:
         name: e2e-report
-        path: e2e_tests/report.html
+        path: |
+          e2e_tests/report.html
+          e2e_tests/*.xlsx
         retention-days: 7
 
   appium-tests:

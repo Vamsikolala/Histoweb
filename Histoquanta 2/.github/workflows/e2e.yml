@@ -32,6 +32,7 @@ jobs:
           python e2e_tests/run_tests.py
 
       - name: Upload Excel Test Report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: Selenium-Excel-Test-Report
@@ -67,6 +68,7 @@ jobs:
           python appium_tests/run_tests.py
 
       - name: Upload Excel Test Report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: Appium-Excel-Test-Report
